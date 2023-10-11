@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-10-11T18:41Z
+last_built: 2023-10-11T18:48Z
 urls:
   reference: https://congenial-couscous-n8l7pme.pages.github.io/reference
   article: https://congenial-couscous-n8l7pme.pages.github.io/articles
