@@ -1,0 +1,41 @@
+name: Bug report
+description: Report something that is broken or incorrect
+labels: bug
+body:
+  - type: markdown
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reprex
+    attributes:
+      label: Code and output
+      description: Please include a minimal reproducible example (AKA a reprex). If you've never heard of a [reprex](http://reprex.tidyverse.org/) before, start by reading <https://www.tidyverse.org/help/#reprex>.
+      render: console
+      placeholder: |
+        library(reneeTools)
+        ... insert_your_code_here() ...
+
+        Paste some output where something broke
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Relevant files
+      description: |
+        Please drag and drop any relevant files here if applicable. Create a `.zip` archive if the extension is not allowed.
+
+  - type: textarea
+    id: system
+    attributes:
+      label: System information
+      description: |
+        * Version of R
+        * Version of CCBR/reneeTools
+        * OS _(eg. Ubuntu Linux, macOS)_
+        * Hardware _(eg. HPC, Desktop)_

@@ -1,4 +1,3 @@
-
 #' filter_low_counts
 #'
 #' @param raw_counts_matrix raw_counts_matrix object
@@ -14,6 +13,6 @@ filter_low_counts <- function(
     raw_counts_matrix,
     min_counts = 0,
     min_cpm = 0,
-    min_cpm_fraction = 1.0){
+    min_cpm_fraction = 1.0) {
 
 }
