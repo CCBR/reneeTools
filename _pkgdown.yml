@@ -1,5 +1,13 @@
-url: https://congenial-couscous-n8l7pme.pages.github.io/
+url: https://ccbr.github.io/reneeTools/
 template:
   bootstrap: 5
+  bootswatch: yeti
 development:
   mode: auto
+authors:
+  Vishal Koparde:
+    href: https://github.com/kopardev
+  Kelly Sovacool:
+    href: https://github.com/kelly-sovacool
+  CCR Collaborative Bioinformatics Resource:
+    href: https://github.com/CCBR

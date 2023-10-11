@@ -11,7 +11,7 @@ Authors@R: c(
 Description: TODO What the package does (one paragraph).
 License: MIT + file LICENSE
 URL: https://github.com/CCBR/reneeTools,
-    https://congenial-couscous-n8l7pme.pages.github.io/
+    https://ccbr.github.io/reneeTools/
 BugReports: https://github.com/CCBR/reneeTools/issues
 Suggests:
     testthat (>= 3.0.0)
