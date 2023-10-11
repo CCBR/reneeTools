@@ -20,7 +20,7 @@ repos:
         # https://github.com/codespell-project/codespell/issues/1498
   # R formatting
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.1.2
+    rev: v0.1.3
     hooks:
       - id: style-files
       - id: readme-rmd-rendered
