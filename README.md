@@ -8,7 +8,8 @@
 
 <!-- badges: end -->
 
-The goal of reneeTools is to …
+Helper functions for [RENEE](https://github.com/CCBR/renee): RNA
+sequencing analysis pipeline
 
 ## Installation
 
@@ -22,7 +23,8 @@ devtools::install_github("CCBR/reneeTools")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+TODO: This is a basic example which shows you how to solve a common
+problem:
 
 ```r
 library(reneeTools)
