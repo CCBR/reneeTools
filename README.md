@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # reneeTools
@@ -6,6 +5,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/CCBR/reneeTools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CCBR/reneeTools/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 The goal of reneeTools is to …
@@ -15,7 +15,7 @@ The goal of reneeTools is to …
 You can install the development version of reneeTools from
 [GitHub](https://github.com/) with:
 
-``` r
+```r
 # install.packages("devtools")
 devtools::install_github("CCBR/reneeTools")
 ```
@@ -24,7 +24,7 @@ devtools::install_github("CCBR/reneeTools")
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
+```r
 library(reneeTools)
 ## basic example code
 ```

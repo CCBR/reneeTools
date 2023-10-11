@@ -1,16 +1,17 @@
 Package: reneeTools
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person("Vishal", "Koparde", , "vishal.koparde@nih.gov", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8978-8495"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
+URL: https://github.com/CCBR/reneeTools,
+    https://congenial-couscous-n8l7pme.pages.github.io/
+BugReports: https://github.com/CCBR/reneeTools/issues
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/CCBR/reneeTools, https://congenial-couscous-n8l7pme.pages.github.io/
-BugReports: https://github.com/CCBR/reneeTools/issues
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
