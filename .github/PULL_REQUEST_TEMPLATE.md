@@ -24,3 +24,4 @@ when referring to the issue.
 - [ ] Write unit tests for any new features, bug fixes, or other code changes.
 - [ ] Update the docs if there are any API changes (roxygen comments, vignettes, readme, etc.).
 - [ ] Update `NEWS.md` with a short description of any user-facing changes and reference the PR number. Guidelines: https://keepachangelog.com/en/1.1.0/
+- [ ] Run `devtools::check()` locally and fix all notes, warnings, and errors.
