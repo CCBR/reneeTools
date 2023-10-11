@@ -10,6 +10,7 @@ repos:
     rev: v1.2.3
     hooks:
       - id: check-added-large-files
+        args: ["--maxkb=12000"]
       - id: end-of-file-fixer
       - id: trailing-whitespace
   # spell check
