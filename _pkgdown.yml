@@ -6,8 +6,11 @@ development:
   mode: auto
 authors:
   Vishal Koparde:
-    href: https://github.com/kopardev
+    href: "https://github.com/kopardev"
   Kelly Sovacool:
-    href: https://github.com/kelly-sovacool
+    href: "https://github.com/kelly-sovacool"
   CCR Collaborative Bioinformatics Resource:
-    href: https://github.com/CCBR
+    href: "https://github.com/CCBR"
+  footer:
+    roles: [cph, fnd]
+    text: "Created by"
