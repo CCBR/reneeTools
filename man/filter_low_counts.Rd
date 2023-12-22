@@ -18,5 +18,6 @@ filtered counts dataframe
 filter_low_counts
 }
 \examples{
-filter_low_counts(gene_counts)
+filter_low_counts(gene_counts) \%>\% head()
+filter_low_counts(gene_counts, min_counts = 100)
 }
