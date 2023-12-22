@@ -3,7 +3,8 @@ default_stages: [pre-commit]
 exclude: |
   (?x)(
       ^assets/|
-      ^docs/.*.html
+      ^docs/.*.html|
+      ^data-raw/*.txt
    )
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
