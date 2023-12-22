@@ -7,3 +7,4 @@ results/
 *.code-workspace
 assets/*.html
 data-raw/*.txt
+man/*

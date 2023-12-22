@@ -4,7 +4,8 @@ exclude: |
   (?x)(
       ^assets/|
       ^docs/.*.html|
-      ^data-raw/*.txt
+      ^data-raw/*.txt|
+      ^man/
    )
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks

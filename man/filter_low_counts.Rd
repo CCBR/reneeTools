@@ -4,25 +4,19 @@
 \alias{filter_low_counts}
 \title{filter_low_counts}
 \usage{
-filter_low_counts(
-  raw_counts_matrix,
-  min_counts = 0,
-  min_cpm = 0,
-  min_cpm_fraction = 1
-)
+filter_low_counts(counts_dat, min_counts = 0)
 }
 \arguments{
-\item{raw_counts_matrix}{raw_counts_matrix object}
+\item{counts_dat}{dataframe of expected gene counts from RSEM}
 
-\item{min_counts}{integer number of min_counts across all samples, default 0}
-
-\item{min_cpm}{float minimum cpm value, default 0}
-
-\item{min_cpm_fraction}{float fraction of samples that need to satisfy min_cpm filter, default 1.0}
+\item{min_counts}{integer number of minimum counts across all samples (default: 0)}
 }
 \value{
-filtered_raw_count_matrix
+filtered counts dataframe
 }
 \description{
 filter_low_counts
+}
+\examples{
+filter_low_counts(gene_counts)
 }
