@@ -7,4 +7,6 @@
 ^\.github$
 ^README\.Rmd$
 ^\.pre-commit-config\.yaml$
+^\.prettierignore$
+^\.prettierrc$
 ^data-raw$
