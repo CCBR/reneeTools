@@ -1,0 +1,10 @@
+# gitignore
+.nextflow*
+work/
+data/
+results/
+.DS_Store
+*.code-workspace
+assets/*.html
+data-raw/*.txt
+man/*

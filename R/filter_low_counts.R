@@ -1,18 +1,28 @@
 #' filter_low_counts
 #'
-#' @param raw_counts_matrix raw_counts_matrix object
-#' @param min_counts integer number of min_counts across all samples, default 0
-#' @param min_cpm float minimum cpm value, default 0
-#' @param min_cpm_fraction float fraction of samples that need to satisfy min_cpm filter, default 1.0
+#' @param counts_dat dataframe of expected gene counts from RSEM
+#' @param min_counts integer number of minimum counts across all samples (default: 0)
 #'
-#' @return filtered_raw_count_matrix
+#' @return filtered counts dataframe
 #' @export
 #'
 #' @examples
+#' filter_low_counts(gene_counts) %>% head()
+#' filter_low_counts(gene_counts, min_counts = 100)
 filter_low_counts <- function(
-    raw_counts_matrix,
-    min_counts = 0,
-    min_cpm = 0,
-    min_cpm_fraction = 1.0) {
-
+    counts_dat,
+    min_counts = 0) {
+  gene_id <- count <- count_sum <- NULL
+  genes_above_threshold <- counts_dat %>%
+    tidyr::pivot_longer(!c("gene_id", "GeneName"),
+      names_to = "sample_id", values_to = "count"
+    ) %>%
+    dplyr::group_by(gene_id) %>%
+    dplyr::summarize(count_sum = sum(count)) %>%
+    dplyr::filter(count_sum >= min_counts) %>%
+    dplyr::pull(gene_id)
+  return(
+    counts_dat %>%
+      dplyr::filter(gene_id %in% (genes_above_threshold))
+  )
 }

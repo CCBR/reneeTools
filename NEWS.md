@@ -1,5 +1,7 @@
-# reneeTools development version
+# reneeTools 0.1.0
 
 - Create a `NEWS.md` file to track changes to the package.
 
-# reneeTools 0.1.0
+## New functions
+
+- `filter_low_counts()` (#10)

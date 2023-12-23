@@ -3,13 +3,16 @@ default_stages: [pre-commit]
 exclude: |
   (?x)(
       ^assets/|
-      ^docs/.*.html
+      ^docs/.*.html|
+      ^data-raw/*.txt|
+      ^man/
    )
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3
     hooks:
       - id: check-added-large-files
+        args: ["--maxkb=12000"]
       - id: end-of-file-fixer
       - id: trailing-whitespace
   # spell check
