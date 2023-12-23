@@ -51,39 +51,53 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter_low_counts</span><span class="op">(</span></span>
-<span>  <span class="va">raw_counts_matrix</span>,</span>
-<span>  min_counts <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  min_cpm <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  min_cpm_fraction <span class="op">=</span> <span class="fl">1</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter_low_counts</span><span class="op">(</span><span class="va">counts_dat</span>, min_counts <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>raw_counts_matrix</dt>
-<dd><p>raw_counts_matrix object</p></dd>
+    <dl><dt>counts_dat</dt>
+<dd><p>dataframe of expected gene counts from RSEM</p></dd>
 
 
 <dt>min_counts</dt>
-<dd><p>integer number of min_counts across all samples, default 0</p></dd>
-
-
-<dt>min_cpm</dt>
-<dd><p>float minimum cpm value, default 0</p></dd>
-
-
-<dt>min_cpm_fraction</dt>
-<dd><p>float fraction of samples that need to satisfy min_cpm filter, default 1.0</p></dd>
+<dd><p>integer number of minimum counts across all samples (default: 0)</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>filtered_raw_count_matrix</p>
+<p>filtered counts dataframe</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">filter_low_counts</span><span class="op">(</span><span class="va">gene_counts</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene_id            GeneName KO_S3 KO_S4 WT_S1 WT_S2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ENSG00000121410.11 A1BG         0     0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ENSG00000268895.5  A1BG-AS1     0     0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ENSG00000148584.15 A1CF         0     0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ENSG00000175899.14 A2M          0     0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ENSG00000245105.3  A2M-AS1      0     0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ENSG00000166535.20 A2ML1        0     0     0     0</span>
+<span class="r-in"><span><span class="fu">filter_low_counts</span><span class="op">(</span><span class="va">gene_counts</span>, min_counts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene_id            GeneName KO_S3 KO_S4 WT_S1 WT_S2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ENSG00000154734.15 ADAMTS1      0   0      46    80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ENSG00000142192.21 APP          2   1      78    88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ENSG00000185658.13 BRWD1       25  22.1    74   104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ENSG00000142156.14 COL6A1       3   6      71   112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ENSG00000142173.15 COL6A2       3   0      77    98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ENSG00000157540.21 DYRK1A      12   8      31    49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> ENSG00000159140.20 SON          3   1      74    97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> ENSG00000160181.9  TFF2         0   0      71    89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> ENSG00000182670.13 TTC3        12  11      76    85</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

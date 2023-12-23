@@ -25,9 +25,18 @@
     <loc>https://ccbr.github.io/reneeTools/reference/filter_low_counts.html</loc>
   </url>
   <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/gene_counts.html</loc>
+  </url>
+  <url>
     <loc>https://ccbr.github.io/reneeTools/reference/index.html</loc>
   </url>
   <url>
     <loc>https://ccbr.github.io/reneeTools/reference/read_raw_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/reneeTools-package.html</loc>
   </url>
 </urlset>
