@@ -1,4 +1,4 @@
-name: Auto add reponame as label to all issues and PRs
+name: Add repo name label
 
 on:
   issues:
