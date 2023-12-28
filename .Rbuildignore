@@ -10,3 +10,4 @@
 ^\.prettierignore$
 ^\.prettierrc$
 ^data-raw$
+^Dockerfile$
