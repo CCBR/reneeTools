@@ -16,6 +16,7 @@
 #' )
 #' dds <- create_deseq_obj(gene_counts, sample_meta, ~condition)
 create_deseq_obj <- function(counts_tbl, meta_dat, design) {
+  gene_id <- GeneName <- NULL
   counts_dat <- counts_tbl %>%
     # deseq2 requires integer counts
     dplyr::mutate(dplyr::across(
