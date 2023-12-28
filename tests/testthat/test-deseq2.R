@@ -1,3 +1,4 @@
+set.seed(20231228)
 test_that("create_deseq_obj works", {
   sample_meta <-
     data.frame(
@@ -29,7 +30,7 @@ test_that("create_deseq_obj works", {
   )
 
   # run deseq
-  dds_dex <- DESeq2::DESeq(dds)
+  dds_dex <- DESeq2::DESeq(dds, fitType = "local")
   res <- DESeq2::results(dds_dex)
   res_dat <- res %>% as.data.frame()
   expect_equal(
@@ -44,7 +45,8 @@ test_that("create_deseq_obj works", {
           35.6755294108162
         ),
         log2FoldChange = c(
-          -0.93461130443384, -3.35053555731274,
+          -0.93461130443384,
+          -3.35053555731274,
           -4.88594876484931,
           -4.43532926024883,
           -1.8328208411504
@@ -57,7 +59,8 @@ test_that("create_deseq_obj works", {
           0.36162525207182
         ),
         stat = c(
-          -3.48756535533128, -6.41560589526015,
+          -3.48756535533128,
+          -6.41560589526015,
           -5.67485220164042,
           -5.88253158684504,
           -5.0682877665479
