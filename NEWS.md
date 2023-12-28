@@ -5,3 +5,4 @@
 ## New functions
 
 - `filter_low_counts()` (#10)
+- `create_deseq_obj()` (#13)
