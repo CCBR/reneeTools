@@ -11,7 +11,7 @@ on:
     types: [published]
 
 env:
-  IMAGE_NAME: "reneeTools"
+  IMAGE_NAME: "reneetools"
   CONTEXT: "./"
   NAMESPACE: "nciccbr"
 
