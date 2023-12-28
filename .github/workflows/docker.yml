@@ -1,11 +1,11 @@
 name: docker
 
 on:
-  # push:
-  #   paths:
-  #     - '.github/workflows/r-pkg-docker.yml'
-  #     - 'Description'
-  #     - 'Dockerfile'
+  push:
+    paths:
+      - ".github/workflows/r-pkg-docker.yml"
+      - "Description"
+      - "Dockerfile"
   workflow_dispatch:
   release:
     types: [published]
