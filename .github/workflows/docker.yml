@@ -1,0 +1,57 @@
+name: docker
+
+on:
+  # push:
+  #   paths:
+  #     - '.github/workflows/r-pkg-docker.yml'
+  #     - 'Description'
+  #     - 'Dockerfile'
+  workflow_dispatch:
+  release:
+    types: [published]
+
+env:
+  IMAGE_NAME: "reneeTools"
+  CONTEXT: "./"
+  NAMESPACE: "nciccbr"
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare build-time variables
+        id: vars
+        run: |
+          echo "DATE=$(date +"%Y-%m-%d")" >> "$GITHUB_OUTPUT"
+
+          if [ '${{ github.event_name }}' == 'release' ]; then
+            VERSION=${{ github.ref_name }}
+          else
+            HASH=$(echo "${{ github.sha }}" | cut -c1-7)
+            VERSION="$(grep 'Version:' $CONTEXT/DESCRIPTION | sed 's/Version: //')_$HASH"
+          fi
+          echo "VERSION_TAG=$(echo $VERSION)" >> "$GITHUB_OUTPUT"
+      - name: debug
+        run: |
+          echo "the github tag is ${{ github.ref_name }}"
+          echo "github event_name is ${{ github.event_name }}"
+          echo "the version tag is ${{ steps.vars.outputs.VERSION_TAG }}"
+
+      - name: Login to DockerHub
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.VERSION_TAG }}
+          context: ${{ env.CONTEXT }}
+          file: ${{ env.CONTEXT }}/Dockerfile
+          build-args: |
+            BUILD_DATE=${{ steps.vars.outputs.DATE }}
+            BUILD_TAG=${{ steps.vars.outputs.VERSION_TAG }}
+            REPONAME=${{ env.IMAGE_NAME }}
