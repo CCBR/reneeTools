@@ -16,6 +16,8 @@ BugReports: https://github.com/CCBR/reneeTools/issues
 Depends:
     R (>= 2.10)
 Imports:
+    assertthat,
+    DESeq2,
     dplyr,
     tidyr
 Suggests:

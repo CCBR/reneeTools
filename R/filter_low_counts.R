@@ -1,6 +1,6 @@
 #' filter_low_counts
 #'
-#' @param counts_dat dataframe of expected gene counts from RSEM
+#' @param counts_dat expected gene counts from RSEM as a data frame or tibble
 #' @param min_counts integer number of minimum counts across all samples (default: 0)
 #'
 #' @return filtered counts dataframe
