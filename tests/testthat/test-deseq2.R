@@ -33,7 +33,7 @@ test_that("create_deseq_obj works", {
   dds_dex <- DESeq2::DESeq(dds, fitType = "local")
   res <- DESeq2::results(dds_dex)
   res_dat <- res %>% as.data.frame()
-  expect_equal(
+  expect_true(all.equal(
     res_dat %>% dplyr::filter(baseMean > 30),
     structure(
       list(
@@ -89,5 +89,5 @@ test_that("create_deseq_obj works", {
         "ENSG00000182670.13"
       )
     )
-  )
+  ))
 })
