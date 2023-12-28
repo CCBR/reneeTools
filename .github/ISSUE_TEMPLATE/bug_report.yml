@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before you submit this issue, please check the documentation: <ccbr.github.io/reneeTools/>
+        Before you submit this issue, please check the documentation: <https://ccbr.github.io/reneeTools/>
 
   - type: textarea
     id: description
