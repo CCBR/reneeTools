@@ -1,7 +1,8 @@
 #' Create DESeq2 object from gene counts and sample metadata
 #'
-#' @param counts_tbl expected gene counts from RSEM as a data frame or tibble
-#' @param meta_dat sample metadata as a data frame with rownames as sample IDs
+#' @param counts_tbl expected gene counts from RSEM as a data frame or tibble.
+#' @param meta_dat   sample metadata as a data frame with rownames as sample IDs.
+#' @param design     model formula for experimental design. Columns must exist in `meta_dat`.
 #'
 #' @return DESeqDataSet
 #' @export
