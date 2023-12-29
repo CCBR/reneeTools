@@ -29,7 +29,7 @@ reneeDataSet <- S7::new_class("renee",
 reneeDataSetFromFiles <- function(gene_counts_filepath, sample_meta_filepath) {
   count_dat <- readr::read_tsv(gene_counts_filepath)
   sample_meta_dat <- readr::read_tsv(sample_meta_filepath)
-  return(reneeDataSetFromDataFrames)
+  return(reneeDataSetFromDataFrames(count_dat, sample_meta_dat))
 }
 
 #' Construct a reneeDataSet object from data frames
