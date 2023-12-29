@@ -1,17 +1,22 @@
 reneeDataSet <- S7::new_class("renee",
-  parent = S7::class_list,
+  properties = list(
+    counts = S7::new_S3_class("matrix"),
+    sample_meta = S7::class_data.frame,
+    analyses = S7::class_list
+  ),
   constructor = function(count_matrix, sample_meta_dat) {
-    S7::new_object(list(
+    S7::new_object(S7::S7_object(),
       counts = count_matrix,
-      sample_meta = sample_meta_dat
-    ))
+      sample_meta = sample_meta_dat,
+      analyses = list()
+    )
   }
 )
 
-#' Create a reneeDataSet object from TSV files
+#' Construct a reneeDataSet object from tsv files.
 #'
-#' @param gene_counts_filepath path to TSV file of expected gene counts from RSEM
-#' @param sample_meta_filepath path to TSV file with sample IDs and metadata for differential analysis
+#' @param gene_counts_filepath path to tsv file of expected gene counts from RSEM.
+#' @param sample_meta_filepath path to tsv file with sample IDs and metadata for differential analysis.
 #'
 #' @return reneeDataSet object
 #' @export
