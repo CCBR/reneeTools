@@ -2,20 +2,20 @@
 % Please edit documentation in R/renee-class.R
 \name{reneeDataSetFromFiles}
 \alias{reneeDataSetFromFiles}
-\title{Create a reneeDataSet object from TSV files}
+\title{Construct a reneeDataSet object from tsv files.}
 \usage{
 reneeDataSetFromFiles(gene_counts_filepath, sample_meta_filepath)
 }
 \arguments{
-\item{gene_counts_filepath}{path to TSV file of expected gene counts from RSEM}
+\item{gene_counts_filepath}{path to tsv file of expected gene counts from RSEM.}
 
-\item{sample_meta_filepath}{path to TSV file with sample IDs and metadata for differential analysis}
+\item{sample_meta_filepath}{path to tsv file with sample IDs and metadata for differential analysis.}
 }
 \value{
 reneeDataSet object
 }
 \description{
-Create a reneeDataSet object from TSV files
+Construct a reneeDataSet object from tsv files.
 }
 \examples{
 reneeDataSetFromFiles(

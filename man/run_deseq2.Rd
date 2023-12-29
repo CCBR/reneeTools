@@ -4,12 +4,14 @@
 \alias{run_deseq2}
 \title{Run DESeq2 on a reneeDataSet}
 \usage{
-run_deseq2(renee_ds, design)
+run_deseq2(renee_ds, design, ...)
 }
 \arguments{
 \item{renee_ds}{reneeDataSet object}
 
 \item{design}{model formula for experimental design. Columns must exist in \code{meta_dat}.}
+
+\item{...}{remaining variables are forwarded to \code{DESeq2::DESeq()}.}
 }
 \value{
 reneeDataSet object with DESeq2 slot filled
@@ -20,10 +22,12 @@ Run DESeq2 on a reneeDataSet
 \examples{
 rds <- reneeDataSetFromFiles(
   system.file("extdata",
-              "RSEM.genes.expected_count.all_samples.txt",
-               package = "reneeTools"),
+    "RSEM.genes.expected_count.all_samples.txt",
+    package = "reneeTools"
+  ),
   system.file("extdata", "sample_metadata.tsv",
-               package = "reneeTools")
+    package = "reneeTools"
+  )
 )
 run_deseq2(rds, ~condition)
 }
