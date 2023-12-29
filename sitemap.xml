@@ -22,7 +22,7 @@
     <loc>https://ccbr.github.io/reneeTools/news/index.html</loc>
   </url>
   <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/create_deseq_obj.html</loc>
+    <loc>https://ccbr.github.io/reneeTools/reference/counts_dat_to_matrix.html</loc>
   </url>
   <url>
     <loc>https://ccbr.github.io/reneeTools/reference/filter_low_counts.html</loc>
@@ -34,12 +34,21 @@
     <loc>https://ccbr.github.io/reneeTools/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/read_raw_counts.html</loc>
+    <loc>https://ccbr.github.io/reneeTools/reference/meta_tbl_to_dat.html</loc>
   </url>
   <url>
     <loc>https://ccbr.github.io/reneeTools/reference/reexports.html</loc>
   </url>
   <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/reneeDataSetFromDataFrames.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/reneeDataSetFromFiles.html</loc>
+  </url>
+  <url>
     <loc>https://ccbr.github.io/reneeTools/reference/reneeTools-package.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/run_deseq2.html</loc>
   </url>
 </urlset>
