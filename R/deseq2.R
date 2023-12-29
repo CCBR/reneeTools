@@ -1,37 +1,29 @@
-#' Create DESeq2 object from gene counts and sample metadata
+#' Run DESeq2 on a reneeDataSet
 #'
-#' @param counts_tbl expected gene counts from RSEM as a data frame or tibble.
-#' @param meta_dat   sample metadata as a data frame with rownames as sample IDs.
-#' @param design     model formula for experimental design. Columns must exist in `meta_dat`.
+#' @param renee_ds reneeDataSet object
+#' @param design   model formula for experimental design. Columns must exist in `meta_dat`.
+#' @param ...      remaining variables are forwarded to `DESeq2::DESeq()`.
 #'
-#' @return DESeqDataSet
+#' @return reneeDataSet object with DESeq2 slot filled
 #' @export
 #'
 #' @examples
-#' sample_meta <- data.frame(
-#'   row.names = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"),
-#'   condition = factor(c("knockout", "knockout", "wildtype", "wildtype"),
-#'     levels = c("wildtype", "knockout")
+#' rds <- reneeDataSetFromFiles(
+#'   system.file("extdata",
+#'     "RSEM.genes.expected_count.all_samples.txt",
+#'     package = "reneeTools"
+#'   ),
+#'   system.file("extdata", "sample_metadata.tsv",
+#'     package = "reneeTools"
 #'   )
 #' )
-#' dds <- create_deseq_obj(gene_counts, sample_meta, ~condition)
-create_deseq_obj <- function(counts_tbl, meta_dat, design) {
-  gene_id <- GeneName <- NULL
-  counts_dat <- counts_tbl %>%
-    # deseq2 requires integer counts
-    dplyr::mutate(dplyr::across(
-      dplyr::where(is.numeric),
-      \(x) as.integer(round(x, 0))
-    )) %>%
-    as.data.frame()
-  row.names(counts_dat) <- counts_dat %>% dplyr::pull("gene_id")
-  # convert counts tibble to matrix
-  counts_mat <- counts_dat %>%
-    dplyr::select(-c(gene_id, GeneName)) %>%
-    as.matrix()
-
-  # sample IDs must be in the same order
-  assertthat::are_equal(colnames(counts_mat), rownames(meta_dat))
-
-  return(DESeq2::DESeqDataSetFromMatrix(counts_mat, meta_dat, design))
+#' run_deseq2(rds, ~condition)
+run_deseq2 <- function(renee_ds, design, ...) {
+  dds <- DESeq2::DESeqDataSetFromMatrix(
+    renee_ds@counts,
+    renee_ds@sample_meta,
+    design
+  )
+  renee_ds@analyses$deseq2_ds <- DESeq2::DESeq(dds, ...)
+  return(renee_ds)
 }
