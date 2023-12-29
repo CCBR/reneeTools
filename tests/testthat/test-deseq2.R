@@ -1,6 +1,6 @@
 set.seed(20231228)
 test_that("run_deseq2 works", {
-  rds <- reneeDataSetFromFiles(
+  renee_ds <- reneeDataSetFromFiles(
     system.file(
       "extdata",
       "RSEM.genes.expected_count.all_samples.txt",
@@ -10,12 +10,12 @@ test_that("run_deseq2 works", {
       package = "reneeTools"
     )
   )
-  rds@sample_meta <- rds@sample_meta %>%
+  renee_ds@sample_meta <- renee_ds@sample_meta %>%
     dplyr::mutate(condition = factor(condition,
       levels = c("wildtype", "knockout")
     ))
-  rds <- run_deseq2(rds, design = ~condition, fitType = "local")
-  dds <- rds@analyses$deseq2_ds
+  renee_ds <- run_deseq2(renee_ds, design = ~condition, fitType = "local")
+  dds <- renee_ds@analyses$deseq2_ds
   expect_equal(
     dds@colData %>% as.data.frame(),
     structure(
