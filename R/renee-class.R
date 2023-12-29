@@ -27,13 +27,38 @@ reneeDataSet <- S7::new_class("renee",
 #'   system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
 #' )
 reneeDataSetFromFiles <- function(gene_counts_filepath, sample_meta_filepath) {
-  count_mat <- readr::read_tsv(gene_counts_filepath) %>%
-    counts_dat_to_matrix()
-  sample_meta_dat <- readr::read_tsv(sample_meta_filepath) %>%
-    meta_tbl_to_dat()
+  count_dat <- readr::read_tsv(gene_counts_filepath)
+  sample_meta_dat <- readr::read_tsv(sample_meta_filepath)
+  return(reneeDataSetFromDataFrames)
+}
+
+#' Construct a reneeDataSet object from data frames
+#'
+#' @param gene_counts_dat expected gene counts from RSEM as a data frame or tibble.
+#'   Must contain a `gene_id` column and a column for each sample ID in the metadata.
+#' @param sample_meta_dat sample metadata as a data frame or tibble.
+#'   Must contain a `sample_ID` column.
+#'
+#' @return reneeDataSet object
+#' @export
+#'
+#' @examples
+#' sample_meta <- data.frame(
+#'   sample_id = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"),
+#'   condition = factor(
+#'     c("knockout", "knockout", "wildtype", "wildtype"),
+#'     levels = c("wildtype", "knockout")
+#'   )
+#' )
+#' reneeDataSetFromDataFrames(gene_counts, sample_meta)
+reneeDataSetFromDataFrames <- function(gene_counts_dat, sample_meta_dat) {
+  count_mat <- gene_counts_dat %>% counts_dat_to_matrix()
+  sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat()
 
   # sample IDs must be in the same order
-  assertthat::are_equal(colnames(count_mat), rownames(sample_meta_dat))
+  if (!all(colnames(count_mat) == rownames(sample_meta_dat))) {
+    stop("Not all columns in the count matrix equal the rows in the sample metadata. Sample IDs must be in the same order.")
+  }
 
   return(reneeDataSet(count_mat, sample_meta_dat))
 }
