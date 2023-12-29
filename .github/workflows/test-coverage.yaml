@@ -28,10 +28,13 @@ jobs:
 
       - name: Test coverage
         run: |
-          covr::codecov(
-            quiet = FALSE,
+          pkg_cov <- covr::package_coverage(quiet = FALSE,
             clean = FALSE,
             install_path = file.path(Sys.getenv("RUNNER_TEMP"), "package")
+          )
+          covr::codecov(
+            coverage = pkg_cov,
+            quiet = FALSE
           )
         shell: Rscript {0}
 
