@@ -16,22 +16,40 @@
 #' )
 #' dds <- create_deseq_obj(gene_counts, sample_meta, ~condition)
 create_deseq_obj <- function(counts_tbl, meta_dat, design) {
-  gene_id <- GeneName <- NULL
-  counts_dat <- counts_tbl %>%
-    # deseq2 requires integer counts
-    dplyr::mutate(dplyr::across(
-      dplyr::where(is.numeric),
-      \(x) as.integer(round(x, 0))
-    )) %>%
-    as.data.frame()
-  row.names(counts_dat) <- counts_dat %>% dplyr::pull("gene_id")
   # convert counts tibble to matrix
-  counts_mat <- counts_dat %>%
-    dplyr::select(-c(gene_id, GeneName)) %>%
-    as.matrix()
+  counts_mat <- counts_dat_to_matrix(counts_tbl)
 
   # sample IDs must be in the same order
   assertthat::are_equal(colnames(counts_mat), rownames(meta_dat))
 
   return(DESeq2::DESeqDataSetFromMatrix(counts_mat, meta_dat, design))
+}
+
+#' Run DESeq2 on a reneeDataSet
+#'
+#' @param renee_ds reneeDataSet object
+#' @param design   model formula for experimental design. Columns must exist in `meta_dat`.
+#'
+#' @return reneeDataSet object with DESeq2 slot filled
+#' @export
+#'
+#' @examples
+#' rds <- reneeDataSetFromFiles(
+#'   system.file("extdata",
+#'     "RSEM.genes.expected_count.all_samples.txt",
+#'     package = "reneeTools"
+#'   ),
+#'   system.file("extdata", "sample_metadata.tsv",
+#'     package = "reneeTools"
+#'   )
+#' )
+#' run_deseq2(rds, ~condition)
+run_deseq2 <- function(renee_ds, design) {
+  dds <- DESeq2::DESeqDataSetFromMatrix(
+    renee_ds$counts,
+    renee_ds$sample_meta,
+    design
+  )
+  renee_ds$deseq2 <- DESeq2::DESeq(dds)
+  return(renee_ds)
 }

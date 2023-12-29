@@ -19,6 +19,7 @@ Imports:
     assertthat,
     DESeq2,
     dplyr,
+    S7,
     tidyr
 Suggests:
     readr,
