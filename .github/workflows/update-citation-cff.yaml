@@ -30,6 +30,7 @@ jobs:
           extra-packages: |
             any::cffr
             any::V8
+            any::docopt
 
       - name: Update CITATION.cff
         run: |
@@ -47,6 +48,8 @@ jobs:
 
         shell: Rscript {0}
       - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: --files CITATION.cff
       - name: Commit results
         run: |
           git config --local user.name "github-actions[bot]"
