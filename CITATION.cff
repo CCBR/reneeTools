@@ -1,0 +1,156 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.5.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+
+cff-version: 1.2.0
+message: 'To cite package "reneeTools" in publications use:'
+type: software
+license: MIT
+title: "reneeTools: Helper functions for RENEE"
+version: 0.0.0.9000
+abstract: TODO What the package does (one paragraph).
+authors:
+  - family-names: Koparde
+    given-names: Vishal
+    email: vishal.koparde@nih.gov
+    orcid: https://orcid.org/0000-0001-8978-8495
+  - family-names: Sovacool
+    given-names: Kelly
+    email: kelly.sovacool@nih.gov
+    orcid: https://orcid.org/0000-0003-3283-829X
+repository-code: https://github.com/CCBR/reneeTools
+url: https://ccbr.github.io/reneeTools/
+contact:
+  - family-names: Koparde
+    given-names: Vishal
+    email: vishal.koparde@nih.gov
+    orcid: https://orcid.org/0000-0001-8978-8495
+references:
+  - type: software
+    title: "R: A Language and Environment for Statistical Computing"
+    notes: Depends
+    url: https://www.R-project.org/
+    authors:
+      - name: R Core Team
+    location:
+      name: Vienna, Austria
+    year: "2024"
+    institution:
+      name: R Foundation for Statistical Computing
+    version: ">= 2.10"
+  - type: software
+    title: DESeq2
+    abstract:
+      "DESeq2: Differential gene expression analysis based on the negative binomial
+      distribution"
+    notes: Imports
+    url: https://github.com/thelovelab/DESeq2
+    repository: https://bioconductor.org/
+    authors:
+      - family-names: Love
+        given-names: Michael
+        email: michaelisaiahlove@gmail.com
+      - family-names: Anders
+        given-names: Simon
+      - family-names: Huber
+        given-names: Wolfgang
+    year: "2024"
+    doi: 10.18129/B9.bioc.DESeq2
+  - type: software
+    title: dplyr
+    abstract: "dplyr: A Grammar of Data Manipulation"
+    notes: Imports
+    url: https://dplyr.tidyverse.org
+    repository: https://CRAN.R-project.org/package=dplyr
+    authors:
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+        orcid: https://orcid.org/0000-0003-4757-117X
+      - family-names: François
+        given-names: Romain
+        orcid: https://orcid.org/0000-0002-2444-4226
+      - family-names: Henry
+        given-names: Lionel
+      - family-names: Müller
+        given-names: Kirill
+        orcid: https://orcid.org/0000-0002-1416-3412
+      - family-names: Vaughan
+        given-names: Davis
+        email: davis@posit.co
+        orcid: https://orcid.org/0000-0003-4777-038X
+    year: "2024"
+  - type: software
+    title: S7
+    abstract: "S7: An Object Oriented System Meant to Become a Successor to S3 and S4"
+    notes: Imports
+    url: https://github.com/rconsortium/S7/
+    repository: https://CRAN.R-project.org/package=S7
+    authors:
+      - family-names: Vaughan
+        given-names: Davis
+      - family-names: Hester
+        given-names: Jim
+        orcid: https://orcid.org/0000-0002-2739-7082
+      - family-names: Kalinowski
+        given-names: Tomasz
+      - family-names: Landau
+        given-names: Will
+      - family-names: Lawrence
+        given-names: Michael
+      - family-names: Maechler
+        given-names: Martin
+        orcid: https://orcid.org/0000-0002-8685-9910
+      - family-names: Tierney
+        given-names: Luke
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+        orcid: https://orcid.org/0000-0003-4757-117X
+    year: "2024"
+  - type: software
+    title: tidyr
+    abstract: "tidyr: Tidy Messy Data"
+    notes: Imports
+    url: https://tidyr.tidyverse.org
+    repository: https://CRAN.R-project.org/package=tidyr
+    authors:
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+      - family-names: Vaughan
+        given-names: Davis
+        email: davis@posit.co
+      - family-names: Girlich
+        given-names: Maximilian
+    year: "2024"
+  - type: software
+    title: readr
+    abstract: "readr: Read Rectangular Text Data"
+    notes: Suggests
+    url: https://readr.tidyverse.org
+    repository: https://CRAN.R-project.org/package=readr
+    authors:
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+      - family-names: Hester
+        given-names: Jim
+      - family-names: Bryan
+        given-names: Jennifer
+        email: jenny@posit.co
+        orcid: https://orcid.org/0000-0002-6983-2759
+    year: "2024"
+  - type: software
+    title: testthat
+    abstract: "testthat: Unit Testing for R"
+    notes: Suggests
+    url: https://testthat.r-lib.org
+    repository: https://CRAN.R-project.org/package=testthat
+    authors:
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+    year: "2024"
+    version: ">= 3.0.0"
