@@ -11,3 +11,4 @@
 ^\.prettierrc$
 ^data-raw$
 ^Dockerfile$
+^CITATION\.cff$
