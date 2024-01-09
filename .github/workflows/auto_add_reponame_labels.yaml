@@ -2,9 +2,11 @@ name: Add repo name label
 
 on:
   issues:
-    - opened
+    types:
+      - opened
   pull_request:
-    - opened
+    types:
+      - opened
 
 jobs:
   add_label:
