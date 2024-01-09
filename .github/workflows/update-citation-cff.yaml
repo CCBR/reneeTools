@@ -50,6 +50,7 @@ jobs:
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --files CITATION.cff
+        continue-on-error: true
       - name: Commit results
         run: |
           git config --local user.name "github-actions[bot]"
