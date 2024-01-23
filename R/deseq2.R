@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' rds <- reneeDataSetFromFiles(
+#' renee_ds <- reneeDataSetFromFiles(
 #'   system.file("extdata",
 #'     "RSEM.genes.expected_count.all_samples.txt",
 #'     package = "reneeTools"
@@ -17,7 +17,7 @@
 #'     package = "reneeTools"
 #'   )
 #' )
-#' run_deseq2(rds, ~condition)
+#' renee_ds <- run_deseq2(renee_ds, ~condition)
 run_deseq2 <- function(renee_ds, design, ...) {
   dds <- DESeq2::DESeqDataSetFromMatrix(
     renee_ds@counts,
