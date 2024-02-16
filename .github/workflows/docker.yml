@@ -1,17 +1,12 @@
 name: docker
 
 on:
-  # push:
-  #   paths:
-  #     - ".github/workflows/docker.yml"
-  #     - "DESCRIPTION"
-  #     - "Dockerfile"
   workflow_dispatch:
   release:
     types: [published]
 
 env:
-  IMAGE_NAME: "reneetools"
+  IMAGE_NAME: "reneeTools"
   CONTEXT: "./"
   NAMESPACE: "nciccbr"
 
@@ -27,11 +22,15 @@ jobs:
 
           if [ '${{ github.event_name }}' == 'release' ]; then
             VERSION=${{ github.ref_name }}
+            DOCKER_TAGS=${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${VERSION},${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
           else
-            HASH=$(echo "${{ github.sha }}" | cut -c1-7)
-            VERSION="$(grep 'Version:' $CONTEXT/DESCRIPTION | sed 's/Version: //')_$HASH"
+            HASH=$(git rev-parse --short HEAD)
+            VERSION="$(grep 'Version:' $CONTEXT/DESCRIPTION | sed 's/Version: //')_${HASH}"
+            DOCKER_TAGS=${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${VERSION}
           fi
           echo "VERSION_TAG=$(echo $VERSION)" >> "$GITHUB_OUTPUT"
+          echo "DOCKER_TAGS=$(echo $DOCKER_TAGS)" >> "$GITHUB_OUTPUT"
+
       - name: debug
         run: |
           echo "the github tag is ${{ github.ref_name }}"
@@ -48,10 +47,11 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.VERSION_TAG }}
+          tags: ${{ steps.vars.outputs.DOCKER_TAGS }} # include 'latest' tag if this is a release
           context: ${{ env.CONTEXT }}
           file: ${{ env.CONTEXT }}/Dockerfile
           build-args: |
             BUILD_DATE=${{ steps.vars.outputs.DATE }}
             BUILD_TAG=${{ steps.vars.outputs.VERSION_TAG }}
             REPONAME=${{ env.IMAGE_NAME }}
+            R_VERSION=4.3.2

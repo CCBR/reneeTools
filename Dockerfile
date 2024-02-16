@@ -8,6 +8,9 @@ ENV BUILD_TAG=${BUILD_TAG}
 ARG REPONAME="000000"
 ENV REPONAME=${REPONAME}
 
+ARG R_VERSION=4.3.2
+ENV R_VERSION=${R_VERSION}
+
 RUN mkdir -p /opt2 && mkdir -p /data2
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -22,6 +25,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 # install basic dependencies with apt-get
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
   build-essential \
+  bzip2 \
+	figlet \
 	g++ \
 	gcc \
 	gfortran \
@@ -66,6 +71,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	rsync \
   squashfs-tools \
 	unzip \
+    vim \
   uuid-dev \
 	wget \
 	zlib1g \
@@ -79,18 +85,20 @@ RUN echo 'export PATH=/opt2/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     rm ~/miniforge3.sh && chmod 777 -R /opt2/conda/
 ENV PATH="/opt2/conda/bin:$PATH"
 
-# install devtools
-RUN mamba install -c conda-forge r-base=4.3.2 r-devtools
+# install conda packages
+RUN mamba install -c conda-forge \
+  r-base=${R_VERSION} \
+  r-devtools
 
 # install R package
 COPY . /opt2/reneeTools
-RUN R -e 'devtools::install("/opt2/reneeTools")'
+RUN R -e "devtools::install_local('/opt2/reneeTools', dependencies = TRUE)"
+
+# Save Dockerfile in the docker
+COPY Dockerfile /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
+RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 
 # cleanup
-RUN apt-get clean && apt-get purge && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-COPY Dockerfile /opt2/Dockerfile
-RUN chmod -R a+rX /opt2/Dockerfile
-
 WORKDIR /data2
+RUN apt-get clean && apt-get purge \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
