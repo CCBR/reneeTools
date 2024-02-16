@@ -1,4 +1,6 @@
-# reneeTools 0.1.0
+# reneeTools development version
+
+This is the first release of reneeTools 🎉
 
 - Create a `NEWS.md` file to track changes to the package.
 
