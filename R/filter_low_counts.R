@@ -21,8 +21,8 @@ filter_low_counts <- function(
     dplyr::summarize(count_sum = sum(count)) %>%
     dplyr::filter(count_sum >= min_counts) %>%
     dplyr::pull(gene_id)
-  return(
-    counts_dat %>%
+
+  renee_ds@counts$filtered <- counts_dat %>%
       dplyr::filter(gene_id %in% (genes_above_threshold))
-  )
+  return(renee_ds)
 }
