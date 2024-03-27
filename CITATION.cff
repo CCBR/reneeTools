@@ -19,6 +19,10 @@ authors:
     given-names: Kelly
     email: kelly.sovacool@nih.gov
     orcid: https://orcid.org/0000-0003-3283-829X
+  - family-names: Sevilla
+    given-names: Samantha
+    email: samantha.sevilla@nih.gov
+    orcid: https://orcid.org/0000-0002-8734-9875
 repository-code: https://github.com/CCBR/reneeTools
 url: https://ccbr.github.io/reneeTools/
 contact:
