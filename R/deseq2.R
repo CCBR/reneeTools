@@ -20,10 +20,11 @@
 #' renee_ds <- run_deseq2(renee_ds, ~condition)
 run_deseq2 <- function(renee_ds, design, ...) {
   dds <- DESeq2::DESeqDataSetFromMatrix(
-    renee_ds@counts,
+    renee_ds@counts$filtered_counts,
     renee_ds@sample_meta,
     design
   )
   renee_ds@analyses$deseq2_ds <- DESeq2::DESeq(dds, ...)
+
   return(renee_ds)
 }
