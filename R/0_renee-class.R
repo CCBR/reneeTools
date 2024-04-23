@@ -54,10 +54,12 @@ create_reneeDataSet_from_files <- function(gene_counts_filepath, sample_meta_fil
 #' )
 #' create_reneeDataSet_from_dataframes(gene_counts, sample_meta)
 create_reneeDataSet_from_dataframes <- function(count_dat, sample_meta_dat) {
+  gene_id <- GeneName <- NULL
+
   sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat()
 
   # sample IDs must be in the same order
-  if (!all(colnames(count_dat %>% select(-gene_id, -GeneName)) == rownames(sample_meta_dat))) {
+  if (!all(colnames(count_dat %>% dplyr::select(-gene_id, -GeneName)) == rownames(sample_meta_dat))) {
     stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
 
