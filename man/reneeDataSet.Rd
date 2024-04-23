@@ -2,10 +2,17 @@
 % Please edit documentation in R/0_renee-class.R
 \name{reneeDataSet}
 \alias{reneeDataSet}
-\title{RENEE data set class}
+\title{reneeDataSet class}
 \usage{
-reneeDataSet(count_matrix, sample_meta_dat)
+reneeDataSet(count_dat, sample_meta_dat)
+}
+\arguments{
+\item{count_dat}{expected gene counts from RSEM as a data frame or tibble.
+Must contain a \code{gene_id} column and a column for each sample ID in the metadata.}
+
+\item{sample_meta_dat}{sample metadata as a data frame or tibble.
+Must contain a \code{sample_ID} column.}
 }
 \description{
-RENEE data set class
+reneeDataSet class
 }

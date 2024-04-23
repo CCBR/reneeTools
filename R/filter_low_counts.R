@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' filter_low_counts(gene_counts) %>% head()
-#' filter_low_counts(gene_counts, min_counts = 100)
+#' filter_low_counts(gene_counts, min_count = 100)
 filter_low_counts <- function(
     counts_dat,
     min_count = 0) {

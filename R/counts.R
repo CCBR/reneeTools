@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' counts_dat_to_matrix(head(gene_counts))
-counts_dat_to_matrix <- function(counts_tbl, gene_id_colname = "gene_id") {
+counts_dat_to_matrix <- function(counts_tbl) {
   gene_id <- GeneName <- NULL
   counts_dat <- counts_tbl %>%
     # deseq2 requires integer counts
