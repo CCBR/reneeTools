@@ -2,7 +2,7 @@
 #' @export
 reneeDataSet <- S7::new_class("renee",
   properties = list(
-    counts = S7::new_S3_class("matrix"),
+    counts = S7::class_data.frame,
     sample_meta = S7::class_data.frame,
     analyses = S7::class_list
   ),
@@ -53,14 +53,13 @@ create_reneeDataSet_from_files <- function(gene_counts_filepath, sample_meta_fil
 #'   )
 #' )
 #' create_reneeDataSet_from_dataframes(gene_counts, sample_meta)
-create_reneeDataSet_from_dataframes <- function(gene_counts_dat, sample_meta_dat) {
-  count_mat <- gene_counts_dat %>% counts_dat_to_matrix()
+create_reneeDataSet_from_dataframes <- function(count_dat, sample_meta_dat) {
   sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat()
 
   # sample IDs must be in the same order
-  if (!all(colnames(count_mat) == rownames(sample_meta_dat))) {
-    stop("Not all columns in the count matrix equal the rows in the sample metadata. Sample IDs must be in the same order.")
+  if (!all(colnames(count_dat %>% select(-gene_id, -GeneName)) == rownames(sample_meta_dat))) {
+    stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
 
-  return(reneeDataSet(count_mat, sample_meta_dat))
+  return(reneeDataSet(count_dat, sample_meta_dat))
 }

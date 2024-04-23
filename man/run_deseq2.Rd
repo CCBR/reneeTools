@@ -20,7 +20,7 @@ reneeDataSet object with DESeq2 slot filled
 Run DESeq2 on a reneeDataSet
 }
 \examples{
-renee_ds <- reneeDataSetFromFiles(
+renee_ds <- create_reneeDataSet_from_files(
   system.file("extdata",
     "RSEM.genes.expected_count.all_samples.txt",
     package = "reneeTools"

@@ -18,12 +18,17 @@
 #'   )
 #' )
 #' renee_ds <- run_deseq2(renee_ds, ~condition)
-run_deseq2 <- function(renee_ds, design, ...) {
+run_deseq2 <- S7::new_generic("run_deseq2", "renee_ds", function(renee_ds, design, ...) {
+  S7::S7_dispatch()
+})
+
+S7::method(run_deseq2, reneeDataSet) <- function(renee_ds, design, min_count = 10, ...) {
   dds <- DESeq2::DESeqDataSetFromMatrix(
-    renee_ds@counts,
-    renee_ds@sample_meta,
-    design
+    countData = renee_ds@counts %>% filter_low_counts(min_count = min_count) %>% counts_dat_to_matrix(),
+    colData = renee_ds@sample_meta,
+    design = design
   )
   renee_ds@analyses$deseq2_ds <- DESeq2::DESeq(dds, ...)
+  renee_ds@analyses$deseq2_results <- DESeq2::results(renee_ds@analyses$deseq2_ds)
   return(renee_ds)
 }

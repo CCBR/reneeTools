@@ -5,15 +5,28 @@ test_that("reneeDataSet from files works", {
   )
   expect_equal(
     rds@counts %>% head(),
-    structure(c(
-      0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
-      0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L
-    ), dim = c(6L, 4L), dimnames = list(
-      c(
-        "ENSG00000121410.11", "ENSG00000268895.5", "ENSG00000148584.15",
-        "ENSG00000175899.14", "ENSG00000245105.3", "ENSG00000166535.20"
-      ), c("KO_S3", "KO_S4", "WT_S1", "WT_S2")
-    ))
+    structure(
+      list(
+        gene_id = c(
+          "ENSG00000121410.11",
+          "ENSG00000268895.5",
+          "ENSG00000148584.15",
+          "ENSG00000175899.14",
+          "ENSG00000245105.3",
+          "ENSG00000166535.20"
+        ),
+        GeneName = c(
+          "A1BG", "A1BG-AS1", "A1CF",
+          "A2M", "A2M-AS1", "A2ML1"
+        ),
+        KO_S3 = c(0, 0, 0, 0, 0, 0),
+        KO_S4 = c(0, 0, 0, 0, 0, 0),
+        WT_S1 = c(0, 0, 0, 0, 0, 0),
+        WT_S2 = c(0, 0, 0, 0, 0, 0)
+      ),
+      row.names = c(NA, -6L),
+      class = c("tbl_df", "tbl", "data.frame")
+    )
   )
   expect_equal(
     rds@sample_meta,

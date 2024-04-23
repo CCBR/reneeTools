@@ -8,7 +8,7 @@ test_that("filter_low_counts works", {
   )
   expect_equal(filter_low_counts(test_dat), test_dat)
   expect_equal(
-    filter_low_counts(test_dat, min_counts = 1),
+    filter_low_counts(test_dat, min_count = 1),
     data.frame(
       gene_id = c("B", "C"),
       GeneName = c("geneB", "geneC"),
@@ -16,14 +16,14 @@ test_that("filter_low_counts works", {
     )
   )
   expect_equal(
-    filter_low_counts(test_dat, min_counts = 2),
+    filter_low_counts(test_dat, min_count = 2),
     data.frame(
       gene_id = "C", GeneName = "geneC",
       s1 = 0, s2 = 0, s3 = 3
     )
   )
   expect_equal(
-    filter_low_counts(test_dat, min_counts = 5),
+    filter_low_counts(test_dat, min_count = 5),
     data.frame(
       gene_id = character(0),
       GeneName = character(0),

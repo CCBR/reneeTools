@@ -4,12 +4,12 @@
 \alias{filter_low_counts}
 \title{filter_low_counts}
 \usage{
-filter_low_counts(counts_dat, min_counts = 0)
+filter_low_counts(counts_dat, min_count = 0)
 }
 \arguments{
 \item{counts_dat}{expected gene counts from RSEM as a data frame or tibble}
 
-\item{min_counts}{integer number of minimum counts across all samples (default: 0)}
+\item{min_count}{integer number of minimum counts across all samples (default: 0)}
 }
 \value{
 filtered counts dataframe
