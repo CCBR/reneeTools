@@ -21,13 +21,17 @@ Imports:
     S7,
     tidyr
 Suggests:
+    knitr,
     readr,
+    rmarkdown,
     styler,
     testthat (>= 3.0.0),
     usethis
+VignetteBuilder:
+    knitr
 biocViews:
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.1
