@@ -22,14 +22,14 @@ reneeDataSet <- S7::new_class("renee",
 #' @export
 #'
 #' @examples
-#' reneeDataSetFromFiles(
+#' create_reneeDataSet_from_files(
 #'   system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools"),
 #'   system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
 #' )
-reneeDataSetFromFiles <- function(gene_counts_filepath, sample_meta_filepath) {
+create_reneeDataSet_from_files <- function(gene_counts_filepath, sample_meta_filepath) {
   count_dat <- readr::read_tsv(gene_counts_filepath)
   sample_meta_dat <- readr::read_tsv(sample_meta_filepath)
-  return(reneeDataSetFromDataFrames(count_dat, sample_meta_dat))
+  return(create_reneeDataSet_from_dataframes(count_dat, sample_meta_dat))
 }
 
 #' Construct a reneeDataSet object from data frames
@@ -50,8 +50,8 @@ reneeDataSetFromFiles <- function(gene_counts_filepath, sample_meta_filepath) {
 #'     levels = c("wildtype", "knockout")
 #'   )
 #' )
-#' reneeDataSetFromDataFrames(gene_counts, sample_meta)
-reneeDataSetFromDataFrames <- function(gene_counts_dat, sample_meta_dat) {
+#' create_reneeDataSet_from_dataframes(gene_counts, sample_meta)
+create_reneeDataSet_from_dataframes <- function(gene_counts_dat, sample_meta_dat) {
   count_mat <- gene_counts_dat %>% counts_dat_to_matrix()
   sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat()
 

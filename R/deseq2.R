@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' renee_ds <- reneeDataSetFromFiles(
+#' renee_ds <- create_reneeDataSet_from_files(
 #'   system.file("extdata",
 #'     "RSEM.genes.expected_count.all_samples.txt",
 #'     package = "reneeTools"

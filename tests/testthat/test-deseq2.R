@@ -1,6 +1,6 @@
 set.seed(20231228)
 test_that("run_deseq2 works", {
-  renee_ds <- reneeDataSetFromFiles(
+  renee_ds <- create_reneeDataSet_from_files(
     system.file(
       "extdata",
       "RSEM.genes.expected_count.all_samples.txt",

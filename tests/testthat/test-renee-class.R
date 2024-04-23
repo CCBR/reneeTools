@@ -1,5 +1,5 @@
-test_that("reneeDataSetFromFiles works", {
-  rds <- reneeDataSetFromFiles(
+test_that("reneeDataSet from files works", {
+  rds <- create_reneeDataSet_from_files(
     system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools"),
     system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
   )
@@ -24,7 +24,7 @@ test_that("reneeDataSetFromFiles works", {
   )
 })
 
-test_that("reneeDataSetFromDataFrames detect problems", {
+test_that("reneeDataSet from data frames detect problems", {
   sample_meta <- data.frame(
     sample_id = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"),
     condition = factor(
@@ -33,7 +33,7 @@ test_that("reneeDataSetFromDataFrames detect problems", {
     )
   )
   expect_error(
-    reneeDataSetFromDataFrames(gene_counts[, 1:4], sample_meta),
+    create_reneeDataSet_from_dataframes(gene_counts[, 1:4], sample_meta),
     "Not all columns"
   )
 })
