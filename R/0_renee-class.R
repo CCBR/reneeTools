@@ -1,14 +1,20 @@
-#' RENEE data set class
-#' @export
+#' reneeDataSet class
+#'
+#' @param count_dat expected gene counts from RSEM as a data frame or tibble.
+#'   Must contain a `gene_id` column and a column for each sample ID in the metadata.
+#' @param sample_meta_dat sample metadata as a data frame or tibble.
+#'   Must contain a `sample_ID` column.
+#'
+#'
 reneeDataSet <- S7::new_class("renee",
   properties = list(
     counts = S7::class_data.frame,
     sample_meta = S7::class_data.frame,
     analyses = S7::class_list
   ),
-  constructor = function(count_matrix, sample_meta_dat) {
+  constructor = function(count_dat, sample_meta_dat) {
     S7::new_object(S7::S7_object(),
-      counts = count_matrix,
+      counts = count_dat,
       sample_meta = sample_meta_dat,
       analyses = list()
     )
@@ -36,10 +42,7 @@ create_reneeDataSet_from_files <- function(gene_counts_filepath, sample_meta_fil
 
 #' Construct a reneeDataSet object from data frames
 #'
-#' @param gene_counts_dat expected gene counts from RSEM as a data frame or tibble.
-#'   Must contain a `gene_id` column and a column for each sample ID in the metadata.
-#' @param sample_meta_dat sample metadata as a data frame or tibble.
-#'   Must contain a `sample_ID` column.
+#' @inheritParams reneeDataSet
 #'
 #' @return reneeDataSet object
 #' @export
