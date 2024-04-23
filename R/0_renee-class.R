@@ -1,3 +1,5 @@
+#' RENEE data set class
+#' @export
 reneeDataSet <- S7::new_class("renee",
   properties = list(
     counts = S7::new_S3_class("matrix"),
