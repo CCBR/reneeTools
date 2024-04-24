@@ -1,4 +1,4 @@
-# reneeTools development version
+# reneeTools development version 0.0.0.9000
 
 This is the first release of reneeTools 🎉
 
@@ -6,8 +6,8 @@ This is the first release of reneeTools 🎉
 
 ## Main functions & classes
 
-- `reneeDataSet` (#16)
-  - `reneeDataSetFromFiles()` (#16)
-  - `reneeDataSetFromDataFrames()` (#16)
-  - `run_deseq2()` (#16)
-- `filter_low_counts()` (#10)
+- `reneeDataSet` (#16, #28, @kelly-sovacool)
+  - `create_reneeDataSet_from_files()`
+  - `create_reneeDataSet_from_dataframes()`
+  - `run_deseq2()`
+- `filter_low_counts()` (#10, @kelly-sovacool)

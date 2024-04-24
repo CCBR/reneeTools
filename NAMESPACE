@@ -2,10 +2,11 @@
 
 export("%>%")
 export(counts_dat_to_matrix)
+export(create_reneeDataSet_from_dataframes)
+export(create_reneeDataSet_from_files)
 export(filter_low_counts)
 export(meta_tbl_to_dat)
-export(reneeDataSetFromDataFrames)
-export(reneeDataSetFromFiles)
 export(run_deseq2)
 if (getRversion() < "4.3.0") importFrom("S7", "@")
+importFrom(DESeq2,DESeq)
 importFrom(dplyr,"%>%")

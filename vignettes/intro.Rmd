@@ -1,0 +1,29 @@
+---
+title: "intro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(reneeTools)
+library(dplyr)
+# replace this line with actual path to your gene counts
+gene_counts_tsv <- system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
+metadata_tsv <- system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
+
+# create reneeDataSet object
+renee_ds <- create_reneeDataSet_from_files(gene_counts_tsv, metadata_tsv) %>%
+  run_deseq2(design = ~condition)
+
+renee_ds@analyses$deseq2_results %>% head()
+```

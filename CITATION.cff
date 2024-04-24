@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
 
 cff-version: 1.2.0
 message: 'To cite package "reneeTools" in publications use:'
@@ -33,11 +33,10 @@ references:
     url: https://www.R-project.org/
     authors:
       - name: R Core Team
-    location:
-      name: Vienna, Austria
-    year: "2024"
     institution:
       name: R Foundation for Statistical Computing
+      address: Vienna, Austria
+    year: "2024"
     version: ">= 2.10"
   - type: software
     title: DESeq2
@@ -56,7 +55,6 @@ references:
       - family-names: Huber
         given-names: Wolfgang
     year: "2024"
-    doi: 10.18129/B9.bioc.DESeq2
   - type: software
     title: dplyr
     abstract: "dplyr: A Grammar of Data Manipulation"
@@ -126,6 +124,18 @@ references:
         given-names: Maximilian
     year: "2024"
   - type: software
+    title: knitr
+    abstract: "knitr: A General-Purpose Package for Dynamic Report Generation in R"
+    notes: Suggests
+    url: https://yihui.org/knitr/
+    repository: https://CRAN.R-project.org/package=knitr
+    authors:
+      - family-names: Xie
+        given-names: Yihui
+        email: xie@yihui.name
+        orcid: https://orcid.org/0000-0003-0645-5666
+    year: "2024"
+  - type: software
     title: readr
     abstract: "readr: Read Rectangular Text Data"
     notes: Suggests
@@ -141,6 +151,49 @@ references:
         given-names: Jennifer
         email: jenny@posit.co
         orcid: https://orcid.org/0000-0002-6983-2759
+    year: "2024"
+  - type: software
+    title: rmarkdown
+    abstract: "rmarkdown: Dynamic Documents for R"
+    notes: Suggests
+    url: https://pkgs.rstudio.com/rmarkdown/
+    repository: https://CRAN.R-project.org/package=rmarkdown
+    authors:
+      - family-names: Allaire
+        given-names: JJ
+        email: jj@posit.co
+      - family-names: Xie
+        given-names: Yihui
+        email: xie@yihui.name
+        orcid: https://orcid.org/0000-0003-0645-5666
+      - family-names: Dervieux
+        given-names: Christophe
+        email: cderv@posit.co
+        orcid: https://orcid.org/0000-0003-4474-2498
+      - family-names: McPherson
+        given-names: Jonathan
+        email: jonathan@posit.co
+      - family-names: Luraschi
+        given-names: Javier
+      - family-names: Ushey
+        given-names: Kevin
+        email: kevin@posit.co
+      - family-names: Atkins
+        given-names: Aron
+        email: aron@posit.co
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+      - family-names: Cheng
+        given-names: Joe
+        email: joe@posit.co
+      - family-names: Chang
+        given-names: Winston
+        email: winston@posit.co
+      - family-names: Iannone
+        given-names: Richard
+        email: rich@posit.co
+        orcid: https://orcid.org/0000-0003-3925-190X
     year: "2024"
   - type: software
     title: styler
