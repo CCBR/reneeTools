@@ -13,6 +13,12 @@
     <loc>https://ccbr.github.io/reneeTools/PULL_REQUEST_TEMPLATE.html</loc>
   </url>
   <url>
+    <loc>https://ccbr.github.io/reneeTools/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/articles/intro.html</loc>
+  </url>
+  <url>
     <loc>https://ccbr.github.io/reneeTools/authors.html</loc>
   </url>
   <url>
@@ -23,6 +29,12 @@
   </url>
   <url>
     <loc>https://ccbr.github.io/reneeTools/reference/counts_dat_to_matrix.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/create_reneeDataSet_from_dataframes.html</loc>
+  </url>
+  <url>
+    <loc>https://ccbr.github.io/reneeTools/reference/create_reneeDataSet_from_files.html</loc>
   </url>
   <url>
     <loc>https://ccbr.github.io/reneeTools/reference/filter_low_counts.html</loc>
@@ -40,10 +52,7 @@
     <loc>https://ccbr.github.io/reneeTools/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/reneeDataSetFromDataFrames.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/reneeDataSetFromFiles.html</loc>
+    <loc>https://ccbr.github.io/reneeTools/reference/reneeDataSet.html</loc>
   </url>
   <url>
     <loc>https://ccbr.github.io/reneeTools/reference/reneeTools-package.html</loc>
