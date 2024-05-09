@@ -32,13 +32,20 @@ so others will know you're working on it.
   See instructions on writing roxygen2 comments here: <https://r-pkgs.org/man.html>.
   If the function is used in a vignette, you may also need to update vignette.
 
-- Commit your changes to git, push your changes to GitHub, then create a PR on GitHub.
+  Run `devtools::check()` to make sure the package still passes R CMD check.
+
+- Commit your changes to git and push your changes to GitHub.
+  Your commit messages should follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format.
+  You can use [`pre-commit`](https://ccbr.github.io/HowTos/GitHub/howto_precommit/)
+  to enforce that your commits follow this format, as well as other code style checks.
+
+- Once your branch is ready, create a PR on GitHub.
   The title of your PR should briefly describe the change.
   Follow the guide in the [PR template](/.github/CONTRIBUTING.md) to fill out the body of the PR.
 
 - Wait for a maintainer to review your PR.
   We will do our best to follow the tidyverse code review principles: <https://code-review.tidyverse.org/>.
-  The reviewer may suggest changes before accepting your PR to improve the code quality or style.
+  The reviewer may suggest that you make changes before accepting your PR in order to improve the code quality or style.
   Once they approve the PR, they will merge it and the issue(s) it links will close automatically.
 
 ### Code style
@@ -51,3 +58,16 @@ so others will know you're working on it.
 
 - We use [testthat](https://cran.r-project.org/package=testthat) for unit tests.
   Contributions with test cases included are easier to accept.
+
+## Helpful links for more information
+
+- This contributing guide was adapted from the [tidyverse contributing guide](https://github.com/tidyverse/tidyverse/blob/main/.github/CONTRIBUTING.md)
+- [tidyverse style guide](https://style.tidyverse.org)
+- [tidyverse code review principles](https://code-review.tidyverse.org)
+- [reproducible examples](https://www.tidyverse.org/help/#reprex)
+- packages:
+  - [usethis](https://usethis.r-lib.org/)
+  - [devtools](https://devtools.r-lib.org/)
+  - [testthat](https://testthat.r-lib.org/)
+  - [styler](https://styler.r-lib.org/)
+  - [roxygen2](https://roxygen2.r-lib.org)
