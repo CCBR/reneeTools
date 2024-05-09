@@ -62,6 +62,7 @@ so others will know you're working on it.
 ## Helpful links for more information
 
 - This contributing guide was adapted from the [tidyverse contributing guide](https://github.com/tidyverse/tidyverse/blob/main/.github/CONTRIBUTING.md)
+- [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
 - [tidyverse style guide](https://style.tidyverse.org)
 - [tidyverse code review principles](https://code-review.tidyverse.org)
 - [reproducible examples](https://www.tidyverse.org/help/#reprex)
