@@ -65,6 +65,7 @@ so others will know you're working on it.
 - [tidyverse style guide](https://style.tidyverse.org)
 - [tidyverse code review principles](https://code-review.tidyverse.org)
 - [reproducible examples](https://www.tidyverse.org/help/#reprex)
+- [R packages book](https://r-pkgs.org/)
 - packages:
   - [usethis](https://usethis.r-lib.org/)
   - [devtools](https://devtools.r-lib.org/)
