@@ -30,7 +30,7 @@ so others will know you're working on it.
 
   If you have written a new function or changed the API of an existing function, you will need to update the function's roxygen2 comment.
   See instructions on writing roxygen2 comments here: <https://r-pkgs.org/man.html>.
-  If the function is used in a vignette, you may also need to update vignette.
+  If the function is used in a vignette, you may also need to update the vignette.
 
   Run `devtools::check()` to make sure the package still passes R CMD check.
 
@@ -41,7 +41,7 @@ so others will know you're working on it.
 
 - Once your branch is ready, create a PR on GitHub.
   The title of your PR should briefly describe the change.
-  Follow the guide in the [PR template](/.github/CONTRIBUTING.md) to fill out the body of the PR.
+  Follow the guide in the [PR template](./CONTRIBUTING.md) to fill out the body of the PR.
 
 - Wait for a maintainer to review your PR.
   We will do our best to follow the tidyverse code review principles: <https://code-review.tidyverse.org/>.
