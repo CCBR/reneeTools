@@ -15,11 +15,24 @@ so others will know you're working on it.
 
 - If you are a member of CCBR, you can clone this repository to your computer or development environment.
   Otherwise, you will first need to fork the package and clone your fork.
+  You only need to do this step once.
 
-- Install all development dependencies with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`.
+  ```sh
+  git clone https://github.com/CCBR/reneeTools
+  cd reneeTools
+  ```
+
+- In an R console, Install all development dependencies with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`.
   If R CMD check doesn't pass cleanly, it's a good idea to ask for help before continuing.
 
-- Create a Git branch for your pull request (PR). Give the branch a descriptive name for the changes you will make, such as `iss-99` if it is for a specific issue.
+- Create a Git branch for your pull request (PR). Give the branch a descriptive name for the changes you will make, such as `iss-10` if it is for a specific issue.
+
+  ```sh
+  # create a new branch and switch to it
+  git switch -c iss-10
+  ```
+
+  > Switched to a new branch 'iss-10'
 
 - Make your changes, write unit tests, and update the documentation as needed.
 
@@ -36,8 +49,14 @@ so others will know you're working on it.
 
 - Commit your changes to git and push your changes to GitHub.
   Your commit messages should follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format.
-  You can use [`pre-commit`](https://ccbr.github.io/HowTos/GitHub/howto_precommit/)
+  Optional: you can use [`pre-commit`](https://ccbr.github.io/HowTos/GitHub/howto_precommit/)
   to enforce that your commits follow this format, as well as other code style checks.
+
+  ```
+  git add path/to/changed/files
+  git commit -m 'feat: create function for awesome feature'
+  git push
+  ```
 
 - Once your branch is ready, create a PR on GitHub.
   The title of your PR should briefly describe the change.
