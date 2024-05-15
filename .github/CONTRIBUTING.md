@@ -22,13 +22,13 @@ so others will know you're working on it.
   git clone https://github.com/CCBR/reneeTools
   ```
 
-  > Cloning into 'reneeTools'...
-  > remote: Enumerating objects: 1136, done.
-  > remote: Counting objects: 100% (463/463), done.
-  > remote: Compressing objects: 100% (357/357), done.
-  > remote: Total 1136 (delta 149), reused 332 (delta 103), pack-reused 673
-  > Receiving objects: 100% (1136/1136), 11.01 MiB | 9.76 MiB/s, done.
-  > Resolving deltas: 100% (530/530), done.
+  > Cloning into 'reneeTools'... <br>
+  > remote: Enumerating objects: 1136, done. <br>
+  > remote: Counting objects: 100% (463/463), done. <br>
+  > remote: Compressing objects: 100% (357/357), done. <br>
+  > remote: Total 1136 (delta 149), reused 332 (delta 103), pack-reused 673 <br>
+  > Receiving objects: 100% (1136/1136), 11.01 MiB | 9.76 MiB/s, done. <br>
+  > Resolving deltas: 100% (530/530), done. <br>
 
   ```sh
   cd reneeTools
@@ -70,28 +70,28 @@ so others will know you're working on it.
   git commit -m 'feat: create function for awesome feature'
   ```
 
-  > [iss-10 9ff256e] chore: demo git commands
-  > 1 file changed, 22 insertions(+), 3 deletions(-)
+  > [iss-10 9ff256e] chore: demo git commands <br>
+  > 1 file changed, 22 insertions(+), 3 deletions(-) <br>
 
   ```sh
   git push
   ```
 
-  > Enumerating objects: 7, done.
-  > Counting objects: 100% (7/7), done.
-  > Delta compression using up to 10 threads
-  > Compressing objects: 100% (4/4), done.
-  > Writing objects: 100% (4/4), 648 bytes | 648.00 KiB/s, done.
-  > Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
-  > remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
-  > remote:
-  > remote: Create a pull request for 'iss-10' on GitHub by visiting:
-  > remote: https://github.com/CCBR/reneeTools/pull/new/iss-10
-  > remote:
-  > To https://github.com/CCBR/reneeTools
-  >
-  > - [new branch] iss-10 -> iss-10
-  >   branch 'iss-10' set up to track 'origin/iss-10'.
+  > Enumerating objects: 7, done. <br>
+  > Counting objects: 100% (7/7), done. <br>
+  > Delta compression using up to 10 threads <br>
+  > Compressing objects: 100% (4/4), done. <br>
+  > Writing objects: 100% (4/4), 648 bytes | 648.00 KiB/s, done. <br>
+  > Total 4 (delta 3), reused 0 (delta 0), pack-reused 0 <br>
+  > remote: Resolving deltas: 100% (3/3), completed with 3 local objects. <br>
+  > remote: <br>
+  > remote: Create a pull request for 'iss-10' on GitHub by visiting: <br>
+  > remote: https://github.com/CCBR/reneeTools/pull/new/iss-10 <br>
+  > remote: <br>
+  > To https://github.com/CCBR/reneeTools <br>
+  > <br>
+  > - [new branch] iss-10 -> iss-10 <br>
+  >   branch 'iss-10' set up to track 'origin/iss-10'. <br>
 
 - Once your branch is ready, create a PR on GitHub: <https://github.com/CCBR/reneeTools/pull/new/>
   Select the branch you just pushed:
