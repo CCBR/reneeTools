@@ -113,16 +113,12 @@ so others will know you're working on it.
   The reviewer may suggest that you make changes before accepting your PR in order to improve the code quality or style.
   Once they approve the PR, they will merge it and the issue(s) it links will close automatically.
 
-- After your PR has been merged, update your local clone of the repo.
-
-  Switch to the default branch and pull the changes.
+- After your PR has been merged, update your local clone of the repo by switching to the main branch and pulling the latest changes:
 
   ```sh
   git checkout main
   git pull
   ```
-
-  > Switched to branch 'main'
 
   It's a good idea to run `git pull` before creating a new branch so it will start with the most recent commits in main.
 
