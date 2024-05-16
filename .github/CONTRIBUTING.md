@@ -2,9 +2,8 @@
 
 ## Proposing changes with issues
 
-If you’ve found a bug, please file an issue that illustrates the bug with a minimal
-[reprex](https://www.tidyverse.org/help/#reprex) (this will also help you write a unit test, if needed).
-If you want to make a change, it's a good idea to first [open an issue](https://code-review.tidyverse.org/issues/)
+If you want to make a change, it's a good idea to first
+[open an issue](https://code-review.tidyverse.org/issues/)
 and make sure someone from the team agrees that it’s needed.
 
 If you've decided to work on an issue,
@@ -15,8 +14,9 @@ so others will know you're working on it.
 
 - If you are a member of [CCBR](https://github.com/CCBR),
   you can clone this repository to your computer or development environment.
-  Otherwise, you will first need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) the repo and clone your fork.
-  You only need to do this step once.
+  Otherwise, you will first need to
+  [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
+  the repo and clone your fork. You only need to do this step once.
 
   ```sh
   git clone https://github.com/CCBR/reneeTools
@@ -34,10 +34,26 @@ so others will know you're working on it.
   cd reneeTools
   ```
 
-- In an R console, Install all development dependencies with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`.
-  If R CMD check doesn't pass cleanly, it's a good idea to ask for help before continuing.
+- If this is your first time cloning the repo, install dependencies:
 
-- Create a Git branch for your pull request (PR). Give the branch a descriptive name for the changes you will make, such as `iss-10` if it is for a specific issue.
+  - In an R console, install the R development dependencies with
+    `devtools::install_dev_deps()`, and then make sure the package passes R CMD
+    check by running `devtools::check()`. If R CMD check doesn't pass cleanly,
+    it's a good idea to ask for help before continuing.
+
+  - Install [`pre-commit`](https://pre-commit.com/#install) if you don't already
+    have it. Then from the repo's root directory, run
+
+    ```sh
+    pre-commit install
+    ```
+
+    This will install the repo's pre-commit hooks.
+    You'll only need to do this step the first time you clone the repo.
+
+- Create a Git branch for your pull request (PR). Give the branch a descriptive
+  name for the changes you will make, such as `iss-10` if it is for a specific
+  issue.
 
   ```sh
   # create a new branch and switch to it
@@ -49,28 +65,59 @@ so others will know you're working on it.
 
 - Make your changes, write unit tests, and update the documentation as needed.
 
-  Most changes to the code will also need unit tests to demonstrate that the changes work as intended.
-  Use [`testthat`](https://testthat.r-lib.org/) to create your unit tests and test the code.
-  Test files are organized as described in <https://style.tidyverse.org/tests.html>.
-  Take a look at the existing code in this package for examples.
+  Most changes to the code will also need unit tests to demonstrate that the
+  changes work as intended. Use [`testthat`](https://testthat.r-lib.org/) to
+  create your unit tests and test the code. Test files are organized as
+  described in <https://style.tidyverse.org/tests.html>. Take a look at the
+  existing code in this package for examples.
 
-  If you have written a new function or changed the API of an existing function, you will need to update the function's roxygen2 comment.
-  See instructions on writing roxygen2 comments here: <https://r-pkgs.org/man.html>.
-  If the function is used in a vignette, you may also need to update the vignette.
+  If you have written a new function or changed the API of an existing function,
+  you will need to update the function's roxygen2 comment. See instructions on
+  writing roxygen2 comments here: <https://r-pkgs.org/man.html>. If the function
+  is used in a vignette, you may also need to update the vignette.
 
   Run `devtools::check()` to make sure the package still passes R CMD check.
 
-- Commit your changes to git and push your changes to GitHub.
-  Your commit messages should follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format.
-  Optional: you can use [`pre-commit`](https://ccbr.github.io/HowTos/GitHub/howto_precommit/)
-  to enforce that your commits follow this format, as well as other code style checks.
+- Commit your changes to git and push your changes to GitHub. Your commit
+  messages should follow the [conventional
+  commits](https://www.conventionalcommits.org/en/v1.0.0/) format. Optional: you
+  can use [`pre-commit`](https://ccbr.github.io/HowTos/GitHub/howto_precommit/)
+  to enforce that your commits follow this format, as well as other code style
+  checks.
 
   ```sh
-  git add path/to/changed/files
+  git add path/to/changed/files/
   git commit -m 'feat: create function for awesome feature'
   ```
 
-  > [iss-10 9ff256e] chore: demo git commands <br>
+  pre-commit will enforce that your commit message and the code changes are
+  styled correctly and will attempt to make corrections if needed.
+
+  > Check for added large files..............................................Passed
+  > Fix End of Files.........................................................Passed
+  > Trim Trailing Whitespace.................................................Failed
+  > - hook id: trailing-whitespace
+  > - exit code: 1
+  > - files were modified by this hook
+  >
+  > Fixing path/to/changed/files/file.txt
+  >
+  > codespell................................................................Passed
+  > style-files..........................................(no files to check)Skipped
+  > readme-rmd-rendered..................................(no files to check)Skipped
+  > use-tidy-description.................................(no files to check)Skipped
+
+  In the example above, one of the hooks modified a file in the proposed commit,
+  so the pre-commit check failed. You can run `git diff` to see the changes that
+  pre-commit made and `git status` to see which files were modified. To proceed
+  with the commit, re-add the modified file(s) and re-run the commit command:
+
+  ```sh
+  git add path/to/changed/files/file.txt
+  git commit -m 'feat: create function for awesome feature'
+  ```
+
+  > [iss-10 9ff256e] feat: create function for awesome feature <br>
   > 1 file changed, 22 insertions(+), 3 deletions(-) <br>
 
   ```sh
@@ -90,20 +137,21 @@ so others will know you're working on it.
   > remote: <br>
   > To https://github.com/CCBR/reneeTools <br>
   > <br>
-  > - [new branch] iss-10 -> iss-10 <br>
+  >   [new branch] iss-10 -> iss-10 <br>
   >   branch 'iss-10' set up to track 'origin/iss-10'. <br>
 
 - Once your branch is ready, create a PR on GitHub: <https://github.com/CCBR/reneeTools/pull/new/>
+
   Select the branch you just pushed:
 
-  ![](./img/new-PR.png)
+  ![Create a new PR from your branch](./img/new-PR.png)
 
   Edit the PR title and description.
   The title should briefly describe the change.
   Follow the comments in the template to fill out the body of the PR.
   When you're ready, click 'Create pull request' to open it.
 
-  ![](./img/create-PR.png)
+  ![Open the PR after editing the title and description](./img/create-PR.png)
 
   Optionally, you can mark the PR as a draft if you're not yet ready for it to be reviewed,
   then change it later when you're ready.
