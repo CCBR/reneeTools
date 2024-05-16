@@ -118,9 +118,9 @@ so others will know you're working on it.
   ```
 
   This time, all the hooks either Passed or were Skipped (e.g. hooks that only
-  run on R code will not run if no R files were committed.) The usual message
-  appears after the pre-commit status checks showing that the commit was
-  created.
+  run on R code will not run if no R files were committed.).
+  When the pre-commit check is successful, the usual commit success message
+  will appear showing that the commit was created.
 
   > Check for added large files..............................................Passed <br>
   > Fix End of Files.........................................................Passed <br>
