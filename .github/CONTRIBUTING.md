@@ -108,7 +108,7 @@ If the function is used in a vignette, you may also need to update the vignette.
 After making your changes, run `devtools::check()` from an R console to make
 sure the package still passes R CMD check.
 
-### Commit your changes to git and push your changes to GitHub
+### Commit and push your changes
 
 If you're not sure how often you should commit or what your commits should
 consist of, we recommend following the "atomic commits" principle where each
@@ -210,6 +210,9 @@ git push --set-upstream origin iss-10
 >   branch 'iss-10' set up to track 'origin/iss-10'. <br>
 
 We recommend pushing your commits often so they will be backed up on GitHub.
+You can view the files in your branch on GitHub at
+`https://github.com/CCBR/reneeTools/tree/<your-branch-name>`
+(replace `<your-branch-name>` with the actual name of your branch).
 
 ### Create the PR
 
@@ -222,7 +225,8 @@ Select the branch you just pushed:
 
 Edit the PR title and description.
 The title should briefly describe the change.
-Follow the comments in the template to fill out the body of the PR.
+Follow the comments in the template to fill out the body of the PR, and
+you can delete the comments (everything between `<!--` and `-->`) as you go.
 When you're ready, click 'Create pull request' to open it.
 
 ![Open the PR after editing the title and description](./img/create-PR.png)
