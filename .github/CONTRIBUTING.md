@@ -93,19 +93,19 @@ so others will know you're working on it.
   pre-commit will enforce that your commit message and the code changes are
   styled correctly and will attempt to make corrections if needed.
 
-  > Check for added large files..............................................Passed
-  > Fix End of Files.........................................................Passed
-  > Trim Trailing Whitespace.................................................Failed
-  > - hook id: trailing-whitespace
-  > - exit code: 1
-  > - files were modified by this hook
-  >
-  > Fixing path/to/changed/files/file.txt
-  >
-  > codespell................................................................Passed
-  > style-files..........................................(no files to check)Skipped
-  > readme-rmd-rendered..................................(no files to check)Skipped
-  > use-tidy-description.................................(no files to check)Skipped
+  > Check for added large files..............................................Passed <br>
+  > Fix End of Files.........................................................Passed <br>
+  > Trim Trailing Whitespace.................................................Failed <br>
+  > - hook id: trailing-whitespace <br>
+  > - exit code: 1 <br>
+  > - files were modified by this hook <br>
+  > <br>
+  > Fixing path/to/changed/files/file.txt <br>
+  > <br>
+  > codespell................................................................Passed <br>
+  > style-files..........................................(no files to check)Skipped <br>
+  > readme-rmd-rendered..................................(no files to check)Skipped <br>
+  > use-tidy-description.................................(no files to check)Skipped <br>
 
   In the example above, one of the hooks modified a file in the proposed commit,
   so the pre-commit check failed. You can run `git diff` to see the changes that
@@ -117,11 +117,33 @@ so others will know you're working on it.
   git commit -m 'feat: create function for awesome feature'
   ```
 
+  This time, all the hooks either Passed or were Skipped (e.g. hooks that only
+  run on R code will not run if no R files were committed.) The usual message
+  appears after the pre-commit status checks showing that the commit was
+  created.
+
+  > Check for added large files..............................................Passed <br>
+  > Fix End of Files.........................................................Passed <br>
+  > Trim Trailing Whitespace.................................................Passed <br>
+  > codespell................................................................Passed <br>
+  > style-files..........................................(no files to check)Skipped <br>
+  > readme-rmd-rendered..................................(no files to check)Skipped <br>
+  > use-tidy-description.................................(no files to check)Skipped <br>
+  > Conventional Commit......................................................Passed <br>
   > [iss-10 9ff256e] feat: create function for awesome feature <br>
   > 1 file changed, 22 insertions(+), 3 deletions(-) <br>
 
+  Finally, push your changes to GitHub:
+
   ```sh
   git push
+  ```
+
+  If this is the first time you are pushing this branch, you may have to
+  explicitly set the upstream branch:
+
+  ```sh
+  git push --set-upstream origin iss-10
   ```
 
   > Enumerating objects: 7, done. <br>
@@ -139,6 +161,8 @@ so others will know you're working on it.
   > <br>
   >   [new branch] iss-10 -> iss-10 <br>
   >   branch 'iss-10' set up to track 'origin/iss-10'. <br>
+
+  We recommend pushing your commits often so they will be backed up on GitHub.
 
 - Once your branch is ready, create a PR on GitHub: <https://github.com/CCBR/reneeTools/pull/new/>
 
