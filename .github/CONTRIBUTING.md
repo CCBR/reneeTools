@@ -76,10 +76,14 @@ cd reneeTools
 
 Edit the code, write unit tests, and update the documentation as needed.
 
+#### style
+
 New code should follow the tidyverse [style guide](https://style.tidyverse.org).
 You can use the [styler](https://CRAN.R-project.org/package=styler) package to
 apply these styles, but please don't restyle code that has nothing to do with
 your PR.
+
+#### test
 
 Most changes to the code will also need unit tests to demonstrate that the
 changes work as intended.
@@ -89,6 +93,8 @@ Test files are organized as described in
 <https://style.tidyverse.org/tests.html>.
 Take a look at the existing code in this package for examples.
 
+#### document
+
 If you have written a new function or changed the API of an existing function,
 you will need to update the function's documentation using
 [roxygen2](https://cran.r-project.org/package=roxygen2) with
@@ -97,10 +103,18 @@ See instructions on writing roxygen2 comments here:
 <https://r-pkgs.org/man.html>.
 If the function is used in a vignette, you may also need to update the vignette.
 
+#### check
+
 After making your changes, run `devtools::check()` from an R console to make
 sure the package still passes R CMD check.
 
 ### Commit your changes to git and push your changes to GitHub
+
+If you're not sure how often you should commit or what your commits should
+consist of, we recommend following the "atomic commits" principle where each
+commit contains one new feature, fix, or task.
+Learn more about atomic commits here:
+<https://www.freshconsulting.com/insights/blog/atomic-commits/>
 
 First, add the files that you changed to the staging area:
 
@@ -109,13 +123,14 @@ git add path/to/changed/files/
 ```
 
 Then make the commit.
-Your commit messages should follow the
+Your commit message should follow the
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 specification.
 Briefly, each commit should start with one of the approved types such as
 `feat`, `fix`, `docs`, etc. followed by a description of the commit.
 Take a look at the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 for more detailed information about how to write commit messages.
+
 
 ```sh
 git commit -m 'feat: create function for awesome feature'
