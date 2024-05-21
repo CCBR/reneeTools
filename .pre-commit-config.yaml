@@ -20,7 +20,7 @@ repos:
     rev: v2.2.4
     hooks:
       - id: codespell
-        # https://github.com/codespell-project/codespell/issues/1498
+        args: ["--ignore-words-list=entrace"]
   # R formatting
   - repo: https://github.com/lorenzwalthert/precommit
     rev: v0.1.3
