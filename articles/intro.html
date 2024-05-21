@@ -82,8 +82,6 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CCBR/reneeTools" class="external-link">reneeTools</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by</span></span>
-<span><span class="co">#&gt; 'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -92,8 +90,9 @@
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="co"># replace this line with actual path to your gene counts</span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># replace this line with actual path to your gene counts</span></span>
 <span><span class="va">gene_counts_tsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"RSEM.genes.expected_count.all_samples.txt"</span>, package <span class="op">=</span> <span class="st">"reneeTools"</span><span class="op">)</span></span>
 <span><span class="va">metadata_tsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample_metadata.tsv"</span>, package <span class="op">=</span> <span class="st">"reneeTools"</span><span class="op">)</span></span>
 <span></span>
@@ -125,8 +124,9 @@
 <span><span class="co">#&gt;    function: y = a/x + b, and a local regression fit was automatically substituted.</span></span>
 <span><span class="co">#&gt;    specify fitType='local' or 'mean' to avoid this message next time.</span></span>
 <span><span class="co">#&gt; final dispersion estimates</span></span>
-<span><span class="co">#&gt; fitting model and testing</span></span>
-<span></span>
+<span><span class="co">#&gt; fitting model and testing</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">renee_ds</span><span class="op">@</span><span class="va">analyses</span><span class="op">$</span><span class="va">deseq2_results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; log2 fold change (MLE): condition wildtype vs knockout </span></span>
 <span><span class="co">#&gt; Wald test p-value: condition wildtype vs knockout </span></span>
