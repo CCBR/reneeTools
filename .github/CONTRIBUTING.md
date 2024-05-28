@@ -17,6 +17,8 @@ as our collaboration process.
 Follow the steps below for detailed instructions on contributing changes to
 reneeTools.
 
+![GitHub Flow diagram](./img/GitHub-Flow_bg-white.png)
+
 ### Clone the repo
 
 If you are a member of [CCBR](https://github.com/CCBR),
