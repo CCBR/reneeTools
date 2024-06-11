@@ -19,5 +19,4 @@ jobs:
       - name: echo
         run: |
           echo ${{ github.event.label }}
-          echo ${{ github.event.label[name] }}
-          echo ${{ steps.metadata.outputs[github.event.label[name]] }}
+          echo ${{ steps.metadata.outputs[github.event.label] }}
