@@ -1,0 +1,25 @@
+name: assign-from-label
+description: assign github user based on issue label
+
+on:
+  issues:
+    types:
+      - labeled
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  assign-from-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pietrobolcato/action-read-yaml@1.1.0
+        id: metadata
+        with:
+          config: .github/assets/user-labels.yml
+
+      - name: echo
+        run: |
+          echo ${{ github.event.label }}
+          echo ${{ github.event.label[name] }}
+          echo ${{ steps.metadata.outputs[github.event.label[name]] }}
