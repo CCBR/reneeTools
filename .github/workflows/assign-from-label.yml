@@ -1,6 +1,4 @@
 name: assign-from-label
-description: assign github user based on issue label
-
 on:
   issues:
     types:
