@@ -16,9 +16,26 @@ BugReports: https://github.com/CCBR/reneeTools/issues
 Depends:
     R (>= 2.10)
 Imports:
+    amap,
+    colorspace,
+    ComplexHeatmap,
+    dendsort,
     DESeq2,
     dplyr,
+    edgeR,
+    ggplot2,
+    ggrepel,
+    gplots,
+    gridExtra,
+    gridGraphics,
+    lattice,
+    limma,
+    plotly,
+    RColorBrewer,
+    RCurl,
+    reshape2,
     S7,
+    stringr,
     tidyr
 Suggests:
     knitr,
