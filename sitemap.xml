@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/404.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/PULL_REQUEST_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/articles/intro.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/counts_dat_to_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/create_reneeDataSet_from_dataframes.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/create_reneeDataSet_from_files.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/filter_low_counts.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/gene_counts.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/meta_tbl_to_dat.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/reneeDataSet.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/reneeTools-package.html</loc>
-  </url>
-  <url>
-    <loc>https://ccbr.github.io/reneeTools/reference/run_deseq2.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://ccbr.github.io/reneeTools/404.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/CONTRIBUTING.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/LICENSE-text.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/LICENSE.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/PULL_REQUEST_TEMPLATE.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/articles/index.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/articles/intro.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/authors.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/index.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/news/index.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/counts_dat_to_matrix.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/create_reneeDataSet_from_dataframes.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/create_reneeDataSet_from_files.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/filter_low_counts.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/gene_counts.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/index.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/meta_tbl_to_dat.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/reexports.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/reneeDataSet.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/reneeTools-package.html</loc></url>
+<url><loc>https://ccbr.github.io/reneeTools/reference/run_deseq2.html</loc></url>
 </urlset>
+

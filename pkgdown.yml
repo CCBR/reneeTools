@@ -1,10 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   intro: intro.html
-last_built: 2024-07-02T15:34Z
+last_built: 2024-07-09T20:56Z
 urls:
   reference: https://ccbr.github.io/reneeTools/reference
   article: https://ccbr.github.io/reneeTools/articles
-
