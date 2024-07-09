@@ -7,9 +7,17 @@
 #' @export
 #'
 #' @examples
-#' filter_counts(nidap_clean_raw_counts, nidap_sample_metadata)
+#' renee_ds <- create_reneeDataSet_from_dataframes(
+#'   as.data.frame(nidap_sample_metadata),
+#'   as.data.frame(nidap_clean_raw_counts),
+#'   sample_id_colname = Sample
+#' )
+#' renee_ds2 <- filter_counts(renee_ds)
+#' head(renee_ds2@counts[["filt"]])
 #'
-filter_counts <- function(counts_matrix, sample_metadata) {
+filter_counts <- function(renee_ds) {
+  counts_matrix <- renee_ds@counts[["raw"]]
+  sample_metadata <- renee_ds@sample_meta
   ## --------- ##
   ## Libraries ##
   ## --------- ##
@@ -39,8 +47,10 @@ filter_counts <- function(counts_matrix, sample_metadata) {
   ## -------------------------------- ##
 
   # TODO move all user-defined parameters to function arguments
+  # TODO we should use "feature" instead of "gene" to make sure this is applicable beyond RNA-seq
   # Basic Parameters:
   gene_names_column <- "Gene"
+
   columns_to_include <- c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3")
   sample_names_column <- "Sample"
   groups_column <- "Group"
@@ -121,6 +131,9 @@ filter_counts <- function(counts_matrix, sample_metadata) {
   ## Main Code Block ##
   ## --------------- ##
   # TODO ask Phil for clarification on purpose of this code block for samples_to_include
+  # ensure samples in metadata match columns in counts table
+  # also exclude annotation / gene columns
+  # TODO separate slots in S7 for samples, counts, annotations --> create function to validate
   samples_to_include <- columns_to_include[columns_to_include %in% sample_metadata[, sample_names_column, drop = T]]
   anno_col <- columns_to_include[columns_to_include %in% sample_metadata[, sample_names_column, drop = T] == F]
 
@@ -161,6 +174,7 @@ filter_counts <- function(counts_matrix, sample_metadata) {
     Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total,
     Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group
   )
+
 
   colorval <- colorlist[colors_for_plots]
   colorval <- unname(colorval) # remove names which affect ggplot
@@ -275,9 +289,10 @@ filter_counts <- function(counts_matrix, sample_metadata) {
   df.final <- merge(anno_tbl, df.final, by = gene_names_column, all.y = T)
   df.final[, gene_names_column] <- gsub("_[0-9]+$", "", df.final[, gene_names_column])
 
-  return(df.final)
-}
+  renee_ds@counts["filt"] <- df.final
 
+  return(renee_ds)
+}
 
 #' Remove low-count genes
 #'

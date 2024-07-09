@@ -8,16 +8,23 @@
 #'
 reneeDataSet <- S7::new_class("renee",
   properties = list(
-    counts = S7::class_data.frame,
     sample_meta = S7::class_data.frame,
+    counts = S7::class_list, # list of data frames
     analyses = S7::class_list
   ),
-  constructor = function(count_dat, sample_meta_dat) {
+  constructor = function(sample_meta_dat, counts_lst) {
     S7::new_object(S7::S7_object(),
-      counts = count_dat,
       sample_meta = sample_meta_dat,
+      counts = counts_lst,
       analyses = list()
     )
+    validator <- function(self) {
+      # counts must only contain approved names
+      if (!all(names(self@counts) %in% c("raw", "filt", "norm_cpm"))) {
+        stop("counts can only contain 'raw', 'filt', and 'norm_cpm' data frames")
+      }
+      # sample IDs must be in both sample_meta and counts
+    }
   }
 )
 
@@ -31,13 +38,14 @@ reneeDataSet <- S7::new_class("renee",
 #'
 #' @examples
 #' create_reneeDataSet_from_files(
-#'   system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools"),
-#'   system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
+#'   system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
+#'   system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
 #' )
-create_reneeDataSet_from_files <- function(gene_counts_filepath, sample_meta_filepath) {
+create_reneeDataSet_from_files <- function(sample_meta_filepath, gene_counts_filepath,
+                                           count_type = "raw") {
   count_dat <- readr::read_tsv(gene_counts_filepath)
   sample_meta_dat <- readr::read_tsv(sample_meta_filepath)
-  return(create_reneeDataSet_from_dataframes(count_dat, sample_meta_dat))
+  return(create_reneeDataSet_from_dataframes(sample_meta_dat, list(count_type = count_dat)))
 }
 
 #' Construct a reneeDataSet object from data frames
@@ -55,16 +63,19 @@ create_reneeDataSet_from_files <- function(gene_counts_filepath, sample_meta_fil
 #'     levels = c("wildtype", "knockout")
 #'   )
 #' )
-#' create_reneeDataSet_from_dataframes(gene_counts, sample_meta)
-create_reneeDataSet_from_dataframes <- function(count_dat, sample_meta_dat) {
+#' create_reneeDataSet_from_dataframes(sample_meta, gene_counts)
+create_reneeDataSet_from_dataframes <- function(sample_meta_dat,
+                                                count_dat,
+                                                sample_id_colname = sample_id,
+                                                count_type = "raw") {
   gene_id <- GeneName <- NULL
 
-  sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat()
+  # sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat(sample_id_colname = {{ sample_id_colname }})
 
   # sample IDs must be in the same order
-  if (!all(colnames(count_dat %>% dplyr::select(-gene_id, -GeneName)) == rownames(sample_meta_dat))) {
+  if (!all(colnames(count_dat %>% dplyr::select(-c(gene_id, GeneName, Gene))) == (sample_meta_dat %>% pull({{ sample_id_colname }})))) {
     stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
 
-  return(reneeDataSet(count_dat, sample_meta_dat))
+  return(reneeDataSet(sample_meta_dat, list(count_type = count_dat)))
 }
