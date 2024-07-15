@@ -289,7 +289,7 @@ filter_counts <- function(renee_ds) {
   df.final <- merge(anno_tbl, df.final, by = gene_names_column, all.y = T)
   df.final[, gene_names_column] <- gsub("_[0-9]+$", "", df.final[, gene_names_column])
 
-  renee_ds@counts["filt"] <- df.final
+  renee_ds@counts[["filt"]] <- df.final
 
   return(renee_ds)
 }
