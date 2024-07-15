@@ -24,7 +24,8 @@ reneeDataSet <- S7::new_class("renee",
     if (!all(names(self@counts) %in% c("raw", "filt", "norm_cpm"))) {
       stop("counts can only contain 'raw', 'filt', and 'norm_cpm' data frames")
     }
-    # sample IDs must be in both sample_meta and counts
+    # all sample IDs must be in both sample_meta and raw counts
+    # any sample ID in filt or norm_cpm counts must also be in sample_meta
   }
 )
 

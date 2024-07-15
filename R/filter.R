@@ -125,13 +125,11 @@ filter_counts <- function(renee_ds) {
   }
 
 
-
-
   ## --------------- ##
   ## Main Code Block ##
   ## --------------- ##
-  # TODO ask Phil for clarification on purpose of this code block for samples_to_include
-  # ensure samples in metadata match columns in counts table
+  # purpose of this code block for samples_to_include:
+  # ensure samples in metadata match columns in counts table and
   # also exclude annotation / gene columns
   # TODO separate slots in S7 for samples, counts, annotations --> create function to validate
   samples_to_include <- columns_to_include[columns_to_include %in% sample_metadata[, sample_names_column, drop = T]]
@@ -157,6 +155,7 @@ filter_counts <- function(renee_ds) {
   gene_names$GeneID <- counts_matrix[, gene_names_column]
 
   ### Input data validation
+  # TODO move this to S7 validator
   sample_metadata <- validate_sample_metadata(
     counts_matrix = df,
     sample_metadata = sample_metadata,
@@ -167,6 +166,7 @@ filter_counts <- function(renee_ds) {
   #### remove low count genes ########
   df.filt <- remove_low_count_genes(
     counts_matrix = df,
+    sample_metadata = sample_metadata,
     gene_names_column = gene_names_column,
     use_cpm_counts_to_filter = use_cpm_counts_to_filter,
     Use_Group_Based_Filtering = Use_Group_Based_Filtering,
@@ -296,12 +296,15 @@ filter_counts <- function(renee_ds) {
 
 #' Remove low-count genes
 #'
+#' TODO this function also transforms raw counts to CPM, but that should be a separate function before this step
+#' TODO document `isexpr1` column in output
+#'
 #' @inheritParams filter_counts
 #'
 #' @return counts matrix with low-count genes removed
 #' @keywords internal
 #'
-remove_low_count_genes <- function(counts_matrix, gene_names_column,
+remove_low_count_genes <- function(counts_matrix, sample_metadata, gene_names_column,
                                    use_cpm_counts_to_filter = TRUE,
                                    Use_Group_Based_Filtering = FALSE,
                                    Minimum_Count_Value_to_be_Considered_Nonzero = 8,
@@ -329,7 +332,7 @@ remove_low_count_genes <- function(counts_matrix, gene_names_column,
     rownames(trans.df) <- trans.df[, gene_names_column]
     trans.df[, gene_names_column] <- NULL
 
-    counts <- trans.df > Minimum_Count_Value_to_be_Considered_Nonzero # boolean matrix
+    counts <- trans.df >= Minimum_Count_Value_to_be_Considered_Nonzero # boolean matrix
 
     tcounts <- as.data.frame(t(counts))
     colnum <- dim(counts)[1] # number of genes
