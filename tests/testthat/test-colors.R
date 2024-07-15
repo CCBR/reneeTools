@@ -8,4 +8,5 @@ test_that("get_random_colors works", {
     get_random_colors(3),
     c("#B3C4C7", "#B7D579", "#C56BC8")
   )
+  expect_error(get_random_colors(0), "num_colors must be at least 1")
 })
