@@ -18,13 +18,13 @@ reneeDataSet <- S7::new_class("renee",
       counts = counts_lst,
       analyses = list()
     )
-    validator <- function(self) {
-      # counts must only contain approved names
-      if (!all(names(self@counts) %in% c("raw", "filt", "norm_cpm"))) {
-        stop("counts can only contain 'raw', 'filt', and 'norm_cpm' data frames")
-      }
-      # sample IDs must be in both sample_meta and counts
+  },
+  validator = function(self) {
+    # counts must only contain approved names
+    if (!all(names(self@counts) %in% c("raw", "filt", "norm_cpm"))) {
+      stop("counts can only contain 'raw', 'filt', and 'norm_cpm' data frames")
     }
+    # sample IDs must be in both sample_meta and counts
   }
 )
 
@@ -72,10 +72,13 @@ create_reneeDataSet_from_dataframes <- function(sample_meta_dat,
 
   # sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat(sample_id_colname = {{ sample_id_colname }})
 
+
   # sample IDs must be in the same order
   if (!all(colnames(count_dat %>% dplyr::select(-c(gene_id, GeneName, Gene))) == (sample_meta_dat %>% pull({{ sample_id_colname }})))) {
     stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
+  counts <- list()
+  counts[[count_type]] <- count_dat
 
-  return(reneeDataSet(sample_meta_dat, list(count_type = count_dat)))
+  return(reneeDataSet(sample_meta_dat, counts))
 }
