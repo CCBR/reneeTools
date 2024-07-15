@@ -12,6 +12,7 @@
 #'   as.data.frame(nidap_clean_raw_counts),
 #'   sample_id_colname = Sample
 #' )
+#' set.seed(10)
 #' renee_ds2 <- filter_counts(renee_ds)
 #' head(renee_ds2@counts[["filt"]])
 #'
@@ -182,7 +183,7 @@ filter_counts <- function(renee_ds) {
   if (length(unique(sample_metadata[[groups_column]])) > length(colorval)) {
     ## Original color-picking code.
     k <- length(unique(sample_metadata[[groups_column]])) - length(colorval)
-    more_cols <- getourrandomcolors(k)
+    more_cols <- get_random_colors(k)
     colorval <- c(colorval, more_cols)
   }
 

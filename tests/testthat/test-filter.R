@@ -4,6 +4,7 @@ test_that("filter_counts reproduces NIDAP results", {
     as.data.frame(nidap_clean_raw_counts),
     sample_id_colname = Sample
   )
+  set.seed(10)
   renee_ds2 <- filter_counts(renee_ds)
   counts_filt <- renee_ds2@counts$filt
   expect_true(all.equal(
