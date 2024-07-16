@@ -1,4 +1,7 @@
-#' Get random colors
+#' Get random colors.
+#'
+#' Note: this function is not guaranteed to create a color blind friendly palette.
+#' Consider using other palettes such as `RColorBrewer::display.brewer.all(colorblindFriendly = TRUE)`.
 #'
 #' @param num_colors number of colors to select.
 #' @param n number of random RGB values to generate in the color space.
