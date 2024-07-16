@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # reneeTools
@@ -16,17 +17,21 @@ sequencing analysis pipeline
 You can install the development version of reneeTools from
 [GitHub](https://github.com/) with:
 
-```r
+``` r
 # install.packages("devtools")
 devtools::install_github("CCBR/reneeTools")
 ```
 
+<!--
 ## Example
-
-TODO: This is a basic example which shows you how to solve a common
-problem:
-
-```r
+&#10;TODO: This is a basic example which shows you how to solve a common problem:
+&#10;
+``` r
 library(reneeTools)
 ## basic example code
 ```
+-->
+
+## Development Roadmap
+
+![](./man/figures/reneeTools-development-plan.png)
