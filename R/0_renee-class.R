@@ -75,7 +75,7 @@ create_reneeDataSet_from_dataframes <- function(sample_meta_dat,
 
 
   # sample IDs must be in the same order
-  if (!all(colnames(count_dat %>% dplyr::select(-c(gene_id, GeneName, Gene))) == (sample_meta_dat %>% pull({{ sample_id_colname }})))) {
+  if (!all(colnames(count_dat %>% dplyr::select(-c(gene_id, GeneName, Gene))) == (sample_meta_dat %>% dplyr::pull({{ sample_id_colname }})))) {
     stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
   counts <- list()
