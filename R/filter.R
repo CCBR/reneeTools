@@ -143,8 +143,6 @@ filter_counts <- function(renee_ds) {
   samples_to_include <- samples_to_include[samples_to_include != "GeneName"]
   samples_to_include <- samples_to_include[samples_to_include %in% sample_metadata[[sample_names_column]]]
 
-
-
   ## create unique rownames to correctly add back Annocolumns at end of template
   counts_matrix[, gene_names_column] <- paste0(counts_matrix[, gene_names_column], "_", 1:nrow(counts_matrix))
 
@@ -156,7 +154,7 @@ filter_counts <- function(renee_ds) {
   gene_names$GeneID <- counts_matrix[, gene_names_column]
 
   ### Input data validation
-  # TODO move this to S7 validator
+  # TODO move this function call to the S7 validator
   sample_metadata <- validate_sample_metadata(
     counts_matrix = df,
     sample_metadata = sample_metadata,
