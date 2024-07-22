@@ -32,6 +32,22 @@ library(reneeTools)
 ```
 -->
 
+## Help & Contributing
+
+Come across a **bug**? Open an
+[issue](https://github.com/CCBR/reneeTools/issues) and include a minimal
+reproducible example.
+
+Have a **question**? Ask it in
+[discussions](https://github.com/CCBR/reneeTools/discussions).
+
+Want to **contribute** to this project? Check out the [contributing
+guidelines](.github/CONTRIBUTING.md).
+
 ## Development Roadmap
 
 ![](./man/figures/reneeTools-development-plan.png)
+
+- [dev
+  spreadsheet](https://nih-my.sharepoint.com/:x:/g/personal/homanpj_nih_gov/ETvHXgnwxExEpcP57Jj9_EwBHBvZBqNuZ_c3eu51w-SlnA?e=PcXKU8)
+- [project board](https://github.com/orgs/CCBR/projects/32)
