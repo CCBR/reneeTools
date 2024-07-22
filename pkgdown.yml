@@ -3,7 +3,7 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   intro: intro.html
-last_built: 2024-07-16T13:18Z
+last_built: 2024-07-22T16:56Z
 urls:
   reference: https://ccbr.github.io/reneeTools/reference
   article: https://ccbr.github.io/reneeTools/articles
