@@ -12,13 +12,12 @@
 rename_samples <- function(pca.df, samples_to_rename_manually) {
   replacements <- samples_to_rename_manually
 
-  if (!is.null(samples_to_rename_manually)) {
-    if (replacements != c("")) {
-      for (x in replacements) {
-        old <- strsplit(x, ": ?")[[1]][1]
-        new <- strsplit(x, ": ?")[[1]][2]
-        pca.df$sample <- ifelse(pca.df$sample == old, new, pca.df$sample)
-      }
+  if (!is.null(replacements) && length(replacements) > 0 && nchar(replacements) > 0) {
+    # TODO: refactor with dplyr::rename for simplicity
+    for (x in replacements) {
+      old <- strsplit(x, ": ?")[[1]][1]
+      new <- strsplit(x, ": ?")[[1]][2]
+      pca.df$sample <- ifelse(pca.df$sample == old, new, pca.df$sample)
     }
   }
   return(pca.df)

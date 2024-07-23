@@ -189,10 +189,10 @@ filter_counts <- function(renee_ds) {
   ######## Start PCA ###############
 
   # TODO should this be a function?
-  edf <- log((as.matrix(df.filt[, samples_to_include] + 0.5)))
-  rownames(edf) <- df.filt[, 1]
+  log_counts <- log((as.matrix(df.filt[, samples_to_include] + 0.5)))
+  rownames(log_counts) <- df.filt[, 1]
 
-  pca.df <- plot_pca(edf,
+  pca.df <- plot_pca(log_counts,
     sample_metadata,
     samples_to_include,
     samples_to_rename_manually,
@@ -212,7 +212,7 @@ filter_counts <- function(renee_ds) {
   ########################
   ## Start Histogram Plot:
   ########################
-  histPlot <- plot_histogram(edf, sample_metadata,
+  histPlot <- plot_histogram(log_counts, sample_metadata,
     gene_names_column = gene_names_column,
     labels_column = labels_column,
     color_histogram_by_group = color_histogram_by_group,
