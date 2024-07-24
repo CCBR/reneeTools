@@ -47,6 +47,7 @@ references:
       - family-names: Lucas
         given-names: Antoine
     year: "2024"
+    doi: 10.32614/CRAN.package.amap
   - type: software
     title: colorspace
     abstract: "colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes"
@@ -86,6 +87,7 @@ references:
         email: Achim.Zeileis@R-project.org
         orcid: https://orcid.org/0000-0003-0918-3766
     year: "2024"
+    doi: 10.32614/CRAN.package.colorspace
   - type: software
     title: ComplexHeatmap
     abstract: "ComplexHeatmap: Make Complex Heatmaps"
@@ -98,7 +100,7 @@ references:
         email: z.gu@dkfz.de
         orcid: https://orcid.org/0000-0002-7395-8709
     year: "2024"
-    doi: 10.18129/B9.bioc.ComplexHeatmap
+    doi: 10.32614/CRAN.package.ComplexHeatmap
   - type: software
     title: dendsort
     abstract: "dendsort: Modular Leaf Ordering Methods for Dendrogram Nodes"
@@ -113,6 +115,7 @@ references:
         given-names: Evan
         email: evan.biederstedt@gmail.com
     year: "2024"
+    doi: 10.32614/CRAN.package.dendsort
   - type: software
     title: DESeq2
     abstract:
@@ -130,7 +133,7 @@ references:
       - family-names: Huber
         given-names: Wolfgang
     year: "2024"
-    doi: 10.18129/B9.bioc.DESeq2
+    doi: 10.32614/CRAN.package.DESeq2
   - type: software
     title: dplyr
     abstract: "dplyr: A Grammar of Data Manipulation"
@@ -155,6 +158,7 @@ references:
         email: davis@posit.co
         orcid: https://orcid.org/0000-0003-4777-038X
     year: "2024"
+    doi: 10.32614/CRAN.package.dplyr
   - type: software
     title: edgeR
     abstract: "edgeR: Empirical Analysis of Digital Gene Expression Data in R"
@@ -185,7 +189,7 @@ references:
       - family-names: Smyth
         given-names: Gordon K
     year: "2024"
-    doi: 10.18129/B9.bioc.edgeR
+    doi: 10.32614/CRAN.package.edgeR
   - type: software
     title: ggplot2
     abstract: "ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics"
@@ -225,6 +229,7 @@ references:
         name-particle: van den
         orcid: https://orcid.org/0000-0002-9335-7468
     year: "2024"
+    doi: 10.32614/CRAN.package.ggplot2
   - type: software
     title: ggrepel
     abstract: "ggrepel: Automatically Position Non-Overlapping Text Labels with 'ggplot2'"
@@ -237,6 +242,7 @@ references:
         email: kslowikowski@gmail.com
         orcid: https://orcid.org/0000-0002-2843-6370
     year: "2024"
+    doi: 10.32614/CRAN.package.ggrepel
   - type: software
     title: gplots
     abstract: "gplots: Various R Programming Tools for Plotting Data"
@@ -269,6 +275,7 @@ references:
       - family-names: Venables
         given-names: Bill
     year: "2024"
+    doi: 10.32614/CRAN.package.gplots
   - type: software
     title: gridExtra
     abstract: 'gridExtra: Miscellaneous Functions for "Grid" Graphics'
@@ -279,6 +286,7 @@ references:
         given-names: Baptiste
         email: baptiste.auguie@gmail.com
     year: "2024"
+    doi: 10.32614/CRAN.package.gridExtra
   - type: software
     title: gridGraphics
     abstract: "gridGraphics: Redraw Base Graphics Using 'grid' Graphics"
@@ -293,6 +301,7 @@ references:
         given-names: Zhijian
         email: jwen246@aucklanduni.ac.nz
     year: "2024"
+    doi: 10.32614/CRAN.package.gridGraphics
   - type: software
     title: lattice
     abstract: "lattice: Trellis Graphics for R"
@@ -305,6 +314,7 @@ references:
         email: deepayan.sarkar@r-project.org
         orcid: https://orcid.org/0000-0003-4107-1553
     year: "2024"
+    doi: 10.32614/CRAN.package.lattice
   - type: software
     title: limma
     abstract: "limma: Linear Models for Microarray Data"
@@ -358,7 +368,7 @@ references:
       - family-names: Li
         given-names: Mengbo
     year: "2024"
-    doi: 10.18129/B9.bioc.limma
+    doi: 10.32614/CRAN.package.limma
   - type: software
     title: plotly
     abstract: "plotly: Create Interactive Web Graphics via 'plotly.js'"
@@ -390,6 +400,7 @@ references:
         given-names: Pedro
         email: pedro@plot.ly
     year: "2024"
+    doi: 10.32614/CRAN.package.plotly
   - type: software
     title: RColorBrewer
     abstract: "RColorBrewer: ColorBrewer Palettes"
@@ -400,6 +411,7 @@ references:
         given-names: Erich
         email: erich.neuwirth@univie.ac.at
     year: "2024"
+    doi: 10.32614/CRAN.package.RColorBrewer
   - type: software
     title: RCurl
     abstract: "RCurl: General Network (HTTP/FTP/...) Client Interface for R"
@@ -411,6 +423,7 @@ references:
         email: duncan@r-project.org
         orcid: https://orcid.org/0000-0003-0159-1546
     year: "2024"
+    doi: 10.32614/CRAN.package.RCurl
   - type: software
     title: reshape2
     abstract: "reshape2: Flexibly Reshape Data: A Reboot of the Reshape Package"
@@ -422,6 +435,7 @@ references:
         given-names: Hadley
         email: h.wickham@gmail.com
     year: "2024"
+    doi: 10.32614/CRAN.package.reshape2
   - type: software
     title: S7
     abstract: "S7: An Object Oriented System Meant to Become a Successor to S3 and S4"
@@ -450,6 +464,7 @@ references:
         email: hadley@posit.co
         orcid: https://orcid.org/0000-0003-4757-117X
     year: "2024"
+    doi: 10.32614/CRAN.package.S7
   - type: software
     title: stringr
     abstract: "stringr: Simple, Consistent Wrappers for Common String Operations"
@@ -461,6 +476,7 @@ references:
         given-names: Hadley
         email: hadley@posit.co
     year: "2024"
+    doi: 10.32614/CRAN.package.stringr
   - type: software
     title: tidyr
     abstract: "tidyr: Tidy Messy Data"
@@ -477,6 +493,7 @@ references:
       - family-names: Girlich
         given-names: Maximilian
     year: "2024"
+    doi: 10.32614/CRAN.package.tidyr
   - type: software
     title: knitr
     abstract: "knitr: A General-Purpose Package for Dynamic Report Generation in R"
@@ -489,6 +506,7 @@ references:
         email: xie@yihui.name
         orcid: https://orcid.org/0000-0003-0645-5666
     year: "2024"
+    doi: 10.32614/CRAN.package.knitr
   - type: software
     title: readr
     abstract: "readr: Read Rectangular Text Data"
@@ -506,6 +524,7 @@ references:
         email: jenny@posit.co
         orcid: https://orcid.org/0000-0002-6983-2759
     year: "2024"
+    doi: 10.32614/CRAN.package.readr
   - type: software
     title: rmarkdown
     abstract: "rmarkdown: Dynamic Documents for R"
@@ -549,6 +568,7 @@ references:
         email: rich@posit.co
         orcid: https://orcid.org/0000-0003-3925-190X
     year: "2024"
+    doi: 10.32614/CRAN.package.rmarkdown
   - type: software
     title: styler
     abstract: "styler: Non-Invasive Pretty Printing of R Code"
@@ -564,6 +584,7 @@ references:
         given-names: Lorenz
         email: lorenz.walthert@icloud.com
     year: "2024"
+    doi: 10.32614/CRAN.package.styler
   - type: software
     title: testthat
     abstract: "testthat: Unit Testing for R"
@@ -575,6 +596,7 @@ references:
         given-names: Hadley
         email: hadley@posit.co
     year: "2024"
+    doi: 10.32614/CRAN.package.testthat
     version: ">= 3.0.0"
   - type: software
     title: usethis
@@ -600,3 +622,4 @@ references:
         email: andy.teucher@posit.co
         orcid: https://orcid.org/0000-0002-7840-692X
     year: "2024"
+    doi: 10.32614/CRAN.package.usethis
