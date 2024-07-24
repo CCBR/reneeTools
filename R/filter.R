@@ -192,7 +192,7 @@ filter_counts <- function(renee_ds) {
   log_counts <- log((as.matrix(df.filt[, samples_to_include] + 0.5)))
   rownames(log_counts) <- df.filt[, 1]
 
-  pca.df <- plot_pca(log_counts,
+  pcaPlot <- plot_pca(log_counts,
     sample_metadata,
     samples_to_include,
     samples_to_rename_manually,

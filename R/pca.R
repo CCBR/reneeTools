@@ -1,4 +1,4 @@
-#' Perform and plot a Principal Coordinate Analysis
+#' Perform and plot a Principal Components Analysis
 #'
 #' @param log_counts log-transformed filtered counts
 #' @inheritParams filter_counts
@@ -49,7 +49,7 @@ plot_pca <- function(log_counts,
 
   # plot PCA
   pcaPlot <- ggplot(pca.df, aes(x = xdata, y = ydata, text = sample)) +
-    geom_point(aes(color = group), text = sample, size = point_size_for_pca) +
+    geom_point(aes(color = group), size = point_size_for_pca) +
     theme_bw() +
     theme(
       legend.position = legend_position_for_pca,
