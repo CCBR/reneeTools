@@ -4,10 +4,10 @@
 #' @param anno_col TODO
 #' @param anno_column TODO
 #'
-#' @return heatmap
+#' @return heatmap ggproto object
 #' @keywords internal
 #'
-make_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, labels_column, anno_col, anno_column) {
+plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, labels_column, anno_col, anno_column) {
   ## Annotate
   rownames(sample_metadata) <- sample_metadata[[labels_column]]
   annoVal <- lapply(anno_column, function(x) {

@@ -240,9 +240,8 @@ filter_counts <- function(renee_ds) {
       # print(histPlot2)
     } else {
       ## & Function Start
-      require(gridExtra)
-      # gh<-make_heatmap(df.filt[,samples_to_include],sample_metadata,colorval)
-      corHM <- make_heatmap(
+      # gh<-plot_heatmap(df.filt[,samples_to_include],sample_metadata,colorval)
+      corHM <- plot_heatmap(
         counts_matrix = df.filt[, samples_to_include],
         sample_metadata = sample_metadata,
         sample_names_column = sample_names_column,
