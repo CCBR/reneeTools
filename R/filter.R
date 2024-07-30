@@ -246,8 +246,8 @@ filter_counts <- function(renee_ds) {
         sample_metadata = sample_metadata,
         sample_names_column = sample_names_column,
         labels_column = labels_column,
-        anno_col = colorval,
-        anno_column = groups_column
+        anno_column = groups_column,
+        anno_colors = colorval
       )
       ## & Function End
 

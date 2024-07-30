@@ -1,21 +1,22 @@
 #' Make a heatmap
 #'
 #' @inheritParams filter_counts
-#' @param anno_col TODO
-#' @param anno_column TODO
+#' @param anno_colors vector of colors for annotation column
+#' @param anno_column annotation (group) column
 #'
 #' @return heatmap ggproto object
 #' @keywords internal
 #'
-plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, labels_column, anno_col, anno_column) {
+plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, labels_column, anno_column, anno_colors) {
   ## Annotate
   rownames(sample_metadata) <- sample_metadata[[labels_column]]
   annoVal <- lapply(anno_column, function(x) {
+    # TODO this only works on dataframes, not tibbles
     out <- as.factor(sample_metadata[, x]) %>% levels()
     # names(out)=x
     return(out)
   }) %>% unlist()
-  col <- anno_col[1:length(annoVal)]
+  col <- anno_colors[1:length(annoVal)]
   names(col) <- annoVal
 
   cols <- lapply(anno_column, function(x) {
