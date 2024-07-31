@@ -3,6 +3,7 @@
 #' TODO this should probably be performed earlier on in the template?
 #' why wait til after PCA is calculated?
 #'
+#'
 #' @param dat data frame containing a `sample` column
 #' @param samples_to_rename_manually TODO ask Phil for expected format
 #'

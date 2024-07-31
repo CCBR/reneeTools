@@ -30,7 +30,7 @@ plot_pca <- function(log_counts,
 
   pcx <- paste0("PC", principal_component_on_x_axis)
   pcy <- paste0("PC", principal_component_on_y_axis)
-  pca.df <- as.data.frame(pca$x) %>% dplyr::select(all_of(c(pcx, pcy)))
+  pca.df <- as.data.frame(pca$x) %>% dplyr::select(tidyselect::all_of(c(pcx, pcy)))
 
   pca.df$group <- sample_metadata[[groups_column]]
   pca.df$sample <- sample_metadata[[labels_column]]
@@ -48,31 +48,32 @@ plot_pca <- function(log_counts,
   pca.df <- rename_samples(pca.df, samples_to_rename_manually)
 
   # plot PCA
-  pcaPlot <- ggplot(pca.df, aes(x = xdata, y = ydata, text = sample)) +
-    geom_point(aes(color = group), size = point_size_for_pca) +
-    theme_bw() +
-    theme(
+  pcaPlot <- pca.df %>%
+    ggplot2::ggplot(ggplot2::aes(x = xdata, y = ydata, text = sample)) +
+    ggplot2::geom_point(ggplot2::aes(color = group),
+      size = point_size_for_pca
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
       legend.position = legend_position_for_pca,
-      legend.title = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      panel.background = element_blank(),
-      axis.text = element_text(size = 18),
-      axis.title = element_text(size = 20),
-      # panel.grid.major = element_line(size = 1),
-      # axis.line=element_line(size=1),
-      panel.border = element_rect(colour = "black", fill = NA, linewidth = 1),
-      axis.ticks = element_line(linewidth = 1),
-      legend.text = element_text(size = 18)
+      legend.title = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank(),
+      axis.text = ggplot2::element_text(size = 18),
+      axis.title = ggplot2::element_text(size = 20),
+      panel.border = ggplot2::element_rect(colour = "black", fill = NA, linewidth = 1),
+      axis.ticks = ggplot2::element_line(linewidth = 1),
+      legend.text = ggplot2::element_text(size = 18)
     ) +
     ggplot2::coord_fixed(ratio = 1.5) +
-    scale_colour_manual(values = color_values) +
-    xlab(pc.x.lab) +
-    ylab(pc.y.lab)
+    ggplot2::scale_colour_manual(values = color_values) +
+    ggplot2::xlab(pc.x.lab) +
+    ggplot2::ylab(pc.y.lab)
 
   if (add_labels_to_pca == TRUE) {
     pcaPlot <- pcaPlot +
-      geom_text_repel(aes(label = sample, color = group),
+      ggrepel::geom_text_repel(ggplot2::aes(label = sample, color = group),
         size = 7,
         show.legend = F,
         direction = c("both"),

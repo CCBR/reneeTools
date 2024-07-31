@@ -54,3 +54,5 @@ test_that("rename_samples does nothing with empty vector", {
   expect_equal(rename_samples(pca_df, NULL), pca_df)
   expect_equal(rename_samples(pca_df, numeric(0)), pca_df)
 })
+
+# TODO need to know expected format of samples_to_rename_manually

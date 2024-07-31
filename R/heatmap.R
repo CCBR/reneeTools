@@ -26,7 +26,7 @@ plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, la
   })
   names(cols) <- (anno_column)
 
-  anno <- columnAnnotation(
+  anno <- ComplexHeatmap::columnAnnotation(
     df = sample_metadata[, anno_column, drop = F],
     col = cols
   )
@@ -44,18 +44,20 @@ plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, la
 
 
   ## calculate correlation
-  d <- Dist(tcounts, method = "correlation", diag = TRUE)
+  d <- amap::Dist(tcounts, method = "correlation", diag = TRUE)
   m <- as.matrix(d)
 
   ## create dendogram
-  dend <- rev(dendsort(as.dendrogram(hclust(d, method = "average"))))
-
-
+  dend <- d %>%
+    stats::hclust(method = "average") %>%
+    stats::as.dendrogram() %>%
+    dendsort::dendsort() %>%
+    rev()
 
   ### plot
-  new.palette <- colorRampPalette(c("blue", "green", "yellow"))
-  lgd <- Legend(new.palette(20), title = "Correlation", title_position = "lefttop-rot")
-  hm <- Heatmap(m,
+  new.palette <- grDevices::colorRampPalette(c("blue", "green", "yellow"))
+  lgd <- ComplexHeatmap::Legend(new.palette(20), title = "Correlation", title_position = "lefttop-rot")
+  hm <- ComplexHeatmap::Heatmap(m,
     heatmap_legend_param = list(
       title = "Correlation",
       title_position = "leftcenter-rot"
@@ -63,12 +65,8 @@ plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, la
     cluster_rows = dend,
     cluster_columns = dend,
     top_annotation = anno,
-    row_names_gp = gpar(fontsize = 15),
-    column_names_gp = gpar(fontsize = 15),
-    # heatmap_height=unit(1, "npc"),
-    # heatmap_width=unit(.5, "npc"),
-    # width = unit(.5, "npc"),
-    # height = unit(.5, "npc"),
+    row_names_gp = grid::gpar(fontsize = 15),
+    column_names_gp = grid::gpar(fontsize = 15),
     col = new.palette(20)
   )
 

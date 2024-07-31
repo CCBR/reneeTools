@@ -50,30 +50,6 @@ filter_counts <- function(renee_ds,
                           plot_correlation_matrix_heatmap = TRUE) {
   counts_matrix <- renee_ds@counts[["raw"]]
   sample_metadata <- renee_ds@sample_meta
-  ## --------- ##
-  ## Libraries ##
-  ## --------- ##
-  # TODO remove all library statements
-  library(limma)
-  library(tidyverse)
-  library(edgeR)
-  library(ggplot2)
-  library(plotly)
-  library(dplyr)
-  library(RColorBrewer)
-  library(colorspace)
-  library(stringr)
-  library(RCurl)
-  library(reshape2)
-  library(gridExtra)
-  library(amap)
-  library(lattice)
-  library(gplots)
-  library(gridGraphics)
-  library(dendsort)
-  library(ComplexHeatmap)
-  library(ggrepel)
-
   # TODO we should use "feature" instead of "gene" to make sure this is applicable beyond RNA-seq
 
   # TODO: just have users specify hex values directly for simplicity

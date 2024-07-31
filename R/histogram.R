@@ -9,7 +9,7 @@ plot_histogram <- function(log_counts,
                            legend_position_for_histogram = "top",
                            legend_font_size_for_histogram = 10,
                            number_of_histogram_legend_columns = 6) {
-  df.m <- melt(log_counts, id.vars = c(gene_names_column))
+  df.m <- reshape2::melt(log_counts, id.vars = c(gene_names_column))
   df.m <- dplyr::rename(df.m, sample = Var2)
 
   if (set_min_max_for_x_axis_for_histogram == TRUE) {
@@ -21,7 +21,7 @@ plot_histogram <- function(log_counts,
   }
 
   if (color_histogram_by_group == TRUE) {
-    df.m %>% mutate(colgroup = sample_metadata[sample, groups_column]) -> df.m
+    df.m %>% dplyr::mutate(colgroup = sample_metadata[sample, groups_column]) -> df.m
     df.m <- df.m[complete.cases(df.m[, "colgroup"]), ]
     df.m$colgroup <- gsub("\\s", "_", df.m$colgroup)
     df.m$colgroup <- factor(df.m$colgroup, levels = unique(df.m$colgroup))
@@ -30,36 +30,39 @@ plot_histogram <- function(log_counts,
     cols <- colorval[1:n]
 
     # plot Density
-    histPlot <- ggplot(df.m, aes(x = value, group = sample)) +
-      geom_density(aes(colour = colgroup), linewidth = 1)
+    histPlot <- df.m %>%
+      ggplot2::ggplot(ggplot2::aes(x = value, group = sample)) +
+      ggplot2::geom_density(ggplot2::aes(colour = colgroup), linewidth = 1)
   } else {
     df.m$sample <- sample_metadata[df.m$sample, labels_column]
     n <- length(unique(df.m$sample))
     cols <- get_random_colors(n)
 
-    histPlot <- ggplot(df.m, aes(x = value, group = sample)) +
-      geom_density(aes(colour = sample), linewidth = 1)
+    histPlot <- df.m %>%
+      ggplot2::ggplot(ggplot2::aes(x = value, group = sample)) +
+      ggplot2::geom_density(ggplot2::aes(colour = sample), linewidth = 1)
   }
 
   histPlot <- histPlot +
-    xlab("Normalized Counts") + ylab("Density") +
-    theme_bw() +
-    theme(
+    ggplot2::xlab("Normalized Counts") +
+    ggplot2::ylab("Density") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
       legend.position = legend_position_for_histogram,
-      legend.text = element_text(size = legend_font_size_for_histogram),
-      legend.title = element_blank(),
-      panel.background = element_blank(),
-      axis.text = element_text(size = 18),
-      axis.title = element_text(size = 20),
-      panel.border = element_rect(colour = "black", fill = NA, linewidth = 0),
-      axis.line = element_line(linewidth = .5),
-      axis.ticks = element_line(linewidth = 1)
+      legend.text = ggplot2::element_text(size = legend_font_size_for_histogram),
+      legend.title = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank(),
+      axis.text = ggplot2::element_text(size = 18),
+      axis.title = ggplot2::element_text(size = 20),
+      panel.border = ggplot2::element_rect(colour = "black", fill = NA, linewidth = 0),
+      axis.line = ggplot2::element_line(linewidth = .5),
+      axis.ticks = ggplot2::element_line(linewidth = 1)
     ) +
     # ggtitle("Frequency Histogram") +
-    xlim(xmin, xmax) +
+    ggplot2::xlim(xmin, xmax) +
     # scale_linetype_manual(values=rep(c('solid', 'dashed','dotted','twodash'),n)) +
-    scale_colour_manual(values = cols) +
-    guides(linetype = guide_legend(ncol = number_of_histogram_legend_columns))
+    ggplot2::scale_colour_manual(values = cols) +
+    ggplot2::guides(linetype = ggplot2::guide_legend(ncol = number_of_histogram_legend_columns))
 
   return(histPlot)
 }

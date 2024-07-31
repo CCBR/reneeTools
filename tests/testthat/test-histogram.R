@@ -35,7 +35,7 @@ sample_meta <- structure(
 test_that("plot_histogram works", {
   p <- plot_histogram(
     log_counts,
-    sample_metadata,
+    sample_meta,
     gene_names_column = "Gene",
     labels_column = "Label",
     color_histogram_by_group = FALSE,
