@@ -24,7 +24,7 @@ run_deseq2 <- S7::new_generic("run_deseq2", "renee_ds", function(renee_ds, desig
 
 S7::method(run_deseq2, reneeDataSet) <- function(renee_ds, design, min_count = 10, ...) {
   dds <- DESeq2::DESeqDataSetFromMatrix(
-    countData = renee_ds@counts %>% filter_low_counts(min_count = min_count) %>% counts_dat_to_matrix(),
+    countData = renee_ds@counts$filt %>% counts_dat_to_matrix(),
     colData = renee_ds@sample_meta,
     design = design
   )

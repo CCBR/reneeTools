@@ -1,12 +1,12 @@
 set.seed(20231228)
 test_that("run_deseq2 works", {
   renee_ds <- create_reneeDataSet_from_files(
-    system.file(
-      "extdata",
-      "RSEM.genes.expected_count.all_samples.txt",
+    sample_meta_filepath = system.file("extdata", "sample_metadata.tsv",
       package = "reneeTools"
     ),
-    system.file("extdata", "sample_metadata.tsv",
+    gene_counts_filepath = system.file(
+      "extdata",
+      "RSEM.genes.expected_count.all_samples.txt",
       package = "reneeTools"
     )
   )
@@ -14,19 +14,30 @@ test_that("run_deseq2 works", {
     dplyr::mutate(condition = factor(condition,
       levels = c("wildtype", "knockout")
     ))
-  renee_ds <-
+  min_count <- 10
+  genes_above_threshold <- renee_ds@counts$raw %>%
+    tidyr::pivot_longer(!c("gene_id", "GeneName"),
+      names_to = "sample_id", values_to = "count"
+    ) %>%
+    dplyr::group_by(gene_id) %>%
+    dplyr::summarize(count_sum = sum(count)) %>%
+    dplyr::filter(count_sum >= min_count) %>%
+    dplyr::pull(gene_id)
+  renee_ds@counts$filt <- renee_ds@counts$raw %>%
+    dplyr::filter(gene_id %in% (genes_above_threshold))
+  renee_ds <- renee_ds %>%
     run_deseq2(renee_ds, design = ~condition, fitType = "local")
   dds <- renee_ds@analyses$deseq2_ds
+
+  # check colData
   expect_equal(
     dds@colData %>% as.data.frame(),
     structure(
       list(
+        sample_id = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"),
         condition = structure(
           c(2L, 2L, 1L, 1L),
-          levels = c(
-            "wildtype",
-            "knockout"
-          ),
+          levels = c("wildtype", "knockout"),
           class = "factor"
         ),
         sizeFactor = c(
@@ -37,12 +48,11 @@ test_that("run_deseq2 works", {
         )
       ),
       class = "data.frame",
-      row.names = c(
-        "KO_S3",
-        "KO_S4", "WT_S1", "WT_S2"
-      )
+      row.names = c("KO_S3", "KO_S4", "WT_S1", "WT_S2")
     )
   )
+
+  # check some of the counts
   expect_equal(
     dds@assays@data@listData %>% as.data.frame() %>% dplyr::filter(counts.KO_S3 > 15),
     structure(
