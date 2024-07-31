@@ -16,7 +16,38 @@
 #' renee_ds2 <- filter_counts(renee_ds)
 #' head(renee_ds2@counts[["filt"]])
 #'
-filter_counts <- function(renee_ds) {
+filter_counts <- function(renee_ds,
+                          gene_names_column = "Gene",
+                          sample_names_column = "Sample",
+                          groups_column = "Group",
+                          labels_column = "Label",
+                          columns_to_include = c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
+                          outlier_samples_to_remove = c(),
+                          use_cpm_counts_to_filter = TRUE,
+                          Minimum_Count_Value_to_be_Considered_Nonzero = 8,
+                          Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
+                          Use_Group_Based_Filtering = FALSE,
+                          Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3,
+                          principal_component_on_x_axis = 1,
+                          principal_component_on_y_axis = 2,
+                          legend_position_for_pca = "top",
+                          point_size_for_pca = 1,
+                          add_labels_to_pca = TRUE,
+                          label_font_size = 3,
+                          label_offset_y_ = 2,
+                          label_offset_x_ = 2,
+                          samples_to_rename_manually = c(""),
+                          color_histogram_by_group = FALSE,
+                          set_min_max_for_x_axis_for_histogram = FALSE,
+                          minimum_for_x_axis_for_histogram = -1,
+                          maximum_for_x_axis_for_histogram = 1,
+                          legend_position_for_histogram = "top",
+                          legend_font_size_for_histogram = 10,
+                          number_of_histogram_legend_columns = 6,
+                          colors_for_plots = c("indigo", "carrot", "lipstick", "turquoise", "lavender", "jade", "coral", "azure", "green", "rum", "orange", "olive"),
+                          number_of_image_rows = 2,
+                          interactive_plots = FALSE,
+                          plot_correlation_matrix_heatmap = TRUE) {
   counts_matrix <- renee_ds@counts[["raw"]]
   sample_metadata <- renee_ds@sample_meta
   ## --------- ##
@@ -43,78 +74,14 @@ filter_counts <- function(renee_ds) {
   library(ComplexHeatmap)
   library(ggrepel)
 
-  ## -------------------------------- ##
-  ## User-Defined Template Parameters ##
-  ## -------------------------------- ##
-
-  # TODO move all user-defined parameters to function arguments
   # TODO we should use "feature" instead of "gene" to make sure this is applicable beyond RNA-seq
-  # Basic Parameters:
-  gene_names_column <- "Gene"
 
-  columns_to_include <- c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3")
-  sample_names_column <- "Sample"
-  groups_column <- "Group"
-  labels_column <- "Label"
-
-
-  # Filtering Parameters:
-  outlier_samples_to_remove <- c()
-  use_cpm_counts_to_filter <- TRUE
-  Minimum_Count_Value_to_be_Considered_Nonzero <- 8
-  Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total <- 7
-  Use_Group_Based_Filtering <- FALSE
-  Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group <- 3
-
-  # PCA Parameters:
-  principal_component_on_x_axis <- 1
-  principal_component_on_y_axis <- 2
-  legend_position_for_pca <- "top"
-  point_size_for_pca <- 1
-  add_labels_to_pca <- TRUE
-  label_font_size <- 3
-  label_offset_y_ <- 2
-  label_offset_x_ <- 2
-  samples_to_rename_manually <- c("")
-
-  # Histogram Parameters:
-  color_histogram_by_group <- FALSE
-  set_min_max_for_x_axis_for_histogram <- FALSE
-  minimum_for_x_axis_for_histogram <- -1
-  maximum_for_x_axis_for_histogram <- 1
-  legend_position_for_histogram <- "top"
-  legend_font_size_for_histogram <- 10
-  number_of_histogram_legend_columns <- 6
-
-
-  # Visualization Parameters:
-  colors_for_plots <- c("indigo", "carrot", "lipstick", "turquoise", "lavender", "jade", "coral", "azure", "green", "rum", "orange", "olive")
-  number_of_image_rows <- 2
-  interactive_plots <- FALSE
-
-  # TCGA:
-  plot_correlation_matrix_heatmap <- TRUE
-
-  ## --------------- ##
-  ## Error Messages ##
-  ## -------------- ##
-
-
-  ## --------- ##
-  ## Functions ##
-  ## --------- ##
-
+  # TODO: just have users specify hex values directly for simplicity
   colorlist <- c(
-    "#5954d6", "#e1562c", "#b80058",
-    "#00c6f8", "#d163e6", "#00a76c",
-    "#ff9287", "#008cf9", "#006e00",
-    "#796880", "#FFA500", "#878500"
-  )
-  names(colorlist) <- c(
-    "indigo", "carrot", "lipstick",
-    "turquoise", "lavender", "jade",
-    "coral", "azure", "green",
-    "rum", "orange", "olive"
+    indigo = "#5954d6", carrot = "#e1562c", lipstick = "#b80058",
+    turquoise = "#00c6f8", lavender = "#d163e6", jade = "#00a76c",
+    coral = "#ff9287", azure = "#008cf9", green = "#006e00", rum = "#796880",
+    orange = "#FFA500", olive = "#878500"
   )
   if (length(colors_for_plots) == 0) {
     colors_for_plots <- c(
@@ -125,10 +92,6 @@ filter_counts <- function(renee_ds) {
     )
   }
 
-
-  ## --------------- ##
-  ## Main Code Block ##
-  ## --------------- ##
   # purpose of this code block for samples_to_include:
   # ensure samples in metadata match columns in counts table and
   # also exclude annotation / gene columns
@@ -167,6 +130,7 @@ filter_counts <- function(renee_ds) {
     counts_matrix = df,
     sample_metadata = sample_metadata,
     gene_names_column = gene_names_column,
+    groups_column = groups_column,
     use_cpm_counts_to_filter = use_cpm_counts_to_filter,
     Use_Group_Based_Filtering = Use_Group_Based_Filtering,
     Minimum_Count_Value_to_be_Considered_Nonzero = Minimum_Count_Value_to_be_Considered_Nonzero,
@@ -239,8 +203,6 @@ filter_counts <- function(renee_ds) {
       grid.newpage()
       # print(histPlot2)
     } else {
-      ## & Function Start
-      # gh<-plot_heatmap(df.filt[,samples_to_include],sample_metadata,colorval)
       corHM <- plot_heatmap(
         counts_matrix = df.filt[, samples_to_include],
         sample_metadata = sample_metadata,
@@ -249,7 +211,6 @@ filter_counts <- function(renee_ds) {
         anno_column = groups_column,
         anno_colors = colorval
       )
-      ## & Function End
 
       # grid.newpage()
       # print(pcaPlot)
@@ -302,7 +263,9 @@ filter_counts <- function(renee_ds) {
 #' @return counts matrix with low-count genes removed
 #' @keywords internal
 #'
-remove_low_count_genes <- function(counts_matrix, sample_metadata, gene_names_column,
+remove_low_count_genes <- function(counts_matrix, sample_metadata,
+                                   gene_names_column,
+                                   groups_column,
                                    use_cpm_counts_to_filter = TRUE,
                                    Use_Group_Based_Filtering = FALSE,
                                    Minimum_Count_Value_to_be_Considered_Nonzero = 8,

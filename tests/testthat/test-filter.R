@@ -2,7 +2,7 @@ test_that("filter_counts reproduces NIDAP results", {
   renee_ds <- create_reneeDataSet_from_dataframes(
     as.data.frame(nidap_sample_metadata),
     as.data.frame(nidap_clean_raw_counts),
-    sample_id_colname = Sample
+    sample_id_colname = "Sample"
   )
   set.seed(10)
   renee_ds2 <- filter_counts(renee_ds)
@@ -57,6 +57,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
+      groups_column = "Group",
       use_cpm_counts_to_filter = TRUE,
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,
@@ -138,6 +139,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
+      groups_column = "Group",
       use_cpm_counts_to_filter = TRUE,
       Use_Group_Based_Filtering = TRUE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,
@@ -238,6 +240,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
+      groups_column = "Group",
       use_cpm_counts_to_filter = TRUE,
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = -1,
