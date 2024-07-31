@@ -1,20 +1,26 @@
 set.seed(20231228)
+renee_ds <- create_reneeDataSet_from_files(
+  sample_meta_filepath = system.file("extdata", "sample_metadata.tsv",
+    package = "reneeTools"
+  ),
+  gene_counts_filepath = system.file(
+    "extdata",
+    "RSEM.genes.expected_count.all_samples.txt",
+    package = "reneeTools"
+  )
+) %>%
+  suppressMessages()
+renee_ds@sample_meta <- renee_ds@sample_meta %>%
+  dplyr::mutate(condition = factor(condition,
+    levels = c("wildtype", "knockout")
+  ))
+
 test_that("run_deseq2 works", {
-  renee_ds <- create_reneeDataSet_from_files(
-    sample_meta_filepath = system.file("extdata", "sample_metadata.tsv",
-      package = "reneeTools"
-    ),
-    gene_counts_filepath = system.file(
-      "extdata",
-      "RSEM.genes.expected_count.all_samples.txt",
-      package = "reneeTools"
-    )
-  ) %>%
-    suppressMessages()
-  renee_ds@sample_meta <- renee_ds@sample_meta %>%
-    dplyr::mutate(condition = factor(condition,
-      levels = c("wildtype", "knockout")
-    ))
+  expect_error(
+    run_deseq2(renee_ds, design = ~condition),
+    "renee_ds must contain filtered counts"
+  )
+
   min_count <- 10
   genes_above_threshold <- renee_ds@counts$raw %>%
     tidyr::pivot_longer(!c("gene_id", "GeneName"),
