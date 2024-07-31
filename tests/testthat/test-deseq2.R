@@ -9,7 +9,8 @@ test_that("run_deseq2 works", {
       "RSEM.genes.expected_count.all_samples.txt",
       package = "reneeTools"
     )
-  )
+  ) %>%
+    suppressMessages()
   renee_ds@sample_meta <- renee_ds@sample_meta %>%
     dplyr::mutate(condition = factor(condition,
       levels = c("wildtype", "knockout")
@@ -26,7 +27,8 @@ test_that("run_deseq2 works", {
   renee_ds@counts$filt <- renee_ds@counts$raw %>%
     dplyr::filter(gene_id %in% (genes_above_threshold))
   renee_ds <- renee_ds %>%
-    run_deseq2(renee_ds, design = ~condition, fitType = "local")
+    run_deseq2(renee_ds, design = ~condition, fitType = "local") %>%
+    suppressMessages()
   dds <- renee_ds@analyses$deseq2_ds
 
   # check colData

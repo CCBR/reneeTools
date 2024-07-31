@@ -2,7 +2,8 @@ test_that("reneeDataSet from files works", {
   rds <- create_reneeDataSet_from_files(
     system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
     system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
-  )
+  ) %>%
+    suppressMessages()
   expect_equal(
     rds@counts$raw %>% head(),
     structure(

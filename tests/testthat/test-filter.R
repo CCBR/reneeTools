@@ -14,6 +14,20 @@ test_that("filter_counts reproduces NIDAP results", {
       dplyr::arrange(desc(Gene))
   ))
 })
+# TODO get filter_counts() to work on tibbles too, not only dataframes
+
+# TODO fails on RENEE dataset, R session aborts
+# test_that('filter_counts works on RENEE dataset', {
+#   renee_ds <- create_reneeDataSet_from_files(
+#     system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
+#     system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
+#   )
+#   rds2 <- renee_ds %>% filter_counts(gene_names_column = 'gene_id',
+#                              sample_names_column = 'sample_id',
+#                              groups_column = 'condition',
+#                              labels_column = 'sample_id',
+#                              columns_to_include = c("gene_id", "KO_S3", "KO_S4", "WT_S1", "WT_S2"))
+# })
 
 test_that("remove_low_count_genes works", {
   df <- structure(
