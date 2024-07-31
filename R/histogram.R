@@ -35,7 +35,7 @@ plot_histogram <- function(log_counts,
   } else {
     df.m$sample <- sample_metadata[df.m$sample, labels_column]
     n <- length(unique(df.m$sample))
-    cols <- getourrandomcolors(n)
+    cols <- get_random_colors(n)
 
     histPlot <- ggplot(df.m, aes(x = value, group = sample)) +
       geom_density(aes(colour = sample), size = 1)
