@@ -10,7 +10,7 @@
 #' renee_ds <- create_reneeDataSet_from_dataframes(
 #'   as.data.frame(nidap_sample_metadata),
 #'   as.data.frame(nidap_clean_raw_counts),
-#'   sample_id_colname = Sample
+#'   sample_id_colname = "Sample"
 #' )
 #' set.seed(10)
 #' renee_ds2 <- filter_counts(renee_ds)
@@ -154,7 +154,9 @@ filter_counts <- function(renee_ds,
   ########################
   histPlot <- plot_histogram(log_counts, sample_metadata,
     gene_names_column = gene_names_column,
+    groups_column = groups_column,
     labels_column = labels_column,
+    color_values = colorval,
     color_histogram_by_group = color_histogram_by_group,
     set_min_max_for_x_axis_for_histogram = set_min_max_for_x_axis_for_histogram,
     minimum_for_x_axis_for_histogram = minimum_for_x_axis_for_histogram,
@@ -171,8 +173,9 @@ filter_counts <- function(renee_ds,
 
   if (plot_correlation_matrix_heatmap == TRUE) {
     if (interactive_plots == TRUE) {
-      pcaPlot1 <- (pcaPlot) %>% ggplotly(tooltip = c("sample", "group"))
-      histPlot2 <- (histPlot + theme(legend.position = "none")) %>% ggplotly(tooltip = c("sample"))
+      pcaPlot1 <- (pcaPlot) %>% plotly::ggplotly(tooltip = c("sample", "group"))
+      histPlot2 <- (histPlot + ggplot2::theme(legend.position = "none")) %>%
+        plotly::ggplotly(tooltip = c("sample"))
 
       grid::grid.newpage()
       # print(pcaPlot1)
@@ -197,8 +200,9 @@ filter_counts <- function(renee_ds,
     }
   } else {
     if (interactive_plots == TRUE) {
-      pcaPlot1 <- (pcaPlot) %>% ggplotly(tooltip = c("sample", "group"))
-      histPlot2 <- (histPlot + theme(legend.position = "none")) %>% ggplotly(tooltip = "sample")
+      pcaPlot1 <- (pcaPlot) %>% plotly::ggplotly(tooltip = c("sample", "group"))
+      histPlot2 <- (histPlot + ggplot2::theme(legend.position = "none")) %>%
+        plotly::ggplotly(tooltip = "sample")
 
       grid::grid.newpage()
       # print(pcaPlot1)
@@ -248,6 +252,7 @@ remove_low_count_genes <- function(counts_matrix, sample_metadata,
                                    Minimum_Count_Value_to_be_Considered_Nonzero = 8,
                                    Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
                                    Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3) {
+  value <- NULL
   df <- counts_matrix
 
   df <- df[stats::complete.cases(df), ]
@@ -278,7 +283,8 @@ remove_low_count_genes <- function(counts_matrix, sample_metadata,
     tcounts$Row.names <- NULL
     melted <- reshape2::melt(tcounts, id.vars = groups_column)
     tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(groups_column, "variable")), sum = sum(value))
-    tcounts.tot %>% tidyr::spread(variable, sum) -> tcounts.group
+    tcounts.group <- tcounts.tot %>%
+      tidyr::pivot_wider(names_from = "variable", values_from = "sum")
     colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
     df.filt <- trans.df[tcounts.keep, ]
     df.filt %>% tibble::rownames_to_column(gene_names_column) -> df.filt

@@ -31,25 +31,35 @@ reneeDataSet <- S7::new_class("renee",
 
 #' Construct a reneeDataSet object from tsv files.
 #'
-#' @param gene_counts_filepath path to tsv file of expected gene counts from RSEM.
 #' @param sample_meta_filepath path to tsv file with sample IDs and metadata for differential analysis.
+#' @param gene_counts_filepath path to tsv file of expected gene counts from RSEM.
 #'
 #' @return reneeDataSet object
 #' @export
 #'
 #' @examples
-#' create_reneeDataSet_from_files(
-#'   sample_meta_filepath = system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
-#'   gene_counts_filepath = system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
+#' renee_ds <- create_reneeDataSet_from_files(
+#'   sample_meta_filepath = system.file("extdata",
+#'     "sample_metadata.tsv",
+#'     package = "reneeTools"
+#'   ),
+#'   gene_counts_filepath = system.file("extdata",
+#'     "RSEM.genes.expected_count.all_samples.txt",
+#'     package = "reneeTools"
+#'   )
 #' )
+#' renee_ds@counts$raw %>% head()
+#' renee_ds@sample_meta
 create_reneeDataSet_from_files <- function(sample_meta_filepath, gene_counts_filepath,
-                                           count_type = "raw") {
+                                           count_type = "raw",
+                                           sample_id_colname = "sample_id") {
   count_dat <- readr::read_tsv(gene_counts_filepath)
   sample_meta_dat <- readr::read_tsv(sample_meta_filepath)
   return(create_reneeDataSet_from_dataframes(
     sample_meta_dat = sample_meta_dat,
     count_dat = count_dat,
-    count_type = "raw"
+    count_type = "raw",
+    sample_id_colname = sample_id_colname
   ))
 }
 

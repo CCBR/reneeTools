@@ -4,12 +4,17 @@
 \alias{create_reneeDataSet_from_files}
 \title{Construct a reneeDataSet object from tsv files.}
 \usage{
-create_reneeDataSet_from_files(gene_counts_filepath, sample_meta_filepath)
+create_reneeDataSet_from_files(
+  sample_meta_filepath,
+  gene_counts_filepath,
+  count_type = "raw",
+  sample_id_colname = "sample_id"
+)
 }
 \arguments{
-\item{gene_counts_filepath}{path to tsv file of expected gene counts from RSEM.}
-
 \item{sample_meta_filepath}{path to tsv file with sample IDs and metadata for differential analysis.}
+
+\item{gene_counts_filepath}{path to tsv file of expected gene counts from RSEM.}
 }
 \value{
 reneeDataSet object
@@ -18,8 +23,13 @@ reneeDataSet object
 Construct a reneeDataSet object from tsv files.
 }
 \examples{
-create_reneeDataSet_from_files(
-  system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools"),
-  system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
+renee_ds <- create_reneeDataSet_from_files(
+  sample_meta_filepath = system.file("extdata",
+                                     "sample_metadata.tsv", package = "reneeTools"),
+  gene_counts_filepath = system.file("extdata",
+                                     "RSEM.genes.expected_count.all_samples.txt",
+                                     package = "reneeTools")
 )
+renee_ds@counts$raw \%>\% head()
+renee_ds@sample_meta
 }

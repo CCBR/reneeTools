@@ -25,19 +25,17 @@ Imports:
     edgeR,
     ggplot2,
     ggrepel,
-    gplots,
-    gridExtra,
-    gridGraphics,
-    lattice,
-    limma,
+    methods,
     plotly,
-    RColorBrewer,
-    RCurl,
     reshape2,
+    rlang,
     S7,
-    stringr,
-    tidyr
+    stats,
+    tibble,
+    tidyr,
+    tidyselect
 Suggests:
+    glue,
     knitr,
     readr,
     rmarkdown,
@@ -51,4 +49,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

@@ -4,14 +4,19 @@
 \alias{create_reneeDataSet_from_dataframes}
 \title{Construct a reneeDataSet object from data frames}
 \usage{
-create_reneeDataSet_from_dataframes(count_dat, sample_meta_dat)
+create_reneeDataSet_from_dataframes(
+  sample_meta_dat,
+  count_dat,
+  sample_id_colname = "sample_id",
+  count_type = "raw"
+)
 }
 \arguments{
-\item{count_dat}{expected gene counts from RSEM as a data frame or tibble.
-Must contain a \code{gene_id} column and a column for each sample ID in the metadata.}
-
 \item{sample_meta_dat}{sample metadata as a data frame or tibble.
 Must contain a \code{sample_ID} column.}
+
+\item{count_dat}{expected gene counts from RSEM as a data frame or tibble.
+Must contain a \code{gene_id} column and a column for each sample ID in the metadata.}
 }
 \value{
 reneeDataSet object
@@ -27,5 +32,5 @@ sample_meta <- data.frame(
     levels = c("wildtype", "knockout")
   )
 )
-create_reneeDataSet_from_dataframes(gene_counts, sample_meta)
+create_reneeDataSet_from_dataframes(sample_meta, gene_counts)
 }

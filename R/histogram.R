@@ -1,7 +1,9 @@
 plot_histogram <- function(log_counts,
                            sample_metadata,
                            gene_names_column,
+                           groups_column,
                            labels_column,
+                           color_values,
                            color_histogram_by_group = FALSE,
                            set_min_max_for_x_axis_for_histogram = FALSE,
                            minimum_for_x_axis_for_histogram = -1,
@@ -9,6 +11,7 @@ plot_histogram <- function(log_counts,
                            legend_position_for_histogram = "top",
                            legend_font_size_for_histogram = 10,
                            number_of_histogram_legend_columns = 6) {
+  Var2 <- colgroup <- value <- NULL
   df.m <- reshape2::melt(log_counts, id.vars = c(gene_names_column))
   df.m <- dplyr::rename(df.m, sample = Var2)
 
@@ -21,13 +24,13 @@ plot_histogram <- function(log_counts,
   }
 
   if (color_histogram_by_group == TRUE) {
-    df.m %>% dplyr::mutate(colgroup = sample_metadata[sample, groups_column]) -> df.m
-    df.m <- df.m[complete.cases(df.m[, "colgroup"]), ]
+    df.m <- df.m %>% dplyr::mutate(colgroup = sample_metadata[sample, groups_column])
+    df.m <- df.m[stats::complete.cases(df.m[, "colgroup"]), ]
     df.m$colgroup <- gsub("\\s", "_", df.m$colgroup)
     df.m$colgroup <- factor(df.m$colgroup, levels = unique(df.m$colgroup))
     ## print(unique(df.m$sample))
     n <- length(levels(df.m$colgroup))
-    cols <- colorval[1:n]
+    cols <- color_values[1:n]
 
     # plot Density
     histPlot <- df.m %>%

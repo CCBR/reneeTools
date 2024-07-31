@@ -4,7 +4,7 @@
 \alias{counts_dat_to_matrix}
 \title{Convert a data frame of gene counts to a matrix}
 \usage{
-counts_dat_to_matrix(counts_tbl)
+counts_dat_to_matrix(counts_tbl, gene_colname = "gene_id")
 }
 \arguments{
 \item{counts_tbl}{expected gene counts from RSEM as a data frame or tibble.}

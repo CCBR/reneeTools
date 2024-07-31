@@ -37,7 +37,14 @@ test_that("plot_histogram works", {
     log_counts,
     sample_meta,
     gene_names_column = "Gene",
+    groups_column = "Group",
     labels_column = "Label",
+    color_values = c(
+      indigo = "#5954d6", carrot = "#e1562c", lipstick = "#b80058",
+      turquoise = "#00c6f8", lavender = "#d163e6", jade = "#00a76c",
+      coral = "#ff9287", azure = "#008cf9", green = "#006e00", rum = "#796880",
+      orange = "#FFA500", olive = "#878500"
+    ),
     color_histogram_by_group = FALSE,
     set_min_max_for_x_axis_for_histogram = FALSE,
     minimum_for_x_axis_for_histogram = -1,

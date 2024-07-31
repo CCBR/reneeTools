@@ -23,10 +23,11 @@ plot_pca <- function(log_counts,
                      label_offset_y_ = 2,
                      label_offset_x_ = 2) {
   # calculate PCA
+  var <- xdata <- ydata <- group <- NULL
   tedf <- t(log_counts)
   tedf <- tedf[, colSums(is.na(tedf)) != nrow(tedf)]
   tedf <- tedf[, apply(tedf, 2, var) != 0]
-  pca <- prcomp(tedf, scale. = T)
+  pca <- stats::prcomp(tedf, scale. = T)
 
   pcx <- paste0("PC", principal_component_on_x_axis)
   pcy <- paste0("PC", principal_component_on_y_axis)
