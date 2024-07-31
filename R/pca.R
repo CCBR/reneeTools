@@ -30,7 +30,7 @@ plot_pca <- function(log_counts,
 
   pcx <- paste0("PC", principal_component_on_x_axis)
   pcy <- paste0("PC", principal_component_on_y_axis)
-  pca.df <- as.data.frame(pca$x) %>% dplyr::select(.data[[pcx]], .data[[pcy]])
+  pca.df <- as.data.frame(pca$x) %>% dplyr::select(all_of(c(pcx, pcy)))
 
   pca.df$group <- sample_metadata[[groups_column]]
   pca.df$sample <- sample_metadata[[labels_column]]
@@ -61,8 +61,8 @@ plot_pca <- function(log_counts,
       axis.title = element_text(size = 20),
       # panel.grid.major = element_line(size = 1),
       # axis.line=element_line(size=1),
-      panel.border = element_rect(colour = "black", fill = NA, size = 1),
-      axis.ticks = element_line(size = 1),
+      panel.border = element_rect(colour = "black", fill = NA, linewidth = 1),
+      axis.ticks = element_line(linewidth = 1),
       legend.text = element_text(size = 18)
     ) +
     ggplot2::coord_fixed(ratio = 1.5) +

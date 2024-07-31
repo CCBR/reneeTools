@@ -31,14 +31,14 @@ plot_histogram <- function(log_counts,
 
     # plot Density
     histPlot <- ggplot(df.m, aes(x = value, group = sample)) +
-      geom_density(aes(colour = colgroup), size = 1)
+      geom_density(aes(colour = colgroup), linewidth = 1)
   } else {
     df.m$sample <- sample_metadata[df.m$sample, labels_column]
     n <- length(unique(df.m$sample))
     cols <- get_random_colors(n)
 
     histPlot <- ggplot(df.m, aes(x = value, group = sample)) +
-      geom_density(aes(colour = sample), size = 1)
+      geom_density(aes(colour = sample), linewidth = 1)
   }
 
   histPlot <- histPlot +
@@ -51,9 +51,9 @@ plot_histogram <- function(log_counts,
       panel.background = element_blank(),
       axis.text = element_text(size = 18),
       axis.title = element_text(size = 20),
-      panel.border = element_rect(colour = "black", fill = NA, size = 0),
-      axis.line = element_line(size = .5),
-      axis.ticks = element_line(size = 1)
+      panel.border = element_rect(colour = "black", fill = NA, linewidth = 0),
+      axis.line = element_line(linewidth = .5),
+      axis.ticks = element_line(linewidth = 1)
     ) +
     # ggtitle("Frequency Histogram") +
     xlim(xmin, xmax) +
