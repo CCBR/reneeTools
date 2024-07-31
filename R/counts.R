@@ -8,7 +8,7 @@
 #' @examples
 #' counts_dat_to_matrix(head(gene_counts))
 counts_dat_to_matrix <- function(counts_tbl) {
-  gene_id <- GeneName <- NULL
+  gene_colnames <- c("gene_id", "GeneName", "gene_name")
   counts_dat <- counts_tbl %>%
     # deseq2 requires integer counts
     dplyr::mutate(dplyr::across(
@@ -19,7 +19,7 @@ counts_dat_to_matrix <- function(counts_tbl) {
   row.names(counts_dat) <- counts_dat %>% dplyr::pull("gene_id")
   # convert counts tibble to matrix
   counts_mat <- counts_dat %>%
-    dplyr::select(-c(gene_id, GeneName)) %>%
+    dplyr::select(-any_of(gene_colnames)) %>%
     as.matrix()
   return(counts_mat)
 }
