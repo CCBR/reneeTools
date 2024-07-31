@@ -39,14 +39,18 @@ reneeDataSet <- S7::new_class("renee",
 #'
 #' @examples
 #' create_reneeDataSet_from_files(
-#'   system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
-#'   system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
+#'   sample_meta_filepath = system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
+#'   gene_counts_filepath = system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
 #' )
 create_reneeDataSet_from_files <- function(sample_meta_filepath, gene_counts_filepath,
                                            count_type = "raw") {
   count_dat <- readr::read_tsv(gene_counts_filepath)
   sample_meta_dat <- readr::read_tsv(sample_meta_filepath)
-  return(create_reneeDataSet_from_dataframes(sample_meta_dat, list(count_type = count_dat)))
+  return(create_reneeDataSet_from_dataframes(
+    sample_meta_dat = sample_meta_dat,
+    count_dat = count_dat,
+    count_type = "raw"
+  ))
 }
 
 #' Construct a reneeDataSet object from data frames
@@ -67,15 +71,16 @@ create_reneeDataSet_from_files <- function(sample_meta_filepath, gene_counts_fil
 #' create_reneeDataSet_from_dataframes(sample_meta, gene_counts)
 create_reneeDataSet_from_dataframes <- function(sample_meta_dat,
                                                 count_dat,
-                                                sample_id_colname = sample_id,
+                                                sample_id_colname = "sample_id",
                                                 count_type = "raw") {
-  gene_id <- GeneName <- NULL
-
-  # sample_meta_dat <- sample_meta_dat %>% meta_tbl_to_dat(sample_id_colname = {{ sample_id_colname }})
-
-
+  gene_columns <- c("gene_id", "GeneName", "Gene")
   # sample IDs must be in the same order
-  if (!all(colnames(count_dat %>% dplyr::select(-c(gene_id, GeneName, Gene))) == (sample_meta_dat %>% dplyr::pull({{ sample_id_colname }})))) {
+  gene_sample_colnames <- count_dat %>%
+    dplyr::select(-tidyselect::any_of(gene_columns)) %>%
+    colnames()
+  meta_sample_colnames <- sample_meta_dat %>%
+    dplyr::pull(!!rlang::sym(sample_id_colname))
+  if (!all(gene_sample_colnames == meta_sample_colnames)) {
     stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
   counts <- list()

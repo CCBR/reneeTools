@@ -1,10 +1,10 @@
 test_that("reneeDataSet from files works", {
   rds <- create_reneeDataSet_from_files(
-    system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools"),
-    system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
+    system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
+    system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
   )
   expect_equal(
-    rds@counts %>% head(),
+    rds@counts$raw %>% head(),
     structure(
       list(
         gene_id = c(
@@ -28,13 +28,10 @@ test_that("reneeDataSet from files works", {
       class = c("tbl_df", "tbl", "data.frame")
     )
   )
-  expect_equal(
-    rds@sample_meta,
-    structure(list(condition = c(
-      "knockout", "knockout", "wildtype",
-      "wildtype"
-    )), row.names = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"), class = "data.frame")
-  )
+  expect_equal(rds@sample_meta, tibble::tibble(
+    sample_id = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"),
+    condition = c("knockout", "knockout", "wildtype", "wildtype")
+  ))
 })
 
 test_that("reneeDataSet from data frames detect problems", {
@@ -46,7 +43,7 @@ test_that("reneeDataSet from data frames detect problems", {
     )
   )
   expect_error(
-    create_reneeDataSet_from_dataframes(gene_counts[, 1:4], sample_meta),
+    create_reneeDataSet_from_dataframes(sample_meta, gene_counts[, 1:4]),
     "Not all columns"
   )
 })
