@@ -174,9 +174,9 @@ filter_counts <- function(renee_ds,
       pcaPlot1 <- (pcaPlot) %>% ggplotly(tooltip = c("sample", "group"))
       histPlot2 <- (histPlot + theme(legend.position = "none")) %>% ggplotly(tooltip = c("sample"))
 
-      grid.newpage()
+      grid::grid.newpage()
       # print(pcaPlot1)
-      grid.newpage()
+      grid::grid.newpage()
       # print(histPlot2)
     } else {
       corHM <- plot_heatmap(
@@ -190,9 +190,9 @@ filter_counts <- function(renee_ds,
 
       # grid.newpage()
       # print(pcaPlot)
-      grid.newpage()
+      grid::grid.newpage()
       # print(corHM)
-      grid.newpage()
+      grid::grid.newpage()
       # print(histPlot)
     }
   } else {
@@ -200,19 +200,20 @@ filter_counts <- function(renee_ds,
       pcaPlot1 <- (pcaPlot) %>% ggplotly(tooltip = c("sample", "group"))
       histPlot2 <- (histPlot + theme(legend.position = "none")) %>% ggplotly(tooltip = "sample")
 
-      grid.newpage()
+      grid::grid.newpage()
       # print(pcaPlot1)
-      grid.newpage()
+      grid::grid.newpage()
       # print(histPlot2)
     } else {
-      grid.newpage()
+      grid::grid.newpage()
       # print(pcaPlot)
-      grid.newpage()
+      grid::grid.newpage()
       # print(histPlot)
     }
   }
 
-  df %>% filter(.data[[gene_names_column]] %in% df.filt[, gene_names_column]) -> df.final
+  df.final <- df %>%
+    dplyr::filter(!!rlang::sym(gene_names_column) %in% df.filt[, gene_names_column])
   # colnames(df.final)[colnames(df.final)==gene_names_column] <- "Gene"
 
   # print('')
@@ -280,7 +281,7 @@ remove_low_count_genes <- function(counts_matrix, sample_metadata,
     tcounts.tot %>% tidyr::spread(variable, sum) -> tcounts.group
     colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
     df.filt <- trans.df[tcounts.keep, ]
-    df.filt %>% rownames_to_column(gene_names_column) -> df.filt
+    df.filt %>% tibble::rownames_to_column(gene_names_column) -> df.filt
   } else {
     trans.df$isexpr1 <- rowSums(as.matrix(trans.df[, -1]) > Minimum_Count_Value_to_be_Considered_Nonzero) >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total
 

@@ -37,7 +37,7 @@ plot_heatmap <- function(counts_matrix, sample_metadata, sample_names_column, la
   old <- sample_metadata[[sample_names_column]]
   new <- sample_metadata[[labels_column]]
   names(old) <- new
-  counts_matrix <- rename(counts_matrix, any_of(old))
+  counts_matrix <- dplyr::rename(counts_matrix, tidyselect::any_of(old))
 
   mat <- as.matrix(counts_matrix)
   tcounts <- t(mat)
