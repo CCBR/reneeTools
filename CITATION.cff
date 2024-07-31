@@ -244,131 +244,16 @@ references:
     year: "2024"
     doi: 10.32614/CRAN.package.ggrepel
   - type: software
-    title: gplots
-    abstract: "gplots: Various R Programming Tools for Plotting Data"
+    title: methods
+    abstract: "R: A Language and Environment for Statistical Computing"
     notes: Imports
-    url: https://github.com/talgalili/gplots
-    repository: https://CRAN.R-project.org/package=gplots
     authors:
-      - family-names: Warnes
-        given-names: Gregory R.
-      - family-names: Bolker
-        given-names: Ben
-      - family-names: Bonebakker
-        given-names: Lodewijk
-      - family-names: Gentleman
-        given-names: Robert
-      - family-names: Huber
-        given-names: Wolfgang
-      - family-names: Liaw
-        given-names: Andy
-      - family-names: Lumley
-        given-names: Thomas
-      - family-names: Maechler
-        given-names: Martin
-      - family-names: Magnusson
-        given-names: Arni
-      - family-names: Moeller
-        given-names: Steffen
-      - family-names: Schwartz
-        given-names: Marc
-      - family-names: Venables
-        given-names: Bill
+      - name: R Core Team
+    institution:
+      name: R Foundation for Statistical Computing
+      address: Vienna, Austria
     year: "2024"
-    doi: 10.32614/CRAN.package.gplots
-  - type: software
-    title: gridExtra
-    abstract: 'gridExtra: Miscellaneous Functions for "Grid" Graphics'
-    notes: Imports
-    repository: https://CRAN.R-project.org/package=gridExtra
-    authors:
-      - family-names: Auguie
-        given-names: Baptiste
-        email: baptiste.auguie@gmail.com
-    year: "2024"
-    doi: 10.32614/CRAN.package.gridExtra
-  - type: software
-    title: gridGraphics
-    abstract: "gridGraphics: Redraw Base Graphics Using 'grid' Graphics"
-    notes: Imports
-    url: https://github.com/pmur002/gridgraphics
-    repository: https://CRAN.R-project.org/package=gridGraphics
-    authors:
-      - family-names: Murrell
-        given-names: Paul
-        email: paul@stat.auckland.ac.nz
-      - family-names: Wen
-        given-names: Zhijian
-        email: jwen246@aucklanduni.ac.nz
-    year: "2024"
-    doi: 10.32614/CRAN.package.gridGraphics
-  - type: software
-    title: lattice
-    abstract: "lattice: Trellis Graphics for R"
-    notes: Imports
-    url: https://lattice.r-forge.r-project.org/
-    repository: https://CRAN.R-project.org/package=lattice
-    authors:
-      - family-names: Sarkar
-        given-names: Deepayan
-        email: deepayan.sarkar@r-project.org
-        orcid: https://orcid.org/0000-0003-4107-1553
-    year: "2024"
-    doi: 10.32614/CRAN.package.lattice
-  - type: software
-    title: limma
-    abstract: "limma: Linear Models for Microarray Data"
-    notes: Imports
-    url: https://bioinf.wehi.edu.au/limma/
-    repository: https://bioconductor.org/
-    authors:
-      - family-names: Smyth
-        given-names: Gordon
-      - family-names: Hu
-        given-names: Yifang
-      - family-names: Ritchie
-        given-names: Matthew
-      - family-names: Silver
-        given-names: Jeremy
-      - family-names: Wettenhall
-        given-names: James
-      - family-names: McCarthy
-        given-names: Davis
-      - family-names: Wu
-        given-names: Di
-      - family-names: Shi
-        given-names: Wei
-      - family-names: Phipson
-        given-names: Belinda
-      - family-names: Lun
-        given-names: Aaron
-      - family-names: Thorne
-        given-names: Natalie
-      - family-names: Oshlack
-        given-names: Alicia
-      - family-names: Graaf
-        given-names: Carolyn
-        name-particle: de
-      - family-names: Chen
-        given-names: Yunshun
-      - family-names: Giner
-        given-names: Goknur
-      - family-names: Langaas
-        given-names: Mette
-      - family-names: Ferkingstad
-        given-names: Egil
-      - family-names: Davy
-        given-names: Marcus
-      - family-names: Pepin
-        given-names: Francois
-      - family-names: Choi
-        given-names: Dongseok
-      - family-names: Law
-        given-names: Charity
-      - family-names: Li
-        given-names: Mengbo
-    year: "2024"
-    doi: 10.32614/CRAN.package.limma
+    doi: 10.32614/CRAN.package.methods
   - type: software
     title: plotly
     abstract: "plotly: Create Interactive Web Graphics via 'plotly.js'"
@@ -402,29 +287,6 @@ references:
     year: "2024"
     doi: 10.32614/CRAN.package.plotly
   - type: software
-    title: RColorBrewer
-    abstract: "RColorBrewer: ColorBrewer Palettes"
-    notes: Imports
-    repository: https://CRAN.R-project.org/package=RColorBrewer
-    authors:
-      - family-names: Neuwirth
-        given-names: Erich
-        email: erich.neuwirth@univie.ac.at
-    year: "2024"
-    doi: 10.32614/CRAN.package.RColorBrewer
-  - type: software
-    title: RCurl
-    abstract: "RCurl: General Network (HTTP/FTP/...) Client Interface for R"
-    notes: Imports
-    repository: https://CRAN.R-project.org/package=RCurl
-    authors:
-      - family-names: Temple Lang
-        given-names: Duncan
-        email: duncan@r-project.org
-        orcid: https://orcid.org/0000-0003-0159-1546
-    year: "2024"
-    doi: 10.32614/CRAN.package.RCurl
-  - type: software
     title: reshape2
     abstract: "reshape2: Flexibly Reshape Data: A Reboot of the Reshape Package"
     notes: Imports
@@ -436,6 +298,21 @@ references:
         email: h.wickham@gmail.com
     year: "2024"
     doi: 10.32614/CRAN.package.reshape2
+  - type: software
+    title: rlang
+    abstract: "rlang: Functions for Base Types and Core R and 'Tidyverse' Features"
+    notes: Imports
+    url: https://rlang.r-lib.org
+    repository: https://CRAN.R-project.org/package=rlang
+    authors:
+      - family-names: Henry
+        given-names: Lionel
+        email: lionel@posit.co
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+    year: "2024"
+    doi: 10.32614/CRAN.package.rlang
   - type: software
     title: S7
     abstract: "S7: An Object Oriented System Meant to Become a Successor to S3 and S4"
@@ -466,17 +343,32 @@ references:
     year: "2024"
     doi: 10.32614/CRAN.package.S7
   - type: software
-    title: stringr
-    abstract: "stringr: Simple, Consistent Wrappers for Common String Operations"
+    title: stats
+    abstract: "R: A Language and Environment for Statistical Computing"
     notes: Imports
-    url: https://stringr.tidyverse.org
-    repository: https://CRAN.R-project.org/package=stringr
     authors:
+      - name: R Core Team
+    institution:
+      name: R Foundation for Statistical Computing
+      address: Vienna, Austria
+    year: "2024"
+    doi: 10.32614/CRAN.package.stats
+  - type: software
+    title: tibble
+    abstract: "tibble: Simple Data Frames"
+    notes: Imports
+    url: https://tibble.tidyverse.org/
+    repository: https://CRAN.R-project.org/package=tibble
+    authors:
+      - family-names: Müller
+        given-names: Kirill
+        email: kirill@cynkra.com
+        orcid: https://orcid.org/0000-0002-1416-3412
       - family-names: Wickham
         given-names: Hadley
-        email: hadley@posit.co
+        email: hadley@rstudio.com
     year: "2024"
-    doi: 10.32614/CRAN.package.stringr
+    doi: 10.32614/CRAN.package.tibble
   - type: software
     title: tidyr
     abstract: "tidyr: Tidy Messy Data"
@@ -494,6 +386,37 @@ references:
         given-names: Maximilian
     year: "2024"
     doi: 10.32614/CRAN.package.tidyr
+  - type: software
+    title: tidyselect
+    abstract: "tidyselect: Select from a Set of Strings"
+    notes: Imports
+    url: https://tidyselect.r-lib.org
+    repository: https://CRAN.R-project.org/package=tidyselect
+    authors:
+      - family-names: Henry
+        given-names: Lionel
+        email: lionel@posit.co
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+    year: "2024"
+    doi: 10.32614/CRAN.package.tidyselect
+  - type: software
+    title: glue
+    abstract: "glue: Interpreted String Literals"
+    notes: Suggests
+    url: https://glue.tidyverse.org/
+    repository: https://CRAN.R-project.org/package=glue
+    authors:
+      - family-names: Hester
+        given-names: Jim
+        orcid: https://orcid.org/0000-0002-2739-7082
+      - family-names: Bryan
+        given-names: Jennifer
+        email: jenny@posit.co
+        orcid: https://orcid.org/0000-0002-6983-2759
+    year: "2024"
+    doi: 10.32614/CRAN.package.glue
   - type: software
     title: knitr
     abstract: "knitr: A General-Purpose Package for Dynamic Report Generation in R"
