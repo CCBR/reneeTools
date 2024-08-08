@@ -17,13 +17,20 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(reneeTools)
 library(dplyr)
-# replace this line with actual path to your gene counts
-gene_counts_tsv <- system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
-metadata_tsv <- system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
+# replace these lines with the actual paths to your files
+gene_counts_tsv <- system.file("extdata",
+  "RSEM.genes.expected_count.all_samples.txt",
+  package = "reneeTools"
+)
+metadata_tsv <- system.file("extdata", "sample_metadata.tsv",
+  package = "reneeTools"
+)
 
 # create reneeDataSet object
-renee_ds <- create_reneeDataSet_from_files(gene_counts_tsv, metadata_tsv) %>%
-  run_deseq2(design = ~condition)
+renee_ds <- create_reneeDataSet_from_files(
+  sample_meta_filepath = metadata_tsv,
+  gene_counts_filepath = gene_counts_tsv
+)
 
-renee_ds@analyses$deseq2_results %>% head()
+renee_ds@counts$raw %>% head()
 ```

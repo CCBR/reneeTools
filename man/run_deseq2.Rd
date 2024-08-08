@@ -20,14 +20,16 @@ reneeDataSet object with DESeq2 slot filled
 Run DESeq2 on a reneeDataSet
 }
 \examples{
+\dontrun{
 renee_ds <- create_reneeDataSet_from_files(
+  system.file("extdata", "sample_metadata.tsv",
+    package = "reneeTools"
+  ),
   system.file("extdata",
     "RSEM.genes.expected_count.all_samples.txt",
     package = "reneeTools"
-  ),
-  system.file("extdata", "sample_metadata.tsv",
-    package = "reneeTools"
   )
-)
+) \%>\% filter_counts()
 renee_ds <- run_deseq2(renee_ds, ~condition)
+}
 }

@@ -4,7 +4,7 @@
 \alias{meta_tbl_to_dat}
 \title{Convert sample metadata from a tibble to a dataframe with sample IDs as row names}
 \usage{
-meta_tbl_to_dat(meta_tbl)
+meta_tbl_to_dat(meta_tbl, sample_id_colname = sample_id)
 }
 \arguments{
 \item{meta_tbl}{tibble with \code{sample_id} column}

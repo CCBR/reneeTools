@@ -12,11 +12,11 @@
 #' ))
 #' head(sample_meta_tbl)
 #' meta_tbl_to_dat(sample_meta_tbl)
-meta_tbl_to_dat <- function(meta_tbl) {
+meta_tbl_to_dat <- function(meta_tbl, sample_id_colname = sample_id) {
   sample_id <- NULL
   meta_dat <- meta_tbl %>%
     as.data.frame() %>%
-    dplyr::select(-sample_id)
-  rownames(meta_dat) <- meta_tbl %>% dplyr::pull(sample_id)
+    dplyr::select({{ sample_id_colname }})
+  rownames(meta_dat) <- meta_tbl %>% dplyr::pull({{ sample_id_colname }})
   return(meta_dat)
 }
