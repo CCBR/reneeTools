@@ -7,546 +7,545 @@ cff-version: 1.2.0
 message: 'To cite package "reneeTools" in publications use:'
 type: software
 license: MIT
-title: "reneeTools: Helper functions for RENEE"
+title: 'reneeTools: Helper functions for RENEE'
 version: 0.0.0.9000
 abstract: TODO What the package does (one paragraph).
 authors:
-  - family-names: Koparde
-    given-names: Vishal
-    email: vishal.koparde@nih.gov
-    orcid: https://orcid.org/0000-0001-8978-8495
-  - family-names: Sovacool
-    given-names: Kelly
-    email: kelly.sovacool@nih.gov
-    orcid: https://orcid.org/0000-0003-3283-829X
-  - family-names: Sevilla
-    given-names: Samantha
-    email: samantha.sevilla@nih.gov
-    orcid: https://orcid.org/0000-0002-8734-9875
+- family-names: Koparde
+  given-names: Vishal
+  email: vishal.koparde@nih.gov
+  orcid: https://orcid.org/0000-0001-8978-8495
+- family-names: Sovacool
+  given-names: Kelly
+  email: kelly.sovacool@nih.gov
+  orcid: https://orcid.org/0000-0003-3283-829X
+- family-names: Chill
+  given-names: Samantha
+  email: samantha.chill@nih.gov
+  orcid: https://orcid.org/0000-0002-8734-9875
 repository-code: https://github.com/CCBR/reneeTools
 url: https://ccbr.github.io/reneeTools/
 contact:
-  - family-names: Koparde
-    given-names: Vishal
-    email: vishal.koparde@nih.gov
-    orcid: https://orcid.org/0000-0001-8978-8495
+- family-names: Koparde
+  given-names: Vishal
+  email: vishal.koparde@nih.gov
+  orcid: https://orcid.org/0000-0001-8978-8495
 references:
-  - type: software
-    title: "R: A Language and Environment for Statistical Computing"
-    notes: Depends
-    url: https://www.R-project.org/
-    authors:
-      - name: R Core Team
-    institution:
-      name: R Foundation for Statistical Computing
-      address: Vienna, Austria
-    year: "2024"
-    version: ">= 2.10"
-  - type: software
-    title: amap
-    abstract: "amap: Another Multidimensional Analysis Package"
-    notes: Imports
-    repository: https://CRAN.R-project.org/package=amap
-    authors:
-      - family-names: Lucas
-        given-names: Antoine
-    year: "2024"
-    doi: 10.32614/CRAN.package.amap
-  - type: software
-    title: colorspace
-    abstract: "colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes"
-    notes: Imports
-    url: https://colorspace.R-Forge.R-project.org/contact.html
-    repository: https://CRAN.R-project.org/package=colorspace
-    authors:
-      - family-names: Ihaka
-        given-names: Ross
-        email: ihaka@stat.auckland.ac.nz
-      - family-names: Murrell
-        given-names: Paul
-        email: paul@stat.auckland.ac.nz
-        orcid: https://orcid.org/0000-0002-3224-8858
-      - family-names: Hornik
-        given-names: Kurt
-        email: Kurt.Hornik@R-project.org
-        orcid: https://orcid.org/0000-0003-4198-9911
-      - family-names: Fisher
-        given-names: Jason C.
-        email: jfisher@usgs.gov
-        orcid: https://orcid.org/0000-0001-9032-8912
-      - family-names: Stauffer
-        given-names: Reto
-        email: Reto.Stauffer@uibk.ac.at
-        orcid: https://orcid.org/0000-0002-3798-5507
-      - family-names: Wilke
-        given-names: Claus O.
-        email: wilke@austin.utexas.edu
-        orcid: https://orcid.org/0000-0002-7470-9261
-      - family-names: McWhite
-        given-names: Claire D.
-        email: claire.mcwhite@utmail.utexas.edu
-        orcid: https://orcid.org/0000-0001-7346-3047
-      - family-names: Zeileis
-        given-names: Achim
-        email: Achim.Zeileis@R-project.org
-        orcid: https://orcid.org/0000-0003-0918-3766
-    year: "2024"
-    doi: 10.32614/CRAN.package.colorspace
-  - type: software
-    title: ComplexHeatmap
-    abstract: "ComplexHeatmap: Make Complex Heatmaps"
-    notes: Imports
-    url: https://jokergoo.github.io/ComplexHeatmap-reference/book/
-    repository: https://bioconductor.org/
-    authors:
-      - family-names: Gu
-        given-names: Zuguang
-        email: z.gu@dkfz.de
-        orcid: https://orcid.org/0000-0002-7395-8709
-    year: "2024"
-    doi: 10.32614/CRAN.package.ComplexHeatmap
-  - type: software
-    title: dendsort
-    abstract: "dendsort: Modular Leaf Ordering Methods for Dendrogram Nodes"
-    notes: Imports
-    url: https://github.com/evanbiederstedt/dendsort
-    repository: https://CRAN.R-project.org/package=dendsort
-    authors:
-      - family-names: Sakai
-        given-names: Ryo
-        email: ryo@vda-lab.be
-      - family-names: Biederstedt
-        given-names: Evan
-        email: evan.biederstedt@gmail.com
-    year: "2024"
-    doi: 10.32614/CRAN.package.dendsort
-  - type: software
-    title: DESeq2
-    abstract:
-      "DESeq2: Differential gene expression analysis based on the negative binomial
-      distribution"
-    notes: Imports
-    url: https://github.com/thelovelab/DESeq2
-    repository: https://bioconductor.org/
-    authors:
-      - family-names: Love
-        given-names: Michael
-        email: michaelisaiahlove@gmail.com
-      - family-names: Anders
-        given-names: Simon
-      - family-names: Huber
-        given-names: Wolfgang
-    year: "2024"
-    doi: 10.32614/CRAN.package.DESeq2
-  - type: software
-    title: dplyr
-    abstract: "dplyr: A Grammar of Data Manipulation"
-    notes: Imports
-    url: https://dplyr.tidyverse.org
-    repository: https://CRAN.R-project.org/package=dplyr
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-        orcid: https://orcid.org/0000-0003-4757-117X
-      - family-names: François
-        given-names: Romain
-        orcid: https://orcid.org/0000-0002-2444-4226
-      - family-names: Henry
-        given-names: Lionel
-      - family-names: Müller
-        given-names: Kirill
-        orcid: https://orcid.org/0000-0002-1416-3412
-      - family-names: Vaughan
-        given-names: Davis
-        email: davis@posit.co
-        orcid: https://orcid.org/0000-0003-4777-038X
-    year: "2024"
-    doi: 10.32614/CRAN.package.dplyr
-  - type: software
-    title: edgeR
-    abstract: "edgeR: Empirical Analysis of Digital Gene Expression Data in R"
-    notes: Imports
-    url: https://bioinf.wehi.edu.au/edgeR/
-    repository: https://bioconductor.org/
-    authors:
-      - family-names: Chen
-        given-names: Yunshun
-      - family-names: Lun
-        given-names: Aaron TL
-      - family-names: McCarthy
-        given-names: Davis J
-      - family-names: Chen
-        given-names: Lizhong
-      - family-names: Baldoni
-        given-names: Pedro
-      - family-names: Ritchie
-        given-names: Matthew E
-      - family-names: Phipson
-        given-names: Belinda
-      - family-names: Hu
-        given-names: Yifang
-      - family-names: Zhou
-        given-names: Xiaobei
-      - family-names: Robinson
-        given-names: Mark D
-      - family-names: Smyth
-        given-names: Gordon K
-    year: "2024"
-    doi: 10.32614/CRAN.package.edgeR
-  - type: software
-    title: ggplot2
-    abstract: "ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics"
-    notes: Imports
-    url: https://ggplot2.tidyverse.org
-    repository: https://CRAN.R-project.org/package=ggplot2
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-        orcid: https://orcid.org/0000-0003-4757-117X
-      - family-names: Chang
-        given-names: Winston
-        orcid: https://orcid.org/0000-0002-1576-2126
-      - family-names: Henry
-        given-names: Lionel
-      - family-names: Pedersen
-        given-names: Thomas Lin
-        email: thomas.pedersen@posit.co
-        orcid: https://orcid.org/0000-0002-5147-4711
-      - family-names: Takahashi
-        given-names: Kohske
-      - family-names: Wilke
-        given-names: Claus
-        orcid: https://orcid.org/0000-0002-7470-9261
-      - family-names: Woo
-        given-names: Kara
-        orcid: https://orcid.org/0000-0002-5125-4188
-      - family-names: Yutani
-        given-names: Hiroaki
-        orcid: https://orcid.org/0000-0002-3385-7233
-      - family-names: Dunnington
-        given-names: Dewey
-        orcid: https://orcid.org/0000-0002-9415-4582
-      - family-names: Brand
-        given-names: Teun
-        name-particle: van den
-        orcid: https://orcid.org/0000-0002-9335-7468
-    year: "2024"
-    doi: 10.32614/CRAN.package.ggplot2
-  - type: software
-    title: ggrepel
-    abstract: "ggrepel: Automatically Position Non-Overlapping Text Labels with 'ggplot2'"
-    notes: Imports
-    url: https://ggrepel.slowkow.com/
-    repository: https://CRAN.R-project.org/package=ggrepel
-    authors:
-      - family-names: Slowikowski
-        given-names: Kamil
-        email: kslowikowski@gmail.com
-        orcid: https://orcid.org/0000-0002-2843-6370
-    year: "2024"
-    doi: 10.32614/CRAN.package.ggrepel
-  - type: software
-    title: methods
-    abstract: "R: A Language and Environment for Statistical Computing"
-    notes: Imports
-    authors:
-      - name: R Core Team
-    institution:
-      name: R Foundation for Statistical Computing
-      address: Vienna, Austria
-    year: "2024"
-    doi: 10.32614/CRAN.package.methods
-  - type: software
-    title: plotly
-    abstract: "plotly: Create Interactive Web Graphics via 'plotly.js'"
-    notes: Imports
-    url: https://plotly-r.com
-    repository: https://CRAN.R-project.org/package=plotly
-    authors:
-      - family-names: Sievert
-        given-names: Carson
-        email: cpsievert1@gmail.com
-        orcid: https://orcid.org/0000-0002-4958-2844
-      - family-names: Parmer
-        given-names: Chris
-        email: chris@plot.ly
-      - family-names: Hocking
-        given-names: Toby
-        email: tdhock5@gmail.com
-      - family-names: Chamberlain
-        given-names: Scott
-        email: myrmecocystus@gmail.com
-      - family-names: Ram
-        given-names: Karthik
-        email: karthik.ram@gmail.com
-      - family-names: Corvellec
-        given-names: Marianne
-        email: marianne.corvellec@igdore.org
-        orcid: https://orcid.org/0000-0002-1994-3581
-      - family-names: Despouy
-        given-names: Pedro
-        email: pedro@plot.ly
-    year: "2024"
-    doi: 10.32614/CRAN.package.plotly
-  - type: software
-    title: reshape2
-    abstract: "reshape2: Flexibly Reshape Data: A Reboot of the Reshape Package"
-    notes: Imports
-    url: https://github.com/hadley/reshape
-    repository: https://CRAN.R-project.org/package=reshape2
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: h.wickham@gmail.com
-    year: "2024"
-    doi: 10.32614/CRAN.package.reshape2
-  - type: software
-    title: rlang
-    abstract: "rlang: Functions for Base Types and Core R and 'Tidyverse' Features"
-    notes: Imports
-    url: https://rlang.r-lib.org
-    repository: https://CRAN.R-project.org/package=rlang
-    authors:
-      - family-names: Henry
-        given-names: Lionel
-        email: lionel@posit.co
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-    year: "2024"
-    doi: 10.32614/CRAN.package.rlang
-  - type: software
-    title: S7
-    abstract: "S7: An Object Oriented System Meant to Become a Successor to S3 and S4"
-    notes: Imports
-    url: https://github.com/rconsortium/S7/
-    repository: https://CRAN.R-project.org/package=S7
-    authors:
-      - family-names: Vaughan
-        given-names: Davis
-      - family-names: Hester
-        given-names: Jim
-        orcid: https://orcid.org/0000-0002-2739-7082
-      - family-names: Kalinowski
-        given-names: Tomasz
-      - family-names: Landau
-        given-names: Will
-      - family-names: Lawrence
-        given-names: Michael
-      - family-names: Maechler
-        given-names: Martin
-        orcid: https://orcid.org/0000-0002-8685-9910
-      - family-names: Tierney
-        given-names: Luke
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-        orcid: https://orcid.org/0000-0003-4757-117X
-    year: "2024"
-    doi: 10.32614/CRAN.package.S7
-  - type: software
-    title: stats
-    abstract: "R: A Language and Environment for Statistical Computing"
-    notes: Imports
-    authors:
-      - name: R Core Team
-    institution:
-      name: R Foundation for Statistical Computing
-      address: Vienna, Austria
-    year: "2024"
-    doi: 10.32614/CRAN.package.stats
-  - type: software
-    title: tibble
-    abstract: "tibble: Simple Data Frames"
-    notes: Imports
-    url: https://tibble.tidyverse.org/
-    repository: https://CRAN.R-project.org/package=tibble
-    authors:
-      - family-names: Müller
-        given-names: Kirill
-        email: kirill@cynkra.com
-        orcid: https://orcid.org/0000-0002-1416-3412
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@rstudio.com
-    year: "2024"
-    doi: 10.32614/CRAN.package.tibble
-  - type: software
-    title: tidyr
-    abstract: "tidyr: Tidy Messy Data"
-    notes: Imports
-    url: https://tidyr.tidyverse.org
-    repository: https://CRAN.R-project.org/package=tidyr
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-      - family-names: Vaughan
-        given-names: Davis
-        email: davis@posit.co
-      - family-names: Girlich
-        given-names: Maximilian
-    year: "2024"
-    doi: 10.32614/CRAN.package.tidyr
-  - type: software
-    title: tidyselect
-    abstract: "tidyselect: Select from a Set of Strings"
-    notes: Imports
-    url: https://tidyselect.r-lib.org
-    repository: https://CRAN.R-project.org/package=tidyselect
-    authors:
-      - family-names: Henry
-        given-names: Lionel
-        email: lionel@posit.co
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-    year: "2024"
-    doi: 10.32614/CRAN.package.tidyselect
-  - type: software
-    title: glue
-    abstract: "glue: Interpreted String Literals"
-    notes: Suggests
-    url: https://glue.tidyverse.org/
-    repository: https://CRAN.R-project.org/package=glue
-    authors:
-      - family-names: Hester
-        given-names: Jim
-        orcid: https://orcid.org/0000-0002-2739-7082
-      - family-names: Bryan
-        given-names: Jennifer
-        email: jenny@posit.co
-        orcid: https://orcid.org/0000-0002-6983-2759
-    year: "2024"
-    doi: 10.32614/CRAN.package.glue
-  - type: software
-    title: knitr
-    abstract: "knitr: A General-Purpose Package for Dynamic Report Generation in R"
-    notes: Suggests
-    url: https://yihui.org/knitr/
-    repository: https://CRAN.R-project.org/package=knitr
-    authors:
-      - family-names: Xie
-        given-names: Yihui
-        email: xie@yihui.name
-        orcid: https://orcid.org/0000-0003-0645-5666
-    year: "2024"
-    doi: 10.32614/CRAN.package.knitr
-  - type: software
-    title: readr
-    abstract: "readr: Read Rectangular Text Data"
-    notes: Suggests
-    url: https://readr.tidyverse.org
-    repository: https://CRAN.R-project.org/package=readr
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-      - family-names: Hester
-        given-names: Jim
-      - family-names: Bryan
-        given-names: Jennifer
-        email: jenny@posit.co
-        orcid: https://orcid.org/0000-0002-6983-2759
-    year: "2024"
-    doi: 10.32614/CRAN.package.readr
-  - type: software
-    title: rmarkdown
-    abstract: "rmarkdown: Dynamic Documents for R"
-    notes: Suggests
-    url: https://pkgs.rstudio.com/rmarkdown/
-    repository: https://CRAN.R-project.org/package=rmarkdown
-    authors:
-      - family-names: Allaire
-        given-names: JJ
-        email: jj@posit.co
-      - family-names: Xie
-        given-names: Yihui
-        email: xie@yihui.name
-        orcid: https://orcid.org/0000-0003-0645-5666
-      - family-names: Dervieux
-        given-names: Christophe
-        email: cderv@posit.co
-        orcid: https://orcid.org/0000-0003-4474-2498
-      - family-names: McPherson
-        given-names: Jonathan
-        email: jonathan@posit.co
-      - family-names: Luraschi
-        given-names: Javier
-      - family-names: Ushey
-        given-names: Kevin
-        email: kevin@posit.co
-      - family-names: Atkins
-        given-names: Aron
-        email: aron@posit.co
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-      - family-names: Cheng
-        given-names: Joe
-        email: joe@posit.co
-      - family-names: Chang
-        given-names: Winston
-        email: winston@posit.co
-      - family-names: Iannone
-        given-names: Richard
-        email: rich@posit.co
-        orcid: https://orcid.org/0000-0003-3925-190X
-    year: "2024"
-    doi: 10.32614/CRAN.package.rmarkdown
-  - type: software
-    title: styler
-    abstract: "styler: Non-Invasive Pretty Printing of R Code"
-    notes: Suggests
-    url: https://styler.r-lib.org
-    repository: https://CRAN.R-project.org/package=styler
-    authors:
-      - family-names: Müller
-        given-names: Kirill
-        email: kirill@cynkra.com
-        orcid: https://orcid.org/0000-0002-1416-3412
-      - family-names: Walthert
-        given-names: Lorenz
-        email: lorenz.walthert@icloud.com
-    year: "2024"
-    doi: 10.32614/CRAN.package.styler
-  - type: software
-    title: testthat
-    abstract: "testthat: Unit Testing for R"
-    notes: Suggests
-    url: https://testthat.r-lib.org
-    repository: https://CRAN.R-project.org/package=testthat
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-    year: "2024"
-    doi: 10.32614/CRAN.package.testthat
-    version: ">= 3.0.0"
-  - type: software
-    title: usethis
-    abstract: "usethis: Automate Package and Project Setup"
-    notes: Suggests
-    url: https://usethis.r-lib.org
-    repository: https://CRAN.R-project.org/package=usethis
-    authors:
-      - family-names: Wickham
-        given-names: Hadley
-        email: hadley@posit.co
-        orcid: https://orcid.org/0000-0003-4757-117X
-      - family-names: Bryan
-        given-names: Jennifer
-        email: jenny@posit.co
-        orcid: https://orcid.org/0000-0002-6983-2759
-      - family-names: Barrett
-        given-names: Malcolm
-        email: malcolmbarrett@gmail.com
-        orcid: https://orcid.org/0000-0003-0299-5825
-      - family-names: Teucher
-        given-names: Andy
-        email: andy.teucher@posit.co
-        orcid: https://orcid.org/0000-0002-7840-692X
-    year: "2024"
-    doi: 10.32614/CRAN.package.usethis
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 2.10'
+- type: software
+  title: amap
+  abstract: 'amap: Another Multidimensional Analysis Package'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=amap
+  authors:
+  - family-names: Lucas
+    given-names: Antoine
+  year: '2024'
+  doi: 10.32614/CRAN.package.amap
+- type: software
+  title: colorspace
+  abstract: 'colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes'
+  notes: Imports
+  url: https://colorspace.R-Forge.R-project.org/contact.html
+  repository: https://CRAN.R-project.org/package=colorspace
+  authors:
+  - family-names: Ihaka
+    given-names: Ross
+    email: ihaka@stat.auckland.ac.nz
+  - family-names: Murrell
+    given-names: Paul
+    email: paul@stat.auckland.ac.nz
+    orcid: https://orcid.org/0000-0002-3224-8858
+  - family-names: Hornik
+    given-names: Kurt
+    email: Kurt.Hornik@R-project.org
+    orcid: https://orcid.org/0000-0003-4198-9911
+  - family-names: Fisher
+    given-names: Jason C.
+    email: jfisher@usgs.gov
+    orcid: https://orcid.org/0000-0001-9032-8912
+  - family-names: Stauffer
+    given-names: Reto
+    email: Reto.Stauffer@uibk.ac.at
+    orcid: https://orcid.org/0000-0002-3798-5507
+  - family-names: Wilke
+    given-names: Claus O.
+    email: wilke@austin.utexas.edu
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: McWhite
+    given-names: Claire D.
+    email: claire.mcwhite@utmail.utexas.edu
+    orcid: https://orcid.org/0000-0001-7346-3047
+  - family-names: Zeileis
+    given-names: Achim
+    email: Achim.Zeileis@R-project.org
+    orcid: https://orcid.org/0000-0003-0918-3766
+  year: '2024'
+  doi: 10.32614/CRAN.package.colorspace
+- type: software
+  title: ComplexHeatmap
+  abstract: 'ComplexHeatmap: Make Complex Heatmaps'
+  notes: Imports
+  url: https://jokergoo.github.io/ComplexHeatmap-reference/book/
+  repository: https://bioconductor.org/
+  authors:
+  - family-names: Gu
+    given-names: Zuguang
+    email: z.gu@dkfz.de
+    orcid: https://orcid.org/0000-0002-7395-8709
+  year: '2024'
+  doi: 10.32614/CRAN.package.ComplexHeatmap
+- type: software
+  title: dendsort
+  abstract: 'dendsort: Modular Leaf Ordering Methods for Dendrogram Nodes'
+  notes: Imports
+  url: https://github.com/evanbiederstedt/dendsort
+  repository: https://CRAN.R-project.org/package=dendsort
+  authors:
+  - family-names: Sakai
+    given-names: Ryo
+    email: ryo@vda-lab.be
+  - family-names: Biederstedt
+    given-names: Evan
+    email: evan.biederstedt@gmail.com
+  year: '2024'
+  doi: 10.32614/CRAN.package.dendsort
+- type: software
+  title: DESeq2
+  abstract: 'DESeq2: Differential gene expression analysis based on the negative binomial
+    distribution'
+  notes: Imports
+  url: https://github.com/thelovelab/DESeq2
+  repository: https://bioconductor.org/
+  authors:
+  - family-names: Love
+    given-names: Michael
+    email: michaelisaiahlove@gmail.com
+  - family-names: Anders
+    given-names: Simon
+  - family-names: Huber
+    given-names: Wolfgang
+  year: '2024'
+  doi: 10.32614/CRAN.package.DESeq2
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
+  year: '2024'
+  doi: 10.32614/CRAN.package.dplyr
+- type: software
+  title: edgeR
+  abstract: 'edgeR: Empirical Analysis of Digital Gene Expression Data in R'
+  notes: Imports
+  url: https://bioinf.wehi.edu.au/edgeR/
+  repository: https://bioconductor.org/
+  authors:
+  - family-names: Chen
+    given-names: Yunshun
+  - family-names: Lun
+    given-names: Aaron TL
+  - family-names: McCarthy
+    given-names: Davis J
+  - family-names: Chen
+    given-names: Lizhong
+  - family-names: Baldoni
+    given-names: Pedro
+  - family-names: Ritchie
+    given-names: Matthew E
+  - family-names: Phipson
+    given-names: Belinda
+  - family-names: Hu
+    given-names: Yifang
+  - family-names: Zhou
+    given-names: Xiaobei
+  - family-names: Robinson
+    given-names: Mark D
+  - family-names: Smyth
+    given-names: Gordon K
+  year: '2024'
+  doi: 10.32614/CRAN.package.edgeR
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Imports
+  url: https://ggplot2.tidyverse.org
+  repository: https://CRAN.R-project.org/package=ggplot2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: Brand
+    given-names: Teun
+    name-particle: van den
+    orcid: https://orcid.org/0000-0002-9335-7468
+  year: '2024'
+  doi: 10.32614/CRAN.package.ggplot2
+- type: software
+  title: ggrepel
+  abstract: 'ggrepel: Automatically Position Non-Overlapping Text Labels with ''ggplot2'''
+  notes: Imports
+  url: https://ggrepel.slowkow.com/
+  repository: https://CRAN.R-project.org/package=ggrepel
+  authors:
+  - family-names: Slowikowski
+    given-names: Kamil
+    email: kslowikowski@gmail.com
+    orcid: https://orcid.org/0000-0002-2843-6370
+  year: '2024'
+  doi: 10.32614/CRAN.package.ggrepel
+- type: software
+  title: methods
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  doi: 10.32614/CRAN.package.methods
+- type: software
+  title: plotly
+  abstract: 'plotly: Create Interactive Web Graphics via ''plotly.js'''
+  notes: Imports
+  url: https://plotly-r.com
+  repository: https://CRAN.R-project.org/package=plotly
+  authors:
+  - family-names: Sievert
+    given-names: Carson
+    email: cpsievert1@gmail.com
+    orcid: https://orcid.org/0000-0002-4958-2844
+  - family-names: Parmer
+    given-names: Chris
+    email: chris@plot.ly
+  - family-names: Hocking
+    given-names: Toby
+    email: tdhock5@gmail.com
+  - family-names: Chamberlain
+    given-names: Scott
+    email: myrmecocystus@gmail.com
+  - family-names: Ram
+    given-names: Karthik
+    email: karthik.ram@gmail.com
+  - family-names: Corvellec
+    given-names: Marianne
+    email: marianne.corvellec@igdore.org
+    orcid: https://orcid.org/0000-0002-1994-3581
+  - family-names: Despouy
+    given-names: Pedro
+    email: pedro@plot.ly
+  year: '2024'
+  doi: 10.32614/CRAN.package.plotly
+- type: software
+  title: reshape2
+  abstract: 'reshape2: Flexibly Reshape Data: A Reboot of the Reshape Package'
+  notes: Imports
+  url: https://github.com/hadley/reshape
+  repository: https://CRAN.R-project.org/package=reshape2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: h.wickham@gmail.com
+  year: '2024'
+  doi: 10.32614/CRAN.package.reshape2
+- type: software
+  title: rlang
+  abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  notes: Imports
+  url: https://rlang.r-lib.org
+  repository: https://CRAN.R-project.org/package=rlang
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  doi: 10.32614/CRAN.package.rlang
+- type: software
+  title: S7
+  abstract: 'S7: An Object Oriented System Meant to Become a Successor to S3 and S4'
+  notes: Imports
+  url: https://github.com/rconsortium/S7/
+  repository: https://CRAN.R-project.org/package=S7
+  authors:
+  - family-names: Vaughan
+    given-names: Davis
+  - family-names: Hester
+    given-names: Jim
+    orcid: https://orcid.org/0000-0002-2739-7082
+  - family-names: Kalinowski
+    given-names: Tomasz
+  - family-names: Landau
+    given-names: Will
+  - family-names: Lawrence
+    given-names: Michael
+  - family-names: Maechler
+    given-names: Martin
+    orcid: https://orcid.org/0000-0002-8685-9910
+  - family-names: Tierney
+    given-names: Luke
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2024'
+  doi: 10.32614/CRAN.package.S7
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  doi: 10.32614/CRAN.package.stats
+- type: software
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Imports
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2024'
+  doi: 10.32614/CRAN.package.tibble
+- type: software
+  title: tidyr
+  abstract: 'tidyr: Tidy Messy Data'
+  notes: Imports
+  url: https://tidyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=tidyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+  - family-names: Girlich
+    given-names: Maximilian
+  year: '2024'
+  doi: 10.32614/CRAN.package.tidyr
+- type: software
+  title: tidyselect
+  abstract: 'tidyselect: Select from a Set of Strings'
+  notes: Imports
+  url: https://tidyselect.r-lib.org
+  repository: https://CRAN.R-project.org/package=tidyselect
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  doi: 10.32614/CRAN.package.tidyselect
+- type: software
+  title: glue
+  abstract: 'glue: Interpreted String Literals'
+  notes: Suggests
+  url: https://glue.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=glue
+  authors:
+  - family-names: Hester
+    given-names: Jim
+    orcid: https://orcid.org/0000-0002-2739-7082
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2024'
+  doi: 10.32614/CRAN.package.glue
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2024'
+  doi: 10.32614/CRAN.package.knitr
+- type: software
+  title: readr
+  abstract: 'readr: Read Rectangular Text Data'
+  notes: Suggests
+  url: https://readr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=readr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2024'
+  doi: 10.32614/CRAN.package.readr
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2024'
+  doi: 10.32614/CRAN.package.rmarkdown
+- type: software
+  title: styler
+  abstract: 'styler: Non-Invasive Pretty Printing of R Code'
+  notes: Suggests
+  url: https://styler.r-lib.org
+  repository: https://CRAN.R-project.org/package=styler
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Walthert
+    given-names: Lorenz
+    email: lorenz.walthert@icloud.com
+  year: '2024'
+  doi: 10.32614/CRAN.package.styler
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  doi: 10.32614/CRAN.package.testthat
+  version: '>= 3.0.0'
+- type: software
+  title: usethis
+  abstract: 'usethis: Automate Package and Project Setup'
+  notes: Suggests
+  url: https://usethis.r-lib.org
+  repository: https://CRAN.R-project.org/package=usethis
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  - family-names: Barrett
+    given-names: Malcolm
+    email: malcolmbarrett@gmail.com
+    orcid: https://orcid.org/0000-0003-0299-5825
+  - family-names: Teucher
+    given-names: Andy
+    email: andy.teucher@posit.co
+    orcid: https://orcid.org/0000-0002-7840-692X
+  year: '2024'
+  doi: 10.32614/CRAN.package.usethis
