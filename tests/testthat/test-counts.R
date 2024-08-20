@@ -17,3 +17,21 @@ test_that("counts_dat_to_matrix works", {
     )
   )
 })
+
+test_that("calc_cpm works", {
+  sample_meta <- data.frame(
+    sample_id = c("KO_S3", "KO_S4", "WT_S1", "WT_S2"),
+    condition = factor(
+      c("knockout", "knockout", "wildtype", "wildtype"),
+      levels = c("wildtype", "knockout")
+    )
+  )
+  renee_ds <- create_reneeDataSet_from_dataframes(sample_meta, gene_counts) %>%
+    calc_cpm()
+  cpm_edger <- gene_counts %>%
+    counts_dat_to_matrix() %>%
+    edgeR::cpm() %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column("gene_id")
+  expect_equal(renee_ds@counts$cpm, cpm_edger)
+})

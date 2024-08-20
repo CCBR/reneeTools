@@ -24,3 +24,12 @@ counts_dat_to_matrix <- function(counts_tbl, gene_colname = "gene_id") {
     as.matrix()
   return(counts_mat)
 }
+
+calc_cpm <- function(renee_ds, gene_colname = "gene_id") {
+  renee_ds@counts$cpm <- renee_ds@counts$raw %>%
+    counts_dat_to_matrix(gene_colname = gene_colname) %>%
+    edgeR::cpm() %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column(gene_colname)
+  return(renee_ds)
+}

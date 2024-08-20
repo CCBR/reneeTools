@@ -21,8 +21,9 @@ reneeDataSet <- S7::new_class("renee",
   },
   validator = function(self) {
     # counts must only contain approved names
-    if (!all(names(self@counts) %in% c("raw", "filt", "norm_cpm"))) {
-      stop("counts can only contain 'raw', 'filt', and 'norm_cpm' data frames")
+    approved_counts <- c("raw", "cpm", "filt")
+    if (!all(names(self@counts) %in% approved_counts)) {
+      stop(glue::glue("counts can only contain data frames with these names:\n\t{paste(approved_counts, collapse = ', ')}"))
     }
     # all sample IDs must be in both sample_meta and raw counts
     # any sample ID in filt or norm_cpm counts must also be in sample_meta
