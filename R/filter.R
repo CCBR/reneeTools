@@ -1,9 +1,57 @@
 #' Filter low counts
 #'
-#' @param counts_matrix The input Counts Matrix. Usually, this will be your Cleaned Counts matrix.
-#' @param sample_metadata The Sample Metadata table containing your sample metadata. At minimum, this table must include one column each of the following: Samples, Groups, Batches, and Labels. The names in the Samples column of your input Sample Metadata must match the Sample Column Names of your input Counts Matrix exactly. You may have more than one column showing different Groups by which your samples may be organized (e.g. Genotype, Response, Time, etc.).
+#' This is often the first step in the QC portion of an analysis to filter out
+#' features that have very low raw counts across most or all of your samples.
 #'
-#' @return Filtered counts as a dataframe
+#' This function takes a reneeDataSet containing raw counts and a sample
+#' metadata table, and returns the reneeDataSet object with filtered counts.
+#' It also produces an image consisting of three QC plots.
+#'
+#' You can tune the threshold for tuning how low counts for a given gene are
+#' before they are deemed "too low" and filtered out of downstream analysis. By
+#' default, this parameter is set to 1, meaning any raw count value less than 1
+#' will count as "too low".
+#'
+#' The QC plots are provided to help you assess: (1) PCA Plot: the within and
+#' between group variance in expression after dimensionality reduction; (2)
+#' Count Density Histogram: the dis/similarity of count distributions between
+#' samples; and (3) Similarity Heatmap: the overall similarity of samples to one
+#' another based on unsupervised clustering.
+#'
+#'
+#' @param renee_ds
+#' @param gene_names_column
+#' @param sample_names_column
+#' @param groups_column
+#' @param labels_column
+#' @param columns_to_include
+#' @param outlier_samples_to_remove
+#' @param Minimum_Count_Value_to_be_Considered_Nonzero
+#' @param Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total
+#' @param Use_Group_Based_Filtering
+#' @param Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group
+#' @param principal_component_on_x_axis
+#' @param principal_component_on_y_axis
+#' @param legend_position_for_pca
+#' @param point_size_for_pca
+#' @param add_labels_to_pca
+#' @param label_font_size
+#' @param label_offset_y_
+#' @param label_offset_x_
+#' @param samples_to_rename_manually
+#' @param color_histogram_by_group
+#' @param set_min_max_for_x_axis_for_histogram
+#' @param minimum_for_x_axis_for_histogram
+#' @param maximum_for_x_axis_for_histogram
+#' @param legend_position_for_histogram
+#' @param legend_font_size_for_histogram
+#' @param number_of_histogram_legend_columns
+#' @param colors_for_plots
+#' @param number_of_image_rows
+#' @param interactive_plots
+#' @param plot_correlation_matrix_heatmap
+#'
+#' @return reneeDataSet with filtered counts
 #' @export
 #'
 #' @examples
@@ -13,17 +61,19 @@
 #'   sample_id_colname = "Sample"
 #' )
 #' set.seed(10)
-#' renee_ds2 <- filter_counts(renee_ds)
-#' head(renee_ds2@counts[["filt"]])
+#' renee_ds2 <- renee_ds %>%
+#'   calc_cpm() %>%
+#'   filter_counts()
+#' head(renee_ds2@counts$filt)
 #'
 filter_counts <- function(renee_ds,
+                          count_type = "cpm",
                           gene_names_column = "Gene",
                           sample_names_column = "Sample",
                           groups_column = "Group",
                           labels_column = "Label",
                           columns_to_include = c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
                           outlier_samples_to_remove = c(),
-                          use_cpm_counts_to_filter = TRUE,
                           Minimum_Count_Value_to_be_Considered_Nonzero = 8,
                           Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
                           Use_Group_Based_Filtering = FALSE,
@@ -48,7 +98,7 @@ filter_counts <- function(renee_ds,
                           number_of_image_rows = 2,
                           interactive_plots = FALSE,
                           plot_correlation_matrix_heatmap = TRUE) {
-  counts_matrix <- renee_ds@counts[["raw"]]
+  counts_matrix <- renee_ds@counts[[count_type]]
   sample_metadata <- renee_ds@sample_meta
   # TODO we should use "feature" instead of "gene" to make sure this is applicable beyond RNA-seq
 
@@ -107,7 +157,6 @@ filter_counts <- function(renee_ds,
     sample_metadata = sample_metadata,
     gene_names_column = gene_names_column,
     groups_column = groups_column,
-    use_cpm_counts_to_filter = use_cpm_counts_to_filter,
     Use_Group_Based_Filtering = Use_Group_Based_Filtering,
     Minimum_Count_Value_to_be_Considered_Nonzero = Minimum_Count_Value_to_be_Considered_Nonzero,
     Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total,
@@ -216,16 +265,8 @@ filter_counts <- function(renee_ds,
     }
   }
 
-  df.final <- df %>%
+  df.final <- df %>% # TODO ask Phil if we should actually use df.filt here instead of raw counts
     dplyr::filter(!!rlang::sym(gene_names_column) %in% df.filt[, gene_names_column])
-  # colnames(df.final)[colnames(df.final)==gene_names_column] <- "Gene"
-
-  # print('')
-  # print('Sample Columns')
-  # print(colnames(df.final[,!colnames(df.final)%in%gene_names_column]))
-  # print('Annotation Columns')
-  # print(colnames(anno_tbl))
-
   df.final <- merge(anno_tbl, df.final, by = gene_names_column, all.y = T)
   df.final[, gene_names_column] <- gsub("_[0-9]+$", "", df.final[, gene_names_column])
 
@@ -236,7 +277,7 @@ filter_counts <- function(renee_ds,
 
 #' Remove low-count genes
 #'
-#' TODO this function also transforms raw counts to CPM, but that should be a separate function before this step
+#' TODO this function also transforms raw counts to CPM, but that should be a separate function before this step, before filter_counts function()
 #' TODO document `isexpr1` column in output
 #'
 #' @inheritParams filter_counts
@@ -247,11 +288,55 @@ filter_counts <- function(renee_ds,
 remove_low_count_genes <- function(counts_matrix, sample_metadata,
                                    gene_names_column,
                                    groups_column,
-                                   use_cpm_counts_to_filter = TRUE,
                                    Use_Group_Based_Filtering = FALSE,
                                    Minimum_Count_Value_to_be_Considered_Nonzero = 8,
                                    Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
                                    Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3) {
+  value <- NULL
+  df <- counts_matrix
+
+  df <- df[stats::complete.cases(df), ]
+  ## duplicate Rows should be removed in Clean_Raw_Counts template
+  # df %>% dplyr::group_by(.data[[gene_names_column]]) %>% summarise_all(sum) %>% as.data.frame() -> df
+  # print(paste0("Number of features before filtering: ", nrow(df)))
+  trans.df <- df
+
+  if (Use_Group_Based_Filtering == TRUE) {
+    rownames(trans.df) <- trans.df[, gene_names_column]
+    trans.df[, gene_names_column] <- NULL
+
+    counts <- trans.df >= Minimum_Count_Value_to_be_Considered_Nonzero # boolean matrix
+
+    tcounts <- as.data.frame(t(counts))
+    colnum <- dim(counts)[1] # number of genes
+    tcounts <- merge(sample_metadata[groups_column], tcounts, by = "row.names")
+    tcounts$Row.names <- NULL
+    melted <- reshape2::melt(tcounts, id.vars = groups_column)
+    tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(groups_column, "variable")), sum = sum(value))
+    tcounts.group <- tcounts.tot %>%
+      tidyr::pivot_wider(names_from = "variable", values_from = "sum")
+    colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
+    df.filt <- trans.df[tcounts.keep, ]
+    df.filt %>% tibble::rownames_to_column(gene_names_column) -> df.filt
+  } else {
+    trans.df$isexpr1 <- rowSums(as.matrix(trans.df[, -1]) > Minimum_Count_Value_to_be_Considered_Nonzero) >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total
+
+    df.filt <- as.data.frame(trans.df[trans.df$isexpr1, ])
+  }
+
+  # colnames(df.filt)[colnames(df.filt)==gene_names_column] <- "Gene"
+  # print(paste0("Number of features after filtering: ", nrow(df.filt)))
+  return(df.filt)
+}
+
+old_filt_cpm <- function(counts_matrix, sample_metadata,
+                         gene_names_column,
+                         groups_column,
+                         use_cpm_counts_to_filter = TRUE,
+                         Use_Group_Based_Filtering = FALSE,
+                         Minimum_Count_Value_to_be_Considered_Nonzero = 8,
+                         Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
+                         Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3) {
   value <- NULL
   df <- counts_matrix
 
