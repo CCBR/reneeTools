@@ -94,6 +94,15 @@ create_reneeDataSet_from_dataframes <- function(sample_meta_dat,
   if (!all(gene_sample_colnames == meta_sample_colnames)) {
     stop("Not all columns in the count data equal the rows in the sample metadata. Sample IDs must be in the same order.")
   }
+
+  if ("gene_id" %in% colnames(count_dat) & "GeneName" %in% colnames(count_dat)) {
+    count_dat <- count_dat %>%
+      mutate(
+        gene_id = mutate(glue("{gene_id}|{GeneName}")),
+        .keep = "unused"
+      )
+  }
+
   counts <- list()
   counts[[count_type]] <- count_dat
 
