@@ -1,0 +1,29 @@
+---
+title: "Memory Usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{memory}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(reneeTools)
+library(dplyr)
+library(readr)
+```
+
+<https://portal.gdc.cancer.gov/projects/TCGA-LIHC>
+
+```{r data}
+counts <- read_tsv("~/Downloads/LIHC_HTseqCounts.txt") %>%
+  mutate(gene_id = Gene)
+metadat <- read_tsv("~/Downloads/LIHC_PatientData.txt")
+```
