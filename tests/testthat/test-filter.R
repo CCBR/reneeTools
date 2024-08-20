@@ -6,14 +6,15 @@ test_that("filter_counts reproduces NIDAP results", {
   )
   set.seed(10)
   renee_ds2 <- filter_counts(renee_ds)
-  counts_filt <- renee_ds2@counts$filt
-  expect_true(all.equal(
-    counts_filt %>%
-      dplyr::arrange(desc(Gene)),
-    as.data.frame(nidap_filtered_counts) %>%
-      dplyr::arrange(desc(Gene))
-  ))
+  counts_filt <- renee_ds2@counts$filt %>%
+    as.data.frame() %>%
+    dplyr::arrange(desc(Gene))
+  nidap_filt <- as.data.frame(nidap_filtered_counts) %>%
+    dplyr::arrange(desc(Gene))
+  expect_true(all(nidap_filt == counts_filt))
+  expect_true(all.equal(lapply(nidap_filt, class), lapply(counts_filt, class)))
 })
+
 # TODO get filter_counts() to work on tibbles too, not only dataframes
 
 # TODO fails on RENEE dataset, R session aborts
