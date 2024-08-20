@@ -1,11 +1,12 @@
 #' Rename samples
 #'
-#' TODO this should probably be performed earlier on in the template?
-#' why wait til after PCA is calculated?
+#' TODO this should happen right at the beginning of the template?
+#'
+#' TODO accept new names for samples in sample metadata spreadsheet
 #'
 #'
 #' @param dat data frame containing a `sample` column
-#' @param samples_to_rename_manually TODO ask Phil for expected format
+#' @param samples_to_rename_manually TODO use sample metadata spreadsheet custom column
 #'
 #' @return data frame with samples renamed
 #' @keywords internal
