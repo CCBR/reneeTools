@@ -24,12 +24,12 @@ run_deseq2 <- S7::new_generic("run_deseq2", "renee_ds", function(renee_ds, desig
   S7::S7_dispatch()
 })
 
-S7::method(run_deseq2, reneeDataSet) <- function(renee_ds, design, min_count = 10, ...) {
+S7::method(run_deseq2, reneeDataSet) <- function(renee_ds, design, gene_colname = "gene_id", min_count = 10, ...) {
   if (is.null(renee_ds@counts$filt)) {
     stop("renee_ds must contain filtered counts for DESeq2. Hint: Did you forget to run filter_counts()?")
   }
   dds <- DESeq2::DESeqDataSetFromMatrix(
-    countData = renee_ds@counts$filt %>% counts_dat_to_matrix(),
+    countData = renee_ds@counts$filt %>% counts_dat_to_matrix(gene_colname = gene_colname),
     colData = renee_ds@sample_meta,
     design = design
   )
