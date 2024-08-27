@@ -7,9 +7,6 @@ test_that("filter_counts reproduces NIDAP results", {
   ) %>%
     calc_cpm(gene_colname = "Gene") %>%
     filter_counts()
-
-
-
   rds_counts_filt <- renee_ds2@counts$filt %>%
     dplyr::arrange(desc(Gene))
   nidap_counts_filt <- as.data.frame(nidap_filtered_counts) %>%
@@ -19,6 +16,20 @@ test_that("filter_counts reproduces NIDAP results", {
     rds_counts_filt,
     nidap_counts_filt
   ))
+
+  set.seed(10)
+  renee_ds2 <- create_reneeDataSet_from_dataframes(
+    as.data.frame(nidap_sample_metadata),
+    as.data.frame(nidap_clean_raw_counts),
+    sample_id_colname = "Sample"
+  ) %>% filter_counts(renee_ds, count_type = "raw")
+  counts_filt <- renee_ds2@counts$filt %>%
+    as.data.frame() %>%
+    dplyr::arrange(desc(Gene))
+  nidap_filt <- as.data.frame(nidap_filtered_counts) %>%
+    dplyr::arrange(desc(Gene))
+  expect_true(all(nidap_filt == counts_filt))
+  expect_true(all.equal(lapply(nidap_filt, class), lapply(counts_filt, class)))
 })
 
 # TODO get filter_counts() to work on tibbles too, not only dataframes
