@@ -7,7 +7,7 @@ test_that("filter_counts reproduces NIDAP results", {
   ) %>%
     calc_cpm(gene_colname = "Gene") %>%
     filter_counts()
-  rds_counts_filt <- renee_ds2@counts$filt %>%
+  rds_counts_filt <- renee_ds@counts$filt %>%
     dplyr::arrange(desc(Gene))
   nidap_counts_filt <- as.data.frame(nidap_filtered_counts) %>%
     dplyr::arrange(desc(Gene))
