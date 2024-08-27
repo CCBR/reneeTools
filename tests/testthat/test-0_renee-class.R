@@ -6,27 +6,22 @@ test_that("reneeDataSet from files works", {
     suppressMessages()
   expect_equal(
     rds@counts$raw %>% head(),
-    structure(
-      list(
-        gene_id = c(
-          "ENSG00000121410.11",
-          "ENSG00000268895.5",
-          "ENSG00000148584.15",
-          "ENSG00000175899.14",
-          "ENSG00000245105.3",
-          "ENSG00000166535.20"
+    tibble::tibble(
+      gene_id = structure(
+        c(
+          "ENSG00000121410.11|A1BG",
+          "ENSG00000268895.5|A1BG-AS1",
+          "ENSG00000148584.15|A1CF",
+          "ENSG00000175899.14|A2M",
+          "ENSG00000245105.3|A2M-AS1",
+          "ENSG00000166535.20|A2ML1"
         ),
-        GeneName = c(
-          "A1BG", "A1BG-AS1", "A1CF",
-          "A2M", "A2M-AS1", "A2ML1"
-        ),
-        KO_S3 = c(0, 0, 0, 0, 0, 0),
-        KO_S4 = c(0, 0, 0, 0, 0, 0),
-        WT_S1 = c(0, 0, 0, 0, 0, 0),
-        WT_S2 = c(0, 0, 0, 0, 0, 0)
+        class = c("glue", "character")
       ),
-      row.names = c(NA, -6L),
-      class = c("tbl_df", "tbl", "data.frame")
+      KO_S3 = c(0, 0, 0, 0, 0, 0),
+      KO_S4 = c(0, 0, 0, 0, 0, 0),
+      WT_S1 = c(0, 0, 0, 0, 0, 0),
+      WT_S2 = c(0, 0, 0, 0, 0, 0)
     )
   )
   expect_equal(rds@sample_meta, tibble::tibble(

@@ -3,7 +3,7 @@
 #' @param count_dat expected gene counts from RSEM as a data frame or tibble.
 #'   Must contain a `gene_id` column and a column for each sample ID in the metadata.
 #' @param sample_meta_dat sample metadata as a data frame or tibble.
-#'   Must contain a `sample_ID` column.
+#'   Must contain a `sample_id` column.
 #'
 #'
 reneeDataSet <- S7::new_class("renee",
@@ -97,8 +97,8 @@ create_reneeDataSet_from_dataframes <- function(sample_meta_dat,
 
   if ("gene_id" %in% colnames(count_dat) & "GeneName" %in% colnames(count_dat)) {
     count_dat <- count_dat %>%
-      mutate(
-        gene_id = mutate(glue("{gene_id}|{GeneName}")),
+      dplyr::mutate(
+        gene_id = glue::glue("{gene_id}|{GeneName}"),
         .keep = "unused"
       )
   }
