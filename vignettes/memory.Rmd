@@ -1,6 +1,7 @@
 ---
 title: "Memory Usage"
 output: rmarkdown::html_vignette
+self_contained: true
 vignette: >
   %\VignetteIndexEntry{memory}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,20 +11,83 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
 ```{r setup}
-library(reneeTools)
 library(dplyr)
+library(ggplot2)
+library(glue)
 library(readr)
+# library(reneeTools)
+devtools::load_all()
 ```
 
-<https://portal.gdc.cancer.gov/projects/TCGA-LIHC>
+Dataset from: <https://portal.gdc.cancer.gov/projects/TCGA-LIHC>
 
 ```{r data}
 counts <- read_tsv("~/Downloads/LIHC_HTseqCounts.txt") %>%
-  mutate(gene_id = Gene)
-metadat <- read_tsv("~/Downloads/LIHC_PatientData.txt")
+  rename(gene_id = Gene)
+metadat <- read_tsv("~/Downloads/LIHC_PatientData.txt") %>%
+  select(-sample_id) %>%
+  rename(sample_id = barcode)
+renee_ds <- create_reneeDataSet_from_dataframes(metadat, counts) %>%
+  calc_cpm() %>%
+  filter_counts(
+    sample_names_column = "sample_id",
+    gene_names_column = "gene_id",
+    group_column = "treatments_radiation_treatment_type",
+    label_column = "sample",
+    columns_to_include = c("gene_id", metadat %>% pull("sample_id")),
+    make_plots = FALSE
+  )
+```
+
+
+```{r subset}
+subset_data <- function(renee_ds, nsamples) {
+  renee_ds_subset <- renee_ds
+  renee_ds_subset@sample_meta <- renee_ds@sample_meta %>% slice_sample(n = nsamples)
+  for (count_type in names(renee_ds@counts)) {
+    renee_ds_subset@counts[[count_type]] <- renee_ds@counts[[count_type]] %>%
+      select(gene_id, all_of(renee_ds_subset@sample_meta$sample_id))
+  }
+  return(renee_ds_subset)
+}
+
+subset_mem <- lapply(c(10, 50, 100, 200, nrow(renee_ds@sample_meta)), function(nsamples) {
+  renee_ds_subset <- subset_data(renee_ds, nsamples)
+  return(tibble(
+    n_samples = nsamples,
+    object_size = lobstr::obj_size(renee_ds_subset)
+  ))
+}) %>%
+  bind_rows()
+```
+
+
+
+```{r plot_memory}
+# what is the resource spec of default NIDAP allocation?
+# TODO: compare to seurat single cell object
+subset_mem %>%
+  ggplot(aes(n_samples, object_size)) +
+  geom_point() +
+  geom_line(linewidth = 0.3) +
+  scale_y_continuous(labels = scales::label_bytes(units = "GB", accuracy = 0.1)) +
+  labs(
+    title = "Memory usage of S7 object",
+    x = "Number of samples",
+    y = "Memory usage",
+    caption = glue(
+      "The object contains sample metadata and count data as raw, CPM-transformed, and filtered counts.\n",
+      "Each dataset has the same number of genes: ",
+      format(length(renee_ds@counts$raw$gene_id), big.mark = ",")
+    )
+  ) +
+  theme_bw()
 ```
