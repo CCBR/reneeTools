@@ -50,7 +50,7 @@ calc_cpm_df <- function(dat, gene_colname = "gene_id", ...) {
   } else {
     col
   }
-  return(dat_cpm %>% relocate(all_of(gene_colname)))
+  return(dat_cpm %>% dplyr::relocate(tidyselct::all_of(gene_colname)))
 }
 
 #' Convert a data frame of gene counts to a matrix
