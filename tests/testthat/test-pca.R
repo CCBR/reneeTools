@@ -38,8 +38,8 @@ test_that("plot_pca layers are expected", {
     sample_meta,
     samples_to_include = c("A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
     samples_to_rename_manually = NULL,
-    groups_column = "Group",
-    labels_column = "Label",
+    group_column = "Group",
+    label_column = "Label",
     color_values = c(
       "#5954d6", "#e1562c", "#b80058", "#00c6f8", "#d163e6", "#00a76c",
       "#ff9287", "#008cf9", "#006e00", "#796880", "#FFA500", "#878500"
@@ -48,7 +48,7 @@ test_that("plot_pca layers are expected", {
     principal_component_on_y_axis = 2,
     legend_position_for_pca = "top",
     point_size_for_pca = 1,
-    add_labels_to_pca = TRUE,
+    add_label_to_pca = TRUE,
     label_font_size = 3,
     label_offset_y_ = 2,
     label_offset_x_ = 2

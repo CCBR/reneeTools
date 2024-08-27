@@ -31,7 +31,7 @@ test_that("validate_sample_metadata works", {
       counts_rows,
       sample_meta,
       sample_names_column = "Sample",
-      groups_column = "Group"
+      group_column = "Group"
     ),
     structure(
       list(

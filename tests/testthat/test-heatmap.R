@@ -21,7 +21,7 @@ test_that("heatmap works", {
       as.data.frame(),
     sample_metadata = as.data.frame(nidap_sample_metadata),
     sample_names_column = "Sample",
-    labels_column = "Label",
+    label_column = "Label",
     anno_column = "Group",
     anno_colors = colors_vec
   )
@@ -125,7 +125,7 @@ test_that("heatmap works", {
 #       dplyr::select(tidyselect::all_of(c("A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"))),
 #     sample_metadata = nidap_sample_metadata,
 #     sample_names_column = "Sample",
-#     labels_column = "Label",
+#     label_column = "Label",
 #     anno_column = "Group",
 #     anno_colors = colors_vec
 #   )

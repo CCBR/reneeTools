@@ -42,8 +42,8 @@ test_that("filter_counts reproduces NIDAP results", {
 #   )
 #   rds2 <- renee_ds %>% filter_counts(gene_names_column = 'gene_id',
 #                              sample_names_column = 'sample_id',
-#                              groups_column = 'condition',
-#                              labels_column = 'sample_id',
+#                              group_column = 'condition',
+#                              label_column = 'sample_id',
 #                              columns_to_include = c("gene_id", "KO_S3", "KO_S4", "WT_S1", "WT_S2"))
 # })
 
@@ -87,7 +87,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
-      groups_column = "Group",
+      group_column = "Group",
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,
       Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
@@ -97,7 +97,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
-      groups_column = "Group",
+      group_column = "Group",
       use_cpm_counts_to_filter = FALSE,
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,
@@ -111,7 +111,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df_cpm,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
-      groups_column = "Group",
+      group_column = "Group",
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,
       Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
@@ -121,7 +121,7 @@ test_that("remove_low_count_genes works", {
       counts_matrix = df,
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
-      groups_column = "Group",
+      group_column = "Group",
       use_cpm_counts_to_filter = TRUE,
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,

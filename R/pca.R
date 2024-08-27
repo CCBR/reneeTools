@@ -11,14 +11,14 @@ plot_pca <- function(log_counts,
                      sample_metadata,
                      samples_to_include,
                      samples_to_rename_manually,
-                     groups_column,
-                     labels_column,
+                     group_column,
+                     label_column,
                      color_values,
                      principal_component_on_x_axis = 1,
                      principal_component_on_y_axis = 2,
                      legend_position_for_pca = "top",
                      point_size_for_pca = 1,
-                     add_labels_to_pca = TRUE,
+                     add_label_to_pca = TRUE,
                      label_font_size = 3,
                      label_offset_y_ = 2,
                      label_offset_x_ = 2) {
@@ -33,8 +33,8 @@ plot_pca <- function(log_counts,
   pcy <- paste0("PC", principal_component_on_y_axis)
   pca.df <- as.data.frame(pca$x) %>% dplyr::select(tidyselect::all_of(c(pcx, pcy)))
 
-  pca.df$group <- sample_metadata[[groups_column]]
-  pca.df$sample <- sample_metadata[[labels_column]]
+  pca.df$group <- sample_metadata[[group_column]]
+  pca.df$sample <- sample_metadata[[label_column]]
   perc.var <- (pca$sdev^2 / sum(pca$sdev^2)) * 100
   perc.var <- formatC(perc.var, format = "g", digits = 4)
   pc.x.lab <- paste0(pcx, " ", perc.var[principal_component_on_x_axis], "%")
@@ -72,7 +72,7 @@ plot_pca <- function(log_counts,
     ggplot2::xlab(pc.x.lab) +
     ggplot2::ylab(pc.y.lab)
 
-  if (add_labels_to_pca == TRUE) {
+  if (add_label_to_pca == TRUE) {
     pcaPlot <- pcaPlot +
       ggrepel::geom_text_repel(ggplot2::aes(label = sample, color = group),
         size = 7,

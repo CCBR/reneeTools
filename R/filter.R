@@ -22,8 +22,8 @@
 #' @param renee_ds
 #' @param gene_names_column
 #' @param sample_names_column
-#' @param groups_column
-#' @param labels_column
+#' @param group_column
+#' @param label_column
 #' @param columns_to_include
 #' @param outlier_samples_to_remove
 #' @param Minimum_Count_Value_to_be_Considered_Nonzero
@@ -34,7 +34,7 @@
 #' @param principal_component_on_y_axis
 #' @param legend_position_for_pca
 #' @param point_size_for_pca
-#' @param add_labels_to_pca
+#' @param add_label_to_pca
 #' @param label_font_size
 #' @param label_offset_y_
 #' @param label_offset_x_
@@ -68,10 +68,10 @@
 #'
 filter_counts <- function(renee_ds,
                           count_type = "cpm",
-                          gene_names_column = "Gene",
-                          sample_names_column = "Sample",
-                          groups_column = "Group",
-                          labels_column = "Label",
+                          gene_names_column = "gene_id",
+                          sample_names_column = "sample_id",
+                          group_column = "Group",
+                          label_column = "Label",
                           columns_to_include = c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
                           outlier_samples_to_remove = c(),
                           Minimum_Count_Value_to_be_Considered_Nonzero = 8,
@@ -82,7 +82,7 @@ filter_counts <- function(renee_ds,
                           principal_component_on_y_axis = 2,
                           legend_position_for_pca = "top",
                           point_size_for_pca = 1,
-                          add_labels_to_pca = TRUE,
+                          add_label_to_pca = TRUE,
                           label_font_size = 3,
                           label_offset_y_ = 2,
                           label_offset_x_ = 2,
@@ -94,27 +94,57 @@ filter_counts <- function(renee_ds,
                           legend_position_for_histogram = "top",
                           legend_font_size_for_histogram = 10,
                           number_of_histogram_legend_columns = 6,
-                          colors_for_plots = c("indigo", "carrot", "lipstick", "turquoise", "lavender", "jade", "coral", "azure", "green", "rum", "orange", "olive"),
+                          colors_for_plots = c(
+                            "indigo",
+                            "carrot",
+                            "lipstick",
+                            "turquoise",
+                            "lavender",
+                            "jade",
+                            "coral",
+                            "azure",
+                            "green",
+                            "rum",
+                            "orange",
+                            "olive"
+                          ),
                           number_of_image_rows = 2,
                           interactive_plots = FALSE,
-                          plot_correlation_matrix_heatmap = TRUE) {
+                          plot_correlation_matrix_heatmap = TRUE,
+                          make_plots = TRUE) {
   counts_matrix <- renee_ds@counts[[count_type]]
   sample_metadata <- renee_ds@sample_meta
   # TODO we should use "feature" instead of "gene" to make sure this is applicable beyond RNA-seq
 
   # TODO: just have users specify hex values directly for simplicity
   colorlist <- c(
-    indigo = "#5954d6", carrot = "#e1562c", lipstick = "#b80058",
-    turquoise = "#00c6f8", lavender = "#d163e6", jade = "#00a76c",
-    coral = "#ff9287", azure = "#008cf9", green = "#006e00", rum = "#796880",
-    orange = "#FFA500", olive = "#878500"
+    indigo = "#5954d6",
+    carrot = "#e1562c",
+    lipstick = "#b80058",
+    turquoise = "#00c6f8",
+    lavender = "#d163e6",
+    jade = "#00a76c",
+    coral = "#ff9287",
+    azure = "#008cf9",
+    green = "#006e00",
+    rum = "#796880",
+    orange = "#FFA500",
+    olive = "#878500"
   )
   if (length(colors_for_plots) == 0) {
     colors_for_plots <- c(
-      "indigo", "carrot", "lipstick",
-      "turquoise", "lavender", "jade",
-      "coral", "azure", "green",
-      "rum", "orange", "olive"
+      "indigo",
+      "carrot",
+      "lipstick",
+      "turquoise",
+      "lavender",
+      "jade",
+      "coral",
+      "azure",
+      "green",
+      "rum",
+      "orange",
+      "olive"
     )
   }
 
@@ -148,7 +178,7 @@ filter_counts <- function(renee_ds,
     counts_matrix = df,
     sample_metadata = sample_metadata,
     sample_names_column = sample_names_column,
-    groups_column = groups_column
+    group_column = group_column
   )
 
   #### remove low count genes ########
@@ -156,7 +186,7 @@ filter_counts <- function(renee_ds,
     counts_matrix = df,
     sample_metadata = sample_metadata,
     gene_names_column = gene_names_column,
-    groups_column = groups_column,
+    group_column = group_column,
     Use_Group_Based_Filtering = Use_Group_Based_Filtering,
     Minimum_Count_Value_to_be_Considered_Nonzero = Minimum_Count_Value_to_be_Considered_Nonzero,
     Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total,
@@ -167,104 +197,102 @@ filter_counts <- function(renee_ds,
   colorval <- colorlist[colors_for_plots]
   colorval <- unname(colorval) # remove names which affect ggplot
 
-  if (length(unique(sample_metadata[[groups_column]])) > length(colorval)) {
+  if (length(unique(sample_metadata[[group_column]])) > length(colorval)) {
     ## Original color-picking code.
-    k <- length(unique(sample_metadata[[groups_column]])) - length(colorval)
+    k <- length(unique(sample_metadata[[group_column]])) - length(colorval)
     more_cols <- get_random_colors(k)
     colorval <- c(colorval, more_cols)
   }
 
+  if (isTRUE(make_plots)) {
+    log_counts <- log((as.matrix(df.filt[, samples_to_include] + 0.5)))
+    rownames(log_counts) <- df.filt[, 1]
 
-  ######## Start PCA ###############
+    pcaPlot <- plot_pca(
+      log_counts,
+      sample_metadata,
+      samples_to_include,
+      samples_to_rename_manually,
+      group_column,
+      label_column,
+      color_values = colorval,
+      principal_component_on_x_axis = principal_component_on_x_axis,
+      principal_component_on_y_axis = principal_component_on_y_axis,
+      legend_position_for_pca = legend_position_for_pca,
+      point_size_for_pca = point_size_for_pca,
+      add_label_to_pca = add_label_to_pca,
+      label_font_size = label_font_size,
+      label_offset_y_ = label_offset_y_,
+      label_offset_x_ = label_offset_x_
+    )
 
-  # TODO should this be a function?
-  log_counts <- log((as.matrix(df.filt[, samples_to_include] + 0.5)))
-  rownames(log_counts) <- df.filt[, 1]
+    ########################
+    ## Start Histogram Plot:
+    ########################
+    histPlot <- plot_histogram(
+      log_counts,
+      sample_metadata,
+      gene_names_column = gene_names_column,
+      group_column = group_column,
+      label_column = label_column,
+      color_values = colorval,
+      color_histogram_by_group = color_histogram_by_group,
+      set_min_max_for_x_axis_for_histogram = set_min_max_for_x_axis_for_histogram,
+      minimum_for_x_axis_for_histogram = minimum_for_x_axis_for_histogram,
+      maximum_for_x_axis_for_histogram = maximum_for_x_axis_for_histogram,
+      legend_position_for_histogram = legend_position_for_histogram,
+      legend_font_size_for_histogram = legend_font_size_for_histogram,
+      number_of_histogram_legend_columns = number_of_histogram_legend_columns
+    )
 
-  pcaPlot <- plot_pca(log_counts,
-    sample_metadata,
-    samples_to_include,
-    samples_to_rename_manually,
-    groups_column,
-    labels_column,
-    color_values = colorval,
-    principal_component_on_x_axis = principal_component_on_x_axis,
-    principal_component_on_y_axis = principal_component_on_y_axis,
-    legend_position_for_pca = legend_position_for_pca,
-    point_size_for_pca = point_size_for_pca,
-    add_labels_to_pca = add_labels_to_pca,
-    label_font_size = label_font_size,
-    label_offset_y_ = label_offset_y_,
-    label_offset_x_ = label_offset_x_
-  )
+    ########################
+    ### Output Figures
+    ########################
+    if (plot_correlation_matrix_heatmap == TRUE) {
+      if (interactive_plots == TRUE) {
+        pcaPlot1 <- (pcaPlot) %>% plotly::ggplotly(tooltip = c("sample", "group"))
+        histPlot2 <- (histPlot + ggplot2::theme(legend.position = "none")) %>%
+          plotly::ggplotly(tooltip = c("sample"))
 
-  ########################
-  ## Start Histogram Plot:
-  ########################
-  histPlot <- plot_histogram(log_counts, sample_metadata,
-    gene_names_column = gene_names_column,
-    groups_column = groups_column,
-    labels_column = labels_column,
-    color_values = colorval,
-    color_histogram_by_group = color_histogram_by_group,
-    set_min_max_for_x_axis_for_histogram = set_min_max_for_x_axis_for_histogram,
-    minimum_for_x_axis_for_histogram = minimum_for_x_axis_for_histogram,
-    maximum_for_x_axis_for_histogram = maximum_for_x_axis_for_histogram,
-    legend_position_for_histogram = legend_position_for_histogram,
-    legend_font_size_for_histogram = legend_font_size_for_histogram,
-    number_of_histogram_legend_columns = number_of_histogram_legend_columns
-  )
+        grid::grid.newpage()
+        # print(pcaPlot1)
+        grid::grid.newpage()
+        # print(histPlot2)
+      } else {
+        corHM <- plot_heatmap(
+          counts_matrix = df.filt[, samples_to_include],
+          sample_metadata = sample_metadata,
+          sample_names_column = sample_names_column,
+          label_column = label_column,
+          anno_column = group_column,
+          anno_colors = colorval
+        )
 
-  ########################
-  ### Output Figures
-  ########################
-
-
-  if (plot_correlation_matrix_heatmap == TRUE) {
-    if (interactive_plots == TRUE) {
-      pcaPlot1 <- (pcaPlot) %>% plotly::ggplotly(tooltip = c("sample", "group"))
-      histPlot2 <- (histPlot + ggplot2::theme(legend.position = "none")) %>%
-        plotly::ggplotly(tooltip = c("sample"))
-
-      grid::grid.newpage()
-      # print(pcaPlot1)
-      grid::grid.newpage()
-      # print(histPlot2)
+        # grid.newpage()
+        # print(pcaPlot)
+        grid::grid.newpage()
+        # print(corHM)
+        grid::grid.newpage()
+        # print(histPlot)
+      }
     } else {
-      corHM <- plot_heatmap(
-        counts_matrix = df.filt[, samples_to_include],
-        sample_metadata = sample_metadata,
-        sample_names_column = sample_names_column,
-        labels_column = labels_column,
-        anno_column = groups_column,
-        anno_colors = colorval
-      )
+      if (interactive_plots == TRUE) {
+        pcaPlot1 <- (pcaPlot) %>% plotly::ggplotly(tooltip = c("sample", "group"))
+        histPlot2 <- (histPlot + ggplot2::theme(legend.position = "none")) %>%
+          plotly::ggplotly(tooltip = "sample")
 
-      # grid.newpage()
-      # print(pcaPlot)
-      grid::grid.newpage()
-      # print(corHM)
-      grid::grid.newpage()
-      # print(histPlot)
-    }
-  } else {
-    if (interactive_plots == TRUE) {
-      pcaPlot1 <- (pcaPlot) %>% plotly::ggplotly(tooltip = c("sample", "group"))
-      histPlot2 <- (histPlot + ggplot2::theme(legend.position = "none")) %>%
-        plotly::ggplotly(tooltip = "sample")
-
-      grid::grid.newpage()
-      # print(pcaPlot1)
-      grid::grid.newpage()
-      # print(histPlot2)
-    } else {
-      grid::grid.newpage()
-      # print(pcaPlot)
-      grid::grid.newpage()
-      # print(histPlot)
+        grid::grid.newpage()
+        # print(pcaPlot1)
+        grid::grid.newpage()
+        # print(histPlot2)
+      } else {
+        grid::grid.newpage()
+        # print(pcaPlot)
+        grid::grid.newpage()
+        # print(histPlot)
+      }
     }
   }
-
   df.final <- df %>% # TODO ask Phil if we should actually use df.filt here instead of raw counts
     dplyr::filter(!!rlang::sym(gene_names_column) %in% df.filt[, gene_names_column])
   df.final <- merge(anno_tbl, df.final, by = gene_names_column, all.y = T)
@@ -285,9 +313,10 @@ filter_counts <- function(renee_ds,
 #' @return counts matrix with low-count genes removed
 #' @keywords internal
 #'
-remove_low_count_genes <- function(counts_matrix, sample_metadata,
+remove_low_count_genes <- function(counts_matrix,
+                                   sample_metadata,
                                    gene_names_column,
-                                   groups_column,
+                                   group_column,
                                    Use_Group_Based_Filtering = FALSE,
                                    Minimum_Count_Value_to_be_Considered_Nonzero = 8,
                                    Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
@@ -309,10 +338,10 @@ remove_low_count_genes <- function(counts_matrix, sample_metadata,
 
     tcounts <- as.data.frame(t(counts))
     colnum <- dim(counts)[1] # number of genes
-    tcounts <- merge(sample_metadata[groups_column], tcounts, by = "row.names")
+    tcounts <- merge(sample_metadata[group_column], tcounts, by = "row.names")
     tcounts$Row.names <- NULL
-    melted <- reshape2::melt(tcounts, id.vars = groups_column)
-    tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(groups_column, "variable")), sum = sum(value))
+    melted <- reshape2::melt(tcounts, id.vars = group_column)
+    tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(group_column, "variable")), sum = sum(value))
     tcounts.group <- tcounts.tot %>%
       tidyr::pivot_wider(names_from = "variable", values_from = "sum")
     colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
@@ -329,9 +358,10 @@ remove_low_count_genes <- function(counts_matrix, sample_metadata,
   return(df.filt)
 }
 
-old_filt_cpm <- function(counts_matrix, sample_metadata,
+old_filt_cpm <- function(counts_matrix,
+                         sample_metadata,
                          gene_names_column,
-                         groups_column,
+                         group_column,
                          use_cpm_counts_to_filter = TRUE,
                          Use_Group_Based_Filtering = FALSE,
                          Minimum_Count_Value_to_be_Considered_Nonzero = 8,
@@ -364,10 +394,10 @@ old_filt_cpm <- function(counts_matrix, sample_metadata,
 
     tcounts <- as.data.frame(t(counts))
     colnum <- dim(counts)[1] # number of genes
-    tcounts <- merge(sample_metadata[groups_column], tcounts, by = "row.names")
+    tcounts <- merge(sample_metadata[group_column], tcounts, by = "row.names")
     tcounts$Row.names <- NULL
-    melted <- reshape2::melt(tcounts, id.vars = groups_column)
-    tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(groups_column, "variable")), sum = sum(value))
+    melted <- reshape2::melt(tcounts, id.vars = group_column)
+    tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(group_column, "variable")), sum = sum(value))
     tcounts.group <- tcounts.tot %>%
       tidyr::pivot_wider(names_from = "variable", values_from = "sum")
     colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
