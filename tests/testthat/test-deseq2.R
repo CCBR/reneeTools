@@ -23,7 +23,7 @@ test_that("run_deseq2 works", {
 
   min_count <- 10
   genes_above_threshold <- renee_ds@counts$raw %>%
-    tidyr::pivot_longer(!c("gene_id", "GeneName"),
+    tidyr::pivot_longer(!tidyselect::any_of(c("gene_id", "GeneName")),
       names_to = "sample_id", values_to = "count"
     ) %>%
     dplyr::group_by(gene_id) %>%
@@ -33,7 +33,7 @@ test_that("run_deseq2 works", {
   renee_ds@counts$filt <- renee_ds@counts$raw %>%
     dplyr::filter(gene_id %in% (genes_above_threshold))
   renee_ds <- renee_ds %>%
-    run_deseq2(renee_ds, design = ~condition, fitType = "local") %>%
+    run_deseq2(renee_ds, design = ~condition, fitType = "local", gene_colname = "gene_id") %>%
     suppressMessages()
   dds <- renee_ds@analyses$deseq2_ds
 
@@ -90,9 +90,9 @@ test_that("run_deseq2 works", {
       ),
       class = "data.frame",
       row.names = c(
-        "ENSG00000185658.13",
-        "ENSG00000233922.2",
-        "ENSG00000157601.14"
+        "ENSG00000185658.13|BRWD1",
+        "ENSG00000233922.2|LINC01694",
+        "ENSG00000157601.14|MX1"
       )
     )
   )
