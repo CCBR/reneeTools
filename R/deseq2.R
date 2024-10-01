@@ -29,7 +29,9 @@ S7::method(run_deseq2, reneeDataSet) <- function(renee_ds, design, gene_colname 
     stop("renee_ds must contain filtered counts for DESeq2. Hint: Did you forget to run filter_counts()?")
   }
   dds <- DESeq2::DESeqDataSetFromMatrix(
-    countData = renee_ds@counts$filt %>% counts_dat_to_matrix(gene_colname = gene_colname),
+    countData = renee_ds@counts$filt %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.numeric), round)) %>% # DESeq2 requires integer counts
+      counts_dat_to_matrix(gene_colname = gene_colname),
     colData = renee_ds@sample_meta,
     design = design
   )
