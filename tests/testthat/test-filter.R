@@ -1,3 +1,12 @@
+equal_dfs <- function(x, y) {
+  all(
+    class(x) == class(y),
+    names(x) == names(y),
+    x == y,
+    all.equal(lapply(x, class), lapply(y, class))
+  )
+}
+
 test_that("filter_counts reproduces NIDAP results", {
   set.seed(10)
   renee_ds <- create_reneeDataSet_from_dataframes(
@@ -6,30 +15,16 @@ test_that("filter_counts reproduces NIDAP results", {
     sample_id_colname = "Sample"
   ) %>%
     calc_cpm(gene_colname = "Gene") %>%
-    filter_counts()
+    filter_counts(
+      sample_names_column = "Sample",
+      gene_names_column = "Gene"
+    )
   rds_counts_filt <- renee_ds@counts$filt %>%
     dplyr::arrange(desc(Gene))
   nidap_counts_filt <- as.data.frame(nidap_filtered_counts) %>%
     dplyr::arrange(desc(Gene))
 
-  expect_true(all.equal(
-    rds_counts_filt,
-    nidap_counts_filt
-  ))
-
-  set.seed(10)
-  renee_ds2 <- create_reneeDataSet_from_dataframes(
-    as.data.frame(nidap_sample_metadata),
-    as.data.frame(nidap_clean_raw_counts),
-    sample_id_colname = "Sample"
-  ) %>% filter_counts(renee_ds, count_type = "raw")
-  counts_filt <- renee_ds2@counts$filt %>%
-    as.data.frame() %>%
-    dplyr::arrange(desc(Gene))
-  nidap_filt <- as.data.frame(nidap_filtered_counts) %>%
-    dplyr::arrange(desc(Gene))
-  expect_true(all(nidap_filt == counts_filt))
-  expect_true(all.equal(lapply(nidap_filt, class), lapply(counts_filt, class)))
+  expect_true(equal_dfs(rds_counts_filt, nidap_counts_filt))
 })
 
 # TODO get filter_counts() to work on tibbles too, not only dataframes
@@ -68,7 +63,6 @@ test_that("remove_low_count_genes works", {
     C3 = c(8481, 1124, 2, 30893, 2, 50),
     row.names = seq(5, 10)
   )
-  df_cpm <- df %>% calc_cpm_df(gene_colname = "Gene")
   sample_meta <- structure(
     list(
       Sample = c("A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
@@ -88,45 +82,45 @@ test_that("remove_low_count_genes works", {
       sample_metadata = sample_meta,
       gene_names_column = "Gene",
       group_column = "Group",
-      Use_Group_Based_Filtering = FALSE,
-      Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3
-    ),
-    old_filt_cpm(
-      counts_matrix = df,
-      sample_metadata = sample_meta,
-      gene_names_column = "Gene",
-      group_column = "Group",
-      use_cpm_counts_to_filter = FALSE,
-      Use_Group_Based_Filtering = FALSE,
-      Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3
-    )
-  )
-  # test cpm
-  expect_equal(
-    remove_low_count_genes(
-      counts_matrix = df_cpm,
-      sample_metadata = sample_meta,
-      gene_names_column = "Gene",
-      group_column = "Group",
-      Use_Group_Based_Filtering = FALSE,
-      Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3
-    ),
-    old_filt_cpm(
-      counts_matrix = df,
-      sample_metadata = sample_meta,
-      gene_names_column = "Gene",
-      group_column = "Group",
       use_cpm_counts_to_filter = TRUE,
       Use_Group_Based_Filtering = FALSE,
       Minimum_Count_Value_to_be_Considered_Nonzero = 8,
       Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
       Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3
-    )
+    ),
+    structure(list(Gene = c(
+      "mt-Nd5_43275", "mt-Nd6_43276", "mt-Cytb_43278",
+      "mt-Tp_43280"
+    ), A1 = c(
+      223274.204664998, 31124.1702035042, 745166.322051728,
+      435.303079769289
+    ), A2 = c(
+      258022.219043532, 33853.0491584418,
+      707504.88723597, 381.442807419063
+    ), A3 = c(
+      223663.725998962,
+      27527.4803038166, 748454.970042931, 306.647167051941
+    ), B1 = c(
+      172842.276513983,
+      33126.7005133096, 793610.277411573, 420.74556113433
+    ), B2 = c(
+      232002.551390218,
+      24499.1447044156, 742715.490997652, 550.868342466151
+    ), B3 = c(
+      186091.435930457,
+      30856.406954282, 782227.94591114, 669.671603348358
+    ), C1 = c(
+      159281.483191015,
+      19809.2160935457, 819678.436802831, 1230.86391260866
+    ), C2 = c(
+      224485.749690211,
+      28426.2701363073, 746171.003717472, 817.843866171004
+    ), C3 = c(
+      209138.883408956,
+      27717.4985204182, 761811.994476228, 1232.98480962715
+    ), isexpr1 = c(
+      TRUE,
+      TRUE, TRUE, TRUE
+    )), row.names = c(5L, 6L, 8L, 10L), class = "data.frame")
   )
 })

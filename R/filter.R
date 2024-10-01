@@ -67,7 +67,7 @@
 #' head(renee_ds2@counts$filt)
 #'
 filter_counts <- function(renee_ds,
-                          count_type = "cpm",
+                          count_type = "raw",
                           gene_names_column = "gene_id",
                           sample_names_column = "sample_id",
                           group_column = "Group",
@@ -76,6 +76,7 @@ filter_counts <- function(renee_ds,
                           outlier_samples_to_remove = c(),
                           Minimum_Count_Value_to_be_Considered_Nonzero = 8,
                           Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
+                          use_cpm_counts_to_filter = TRUE,
                           Use_Group_Based_Filtering = FALSE,
                           Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3,
                           principal_component_on_x_axis = 1,
@@ -187,6 +188,7 @@ filter_counts <- function(renee_ds,
     sample_metadata = sample_metadata,
     gene_names_column = gene_names_column,
     group_column = group_column,
+    use_cpm_counts_to_filter = use_cpm_counts_to_filter,
     Use_Group_Based_Filtering = Use_Group_Based_Filtering,
     Minimum_Count_Value_to_be_Considered_Nonzero = Minimum_Count_Value_to_be_Considered_Nonzero,
     Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total,
@@ -293,7 +295,7 @@ filter_counts <- function(renee_ds,
       }
     }
   }
-  df.final <- df %>% # TODO ask Phil if we should actually use df.filt here instead of raw counts
+  df.final <- df %>%
     dplyr::filter(!!rlang::sym(gene_names_column) %in% df.filt[, gene_names_column])
   df.final <- merge(anno_tbl, df.final, by = gene_names_column, all.y = T)
   df.final[, gene_names_column] <- gsub("_[0-9]+$", "", df.final[, gene_names_column])
@@ -317,6 +319,7 @@ remove_low_count_genes <- function(counts_matrix,
                                    sample_metadata,
                                    gene_names_column,
                                    group_column,
+                                   use_cpm_counts_to_filter = TRUE,
                                    Use_Group_Based_Filtering = FALSE,
                                    Minimum_Count_Value_to_be_Considered_Nonzero = 8,
                                    Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
@@ -325,66 +328,12 @@ remove_low_count_genes <- function(counts_matrix,
   df <- counts_matrix
 
   df <- df[stats::complete.cases(df), ]
-  ## duplicate Rows should be removed in Clean_Raw_Counts template
-  # df %>% dplyr::group_by(.data[[gene_names_column]]) %>% summarise_all(sum) %>% as.data.frame() -> df
-  # print(paste0("Number of features before filtering: ", nrow(df)))
-  trans.df <- df
-
-  if (Use_Group_Based_Filtering == TRUE) {
-    rownames(trans.df) <- trans.df[, gene_names_column]
-    trans.df[, gene_names_column] <- NULL
-
-    counts <- trans.df >= Minimum_Count_Value_to_be_Considered_Nonzero # boolean matrix
-
-    tcounts <- as.data.frame(t(counts))
-    colnum <- dim(counts)[1] # number of genes
-    tcounts <- merge(sample_metadata[group_column], tcounts, by = "row.names")
-    tcounts$Row.names <- NULL
-    melted <- reshape2::melt(tcounts, id.vars = group_column)
-    tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(group_column, "variable")), sum = sum(value))
-    tcounts.group <- tcounts.tot %>%
-      tidyr::pivot_wider(names_from = "variable", values_from = "sum")
-    colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
-    df.filt <- trans.df[tcounts.keep, ]
-    df.filt %>% tibble::rownames_to_column(gene_names_column) -> df.filt
-  } else {
-    trans.df$isexpr1 <- rowSums(as.matrix(trans.df[, -1]) > Minimum_Count_Value_to_be_Considered_Nonzero) >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total
-
-    df.filt <- as.data.frame(trans.df[trans.df$isexpr1, ])
-  }
-
-  # colnames(df.filt)[colnames(df.filt)==gene_names_column] <- "Gene"
-  # print(paste0("Number of features after filtering: ", nrow(df.filt)))
-  return(df.filt)
-}
-
-old_filt_cpm <- function(counts_matrix,
-                         sample_metadata,
-                         gene_names_column,
-                         group_column,
-                         use_cpm_counts_to_filter = TRUE,
-                         Use_Group_Based_Filtering = FALSE,
-                         Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-                         Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-                         Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3) {
-  value <- NULL
-  df <- counts_matrix
-
-  df <- df[stats::complete.cases(df), ]
-  ## duplicate Rows should be removed in Clean_Raw_Counts template
-  # df %>% dplyr::group_by(.data[[gene_names_column]]) %>% summarise_all(sum) %>% as.data.frame() -> df
-  # print(paste0("Number of features before filtering: ", nrow(df)))
 
   ## USE CPM Transformation
+  trans.df <- df
   if (use_cpm_counts_to_filter == TRUE) {
-    trans.df <- df
     trans.df[, -1] <- edgeR::cpm(as.matrix(df[, -1]))
-    counts_label <- "Filtered Counts (CPM)"
-  } else {
-    trans.df <- df
-    counts_label <- "Filtered Counts"
   }
-
 
   if (Use_Group_Based_Filtering == TRUE) {
     rownames(trans.df) <- trans.df[, gene_names_column]

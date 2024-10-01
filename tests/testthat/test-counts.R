@@ -28,11 +28,11 @@ test_that("calc_cpm works on RENEE data", {
   )
   renee_ds <- create_reneeDataSet_from_dataframes(
     sample_meta,
-    gene_counts %>% select(-GeneName)
+    gene_counts %>% dplyr::select(-GeneName)
   )
   renee_ds <- renee_ds %>% calc_cpm()
   cpm_edger <- gene_counts %>%
-    select(-GeneName) %>%
+    dplyr::select(-GeneName) %>%
     counts_dat_to_matrix() %>%
     edgeR::cpm() %>%
     as.data.frame() %>%
