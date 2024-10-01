@@ -86,7 +86,9 @@ counts_dat_to_matrix <- function(counts_tbl, gene_colname = "gene_id") {
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' data.frame(a = c(0, 0.1, 2.3, 5L, 6.9)) %>% as_integer_df()
+#' }
 as_integer_df <- function(counts_tbl) {
   counts_tbl %>%
     # deseq2 requires integer counts
