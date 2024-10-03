@@ -26,10 +26,10 @@
 #' @param label_column
 #' @param columns_to_include
 #' @param outlier_samples_to_remove
-#' @param Minimum_Count_Value_to_be_Considered_Nonzero
-#' @param Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total
-#' @param Use_Group_Based_Filtering
-#' @param Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group
+#' @param minimum_count_value_to_be_considered_nonzero
+#' @param minimum_number_of_samples_with_nonzero_counts_in_total
+#' @param use_group_based_filtering
+#' @param minimum_number_of_samples_with_nonzero_counts_in_a_group
 #' @param principal_component_on_x_axis
 #' @param principal_component_on_y_axis
 #' @param legend_position_for_pca
@@ -74,11 +74,11 @@ filter_counts <- function(renee_ds,
                           label_column = "Label",
                           columns_to_include = c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
                           outlier_samples_to_remove = c(),
-                          Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-                          Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
+                          minimum_count_value_to_be_considered_nonzero = 8,
+                          minimum_number_of_samples_with_nonzero_counts_in_total = 7,
                           use_cpm_counts_to_filter = TRUE,
-                          Use_Group_Based_Filtering = FALSE,
-                          Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3,
+                          use_group_based_filtering = FALSE,
+                          minimum_number_of_samples_with_nonzero_counts_in_a_group = 3,
                           principal_component_on_x_axis = 1,
                           principal_component_on_y_axis = 2,
                           legend_position_for_pca = "top",
@@ -189,10 +189,10 @@ filter_counts <- function(renee_ds,
     gene_names_column = gene_names_column,
     group_column = group_column,
     use_cpm_counts_to_filter = use_cpm_counts_to_filter,
-    Use_Group_Based_Filtering = Use_Group_Based_Filtering,
-    Minimum_Count_Value_to_be_Considered_Nonzero = Minimum_Count_Value_to_be_Considered_Nonzero,
-    Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total,
-    Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group
+    use_group_based_filtering = use_group_based_filtering,
+    minimum_count_value_to_be_considered_nonzero = minimum_count_value_to_be_considered_nonzero,
+    minimum_number_of_samples_with_nonzero_counts_in_total = minimum_number_of_samples_with_nonzero_counts_in_total,
+    minimum_number_of_samples_with_nonzero_counts_in_a_group = minimum_number_of_samples_with_nonzero_counts_in_a_group
   )
 
 
@@ -320,10 +320,10 @@ remove_low_count_genes <- function(counts_matrix,
                                    gene_names_column,
                                    group_column,
                                    use_cpm_counts_to_filter = TRUE,
-                                   Use_Group_Based_Filtering = FALSE,
-                                   Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-                                   Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-                                   Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3) {
+                                   use_group_based_filtering = FALSE,
+                                   minimum_count_value_to_be_considered_nonzero = 8,
+                                   minimum_number_of_samples_with_nonzero_counts_in_total = 7,
+                                   minimum_number_of_samples_with_nonzero_counts_in_a_group = 3) {
   value <- NULL
   df <- counts_matrix
 
@@ -335,11 +335,11 @@ remove_low_count_genes <- function(counts_matrix,
     trans.df[, -1] <- edgeR::cpm(as.matrix(df[, -1]))
   }
 
-  if (Use_Group_Based_Filtering == TRUE) {
+  if (use_group_based_filtering == TRUE) {
     rownames(trans.df) <- trans.df[, gene_names_column]
     trans.df[, gene_names_column] <- NULL
 
-    counts <- trans.df >= Minimum_Count_Value_to_be_Considered_Nonzero # boolean matrix
+    counts <- trans.df >= minimum_count_value_to_be_considered_nonzero # boolean matrix
 
     tcounts <- as.data.frame(t(counts))
     colnum <- dim(counts)[1] # number of genes
@@ -349,11 +349,11 @@ remove_low_count_genes <- function(counts_matrix,
     tcounts.tot <- dplyr::summarise(dplyr::group_by_at(melted, c(group_column, "variable")), sum = sum(value))
     tcounts.group <- tcounts.tot %>%
       tidyr::pivot_wider(names_from = "variable", values_from = "sum")
-    colSums(tcounts.group[(1:colnum + 1)] >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group) >= 1 -> tcounts.keep
+    colSums(tcounts.group[(1:colnum + 1)] >= minimum_number_of_samples_with_nonzero_counts_in_a_group) >= 1 -> tcounts.keep
     df.filt <- trans.df[tcounts.keep, ]
     df.filt %>% tibble::rownames_to_column(gene_names_column) -> df.filt
   } else {
-    trans.df$isexpr1 <- rowSums(as.matrix(trans.df[, -1]) > Minimum_Count_Value_to_be_Considered_Nonzero) >= Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total
+    trans.df$isexpr1 <- rowSums(as.matrix(trans.df[, -1]) > minimum_count_value_to_be_considered_nonzero) >= minimum_number_of_samples_with_nonzero_counts_in_total
 
     df.filt <- as.data.frame(trans.df[trans.df$isexpr1, ])
   }

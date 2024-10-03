@@ -83,10 +83,10 @@ test_that("remove_low_count_genes works", {
       gene_names_column = "Gene",
       group_column = "Group",
       use_cpm_counts_to_filter = TRUE,
-      Use_Group_Based_Filtering = FALSE,
-      Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-      Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3
+      use_group_based_filtering = FALSE,
+      minimum_count_value_to_be_considered_nonzero = 8,
+      minimum_number_of_samples_with_nonzero_counts_in_total = 7,
+      minimum_number_of_samples_with_nonzero_counts_in_a_group = 3
     ),
     structure(list(Gene = c(
       "mt-Nd5_43275", "mt-Nd6_43276", "mt-Cytb_43278",
