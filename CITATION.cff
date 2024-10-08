@@ -433,6 +433,29 @@ references:
   year: '2024'
   doi: 10.32614/CRAN.package.knitr
 - type: software
+  title: lobstr
+  abstract: 'lobstr: Visualize R Data Structures with Trees'
+  notes: Suggests
+  url: https://lobstr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lobstr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2024'
+  doi: 10.32614/CRAN.package.lobstr
+- type: software
+  title: RColorBrewer
+  abstract: 'RColorBrewer: ColorBrewer Palettes'
+  notes: Suggests
+  repository: https://CRAN.R-project.org/package=RColorBrewer
+  authors:
+  - family-names: Neuwirth
+    given-names: Erich
+    email: erich.neuwirth@univie.ac.at
+  year: '2024'
+  doi: 10.32614/CRAN.package.RColorBrewer
+- type: software
   title: readr
   abstract: 'readr: Read Rectangular Text Data'
   notes: Suggests
