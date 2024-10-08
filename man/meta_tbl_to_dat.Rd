@@ -19,7 +19,7 @@ Convert sample metadata from a tibble to a dataframe with sample IDs as row name
 }
 \examples{
 sample_meta_tbl <- readr::read_tsv(system.file("extdata",
-  "sample_metadata.tsv",
+  "sample_metadata.tsv.gz",
   package = "reneeTools"
 ))
 head(sample_meta_tbl)

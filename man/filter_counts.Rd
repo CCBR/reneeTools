@@ -139,12 +139,12 @@ renee_ds <- create_reneeDataSet_from_dataframes(
   as.data.frame(nidap_sample_metadata),
   as.data.frame(nidap_clean_raw_counts),
   sample_id_colname = "Sample"
-  ) \%>\%
-    calc_cpm(gene_colname = "Gene") \%>\%
-    filter_counts(
-      sample_names_column = "Sample",
-      gene_names_column = "Gene"
-    )
+) \%>\%
+  calc_cpm(gene_colname = "Gene") \%>\%
+  filter_counts(
+    sample_names_column = "Sample",
+    gene_names_column = "Gene"
+  )
 head(renee_ds@counts$filt)
 
 }
