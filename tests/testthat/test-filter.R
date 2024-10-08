@@ -29,18 +29,69 @@ test_that("filter_counts reproduces NIDAP results", {
 
 # TODO get filter_counts() to work on tibbles too, not only dataframes
 
-# TODO fails on RENEE dataset, R session aborts
-# test_that('filter_counts works on RENEE dataset', {
-#   renee_ds <- create_reneeDataSet_from_files(
-#     system.file("extdata", "sample_metadata.tsv.gz", package = "reneeTools"),
-#     system.file("extdata", "RSEM.genes.expected_count.all_samples.txt.gz", package = "reneeTools")
-#   )
-#   rds2 <- renee_ds %>% filter_counts(gene_names_column = 'gene_id',
-#                              sample_names_column = 'sample_id',
-#                              group_column = 'condition',
-#                              label_column = 'sample_id',
-#                              columns_to_include = c("gene_id", "KO_S3", "KO_S4", "WT_S1", "WT_S2"))
-# })
+test_that("filter_counts works on RENEE dataset", {
+  renee_ds <- create_reneeDataSet_from_files(
+    system.file("extdata", "sample_metadata.tsv.gz", package = "reneeTools"),
+    system.file(
+      "extdata",
+      "RSEM.genes.expected_count.all_samples.txt.gz",
+      package = "reneeTools"
+    )
+  )
+  rds2 <- renee_ds %>% filter_counts(
+    gene_names_column = "gene_id",
+    sample_names_column = "sample_id",
+    group_column = "condition",
+    label_column = "sample_id",
+    columns_to_include = c("gene_id", "KO_S3", "KO_S4", "WT_S1", "WT_S2"),
+    minimum_count_value_to_be_considered_nonzero = 1,
+    minimum_number_of_samples_with_nonzero_counts_in_total = 1,
+    minimum_number_of_samples_with_nonzero_counts_in_a_group = 1,
+    make_plots = FALSE
+  )
+  expect_equal(
+    rds2@counts$filt %>% head(),
+    structure(
+      list(
+        gene_id = c(
+          "ENSG00000072803.17|FBXW11",
+          "ENSG00000083845.9|RPS5",
+          "ENSG00000107371.13|EXOSC3",
+          "ENSG00000111639.8|MRPL51",
+          "ENSG00000111640.15|GAPDH",
+          "ENSG00000111786.9|SRSF9"
+        ),
+        KO_S3 = c(2, 1, 1, 0, 0, 0),
+        KO_S4 = c(0, 0, 1, 1, 1, 1),
+        WT_S1 = c(0, 0, 0, 0, 0, 0),
+        WT_S2 = c(0, 0, 0, 0, 0, 0)
+      ),
+      row.names = c(NA, 6L),
+      class = "data.frame"
+    )
+  )
+  expect_equal(
+    rds2@counts$filt %>% tail(),
+    structure(
+      list(
+        gene_id = c(
+          "ENSG00000281903.2|LINC02246",
+          "ENSG00000282393.1|AC016588.2",
+          "ENSG00000283886.2|BX664615.2",
+          "ENSG00000285413.1|AP001056.2",
+          "ENSG00000286018.1|AF129075.3",
+          "ENSG00000286104.1|AC016629.3"
+        ),
+        KO_S3 = c(0.85, 0, 1, 3, 2, 1),
+        KO_S4 = c(0, 1, 0, 1, 0, 0),
+        WT_S1 = c(0, 0, 0, 0, 0, 0),
+        WT_S2 = c(0.71, 0, 0, 0, 0, 0)
+      ),
+      row.names = 286:291,
+      class = "data.frame"
+    )
+  )
+})
 
 test_that("remove_low_count_genes works", {
   df <- data.frame(
@@ -88,39 +139,72 @@ test_that("remove_low_count_genes works", {
       minimum_number_of_samples_with_nonzero_counts_in_total = 7,
       minimum_number_of_samples_with_nonzero_counts_in_a_group = 3
     ),
-    structure(list(Gene = c(
-      "mt-Nd5_43275", "mt-Nd6_43276", "mt-Cytb_43278",
-      "mt-Tp_43280"
-    ), A1 = c(
-      223274.204664998, 31124.1702035042, 745166.322051728,
-      435.303079769289
-    ), A2 = c(
-      258022.219043532, 33853.0491584418,
-      707504.88723597, 381.442807419063
-    ), A3 = c(
-      223663.725998962,
-      27527.4803038166, 748454.970042931, 306.647167051941
-    ), B1 = c(
-      172842.276513983,
-      33126.7005133096, 793610.277411573, 420.74556113433
-    ), B2 = c(
-      232002.551390218,
-      24499.1447044156, 742715.490997652, 550.868342466151
-    ), B3 = c(
-      186091.435930457,
-      30856.406954282, 782227.94591114, 669.671603348358
-    ), C1 = c(
-      159281.483191015,
-      19809.2160935457, 819678.436802831, 1230.86391260866
-    ), C2 = c(
-      224485.749690211,
-      28426.2701363073, 746171.003717472, 817.843866171004
-    ), C3 = c(
-      209138.883408956,
-      27717.4985204182, 761811.994476228, 1232.98480962715
-    ), isexpr1 = c(
-      TRUE,
-      TRUE, TRUE, TRUE
-    )), row.names = c(5L, 6L, 8L, 10L), class = "data.frame")
+    structure(
+      list(
+        Gene = c(
+          "mt-Nd5_43275",
+          "mt-Nd6_43276",
+          "mt-Cytb_43278",
+          "mt-Tp_43280"
+        ),
+        A1 = c(
+          223274.204664998,
+          31124.1702035042,
+          745166.322051728,
+          435.303079769289
+        ),
+        A2 = c(
+          258022.219043532,
+          33853.0491584418,
+          707504.88723597,
+          381.442807419063
+        ),
+        A3 = c(
+          223663.725998962,
+          27527.4803038166,
+          748454.970042931,
+          306.647167051941
+        ),
+        B1 = c(
+          172842.276513983,
+          33126.7005133096,
+          793610.277411573,
+          420.74556113433
+        ),
+        B2 = c(
+          232002.551390218,
+          24499.1447044156,
+          742715.490997652,
+          550.868342466151
+        ),
+        B3 = c(
+          186091.435930457,
+          30856.406954282,
+          782227.94591114,
+          669.671603348358
+        ),
+        C1 = c(
+          159281.483191015,
+          19809.2160935457,
+          819678.436802831,
+          1230.86391260866
+        ),
+        C2 = c(
+          224485.749690211,
+          28426.2701363073,
+          746171.003717472,
+          817.843866171004
+        ),
+        C3 = c(
+          209138.883408956,
+          27717.4985204182,
+          761811.994476228,
+          1232.98480962715
+        ),
+        isexpr1 = c(TRUE, TRUE, TRUE, TRUE)
+      ),
+      row.names = c(5L, 6L, 8L, 10L),
+      class = "data.frame"
+    )
   )
 })
