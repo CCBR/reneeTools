@@ -1,9 +1,8 @@
 #' reneeDataSet class
 #'
-#' @param count_dat expected gene counts from RSEM as a data frame or tibble.
-#'   Must contain a `gene_id` column and a column for each sample ID in the metadata.
 #' @param sample_meta_dat sample metadata as a data frame or tibble.
 #'   Must contain a `sample_id` column.
+#' @param counts_lst named list of dataframes containing counts, e.g. expected gene counts from RSEM. Each data frame is expected to contain a `gene_id` column and a column for each sample ID in the metadata.
 #'
 #'
 reneeDataSet <- S7::new_class("renee",
@@ -34,6 +33,8 @@ reneeDataSet <- S7::new_class("renee",
 #'
 #' @param sample_meta_filepath path to tsv file with sample IDs and metadata for differential analysis.
 #' @param gene_counts_filepath path to tsv file of expected gene counts from RSEM.
+#' @param count_type type to assign the values of `gene_counts_filepath` to in the `counts` slot
+#' @param sample_id_colname name of the column in `sample_meta_filepath` that contains the sample IDs
 #'
 #' @return reneeDataSet object
 #' @export
@@ -67,6 +68,8 @@ create_reneeDataSet_from_files <- function(sample_meta_filepath, gene_counts_fil
 #' Construct a reneeDataSet object from data frames
 #'
 #' @inheritParams reneeDataSet
+#' @inheritParams create_reneeDataSet_from_files
+#' @param count_dat data frame of feature counts (e.g. expected gene counts from RSEM)
 #'
 #' @return reneeDataSet object
 #' @export

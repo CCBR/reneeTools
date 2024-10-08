@@ -9,13 +9,15 @@ rename_samples(dat, samples_to_rename_manually)
 \arguments{
 \item{dat}{data frame containing a \code{sample} column}
 
-\item{samples_to_rename_manually}{TODO ask Phil for expected format}
+\item{samples_to_rename_manually}{TODO use sample metadata spreadsheet custom column}
 }
 \value{
 data frame with samples renamed
 }
 \description{
-TODO this should probably be performed earlier on in the template?
-why wait til after PCA is calculated?
+TODO this should happen right at the beginning of the template?
+}
+\details{
+TODO accept new names for samples in sample metadata spreadsheet
 }
 \keyword{internal}

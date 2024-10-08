@@ -8,6 +8,8 @@ meta_tbl_to_dat(meta_tbl, sample_id_colname = sample_id)
 }
 \arguments{
 \item{meta_tbl}{tibble with \code{sample_id} column}
+
+\item{sample_id_colname}{name of the column in \code{sample_meta_filepath} that contains the sample IDs}
 }
 \value{
 dataframe where row names are the sample IDs

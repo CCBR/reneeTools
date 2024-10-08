@@ -6,22 +6,23 @@
 \usage{
 filter_counts(
   renee_ds,
-  gene_names_column = "Gene",
-  sample_names_column = "Sample",
-  groups_column = "Group",
-  labels_column = "Label",
+  count_type = "raw",
+  gene_names_column = "gene_id",
+  sample_names_column = "sample_id",
+  group_column = "Group",
+  label_column = "Label",
   columns_to_include = c("Gene", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"),
   outlier_samples_to_remove = c(),
+  minimum_count_value_to_be_considered_nonzero = 8,
+  minimum_number_of_samples_with_nonzero_counts_in_total = 7,
   use_cpm_counts_to_filter = TRUE,
-  Minimum_Count_Value_to_be_Considered_Nonzero = 8,
-  Minimum_Number_of_Samples_with_Nonzero_Counts_in_Total = 7,
-  Use_Group_Based_Filtering = FALSE,
-  Minimum_Number_of_Samples_with_Nonzero_Counts_in_a_Group = 3,
+  use_group_based_filtering = FALSE,
+  minimum_number_of_samples_with_nonzero_counts_in_a_group = 3,
   principal_component_on_x_axis = 1,
   principal_component_on_y_axis = 2,
   legend_position_for_pca = "top",
   point_size_for_pca = 1,
-  add_labels_to_pca = TRUE,
+  add_label_to_pca = TRUE,
   label_font_size = 3,
   label_offset_y_ = 2,
   label_offset_x_ = 2,
@@ -37,28 +38,113 @@ filter_counts(
     "coral", "azure", "green", "rum", "orange", "olive"),
   number_of_image_rows = 2,
   interactive_plots = FALSE,
-  plot_correlation_matrix_heatmap = TRUE
+  plot_correlation_matrix_heatmap = TRUE,
+  make_plots = TRUE
 )
 }
 \arguments{
-\item{counts_matrix}{The input Counts Matrix. Usually, this will be your Cleaned Counts matrix.}
+\item{renee_ds}{reneeDataSet object (see \code{create_reneeDataSet_from_dataframes()})}
 
-\item{sample_metadata}{The Sample Metadata table containing your sample metadata. At minimum, this table must include one column each of the following: Samples, Groups, Batches, and Labels. The names in the Samples column of your input Sample Metadata must match the Sample Column Names of your input Counts Matrix exactly. You may have more than one column showing different Groups by which your samples may be organized (e.g. Genotype, Response, Time, etc.).}
+\item{count_type}{the type of counts to use -- must be a name in the counts slot (\code{renee_ds@counts})}
+
+\item{gene_names_column}{The column from your input Counts Matrix containing the Feature IDs (Usually Gene or Protein ID). This is usually the first column of your input Counts Matrix. Only columns of Text type from your input Counts Matrix will be available to select for this parameter.}
+
+\item{sample_names_column}{The column from your input Sample Metadata table containing the sample names. The names in this column must exactly match the names used as the sample column names of your input Counts Matrix. Only columns of Text type from your input Sample Metadata table will be available to select for this parameter.}
+
+\item{group_column}{The column from your input Sample Metadata table containing the sample group information. This is usually a column showing to which experimental treatments each sample belongs (e.g. WildType, Knockout, Tumor, Normal, Before, After, etc.). Only columns of Text type from your input Sample Metadata will be available to select for this parameter.}
+
+\item{label_column}{The column from your input Sample Metadata table containing the sample labels as you wish them to appear in the plots produced by this template. This can be the same Sample Names Column. However, you may desire different labels to display on your figure (e.g. shorter labels are sometimes preferred on plots). In that case, select the column with your preferred Labels here. The selected column should contain unique names for each sample.}
+
+\item{columns_to_include}{Which Columns would you like to include? Usually, you will choose to a feature ID column (e.g. gene or protein ID) and all sample columns. Columns excluded here will be removed in this step and from further analysis downstream of this step.}
+
+\item{outlier_samples_to_remove}{A list of sample names to remove from the analysis.}
+
+\item{minimum_count_value_to_be_considered_nonzero}{Minimum count value to be considered non-zero for a sample}
+
+\item{minimum_number_of_samples_with_nonzero_counts_in_total}{Minimum number of samples (total) with non-zero counts}
+
+\item{use_cpm_counts_to_filter}{If no transformation has been been performed on counts matrix (eg Raw Counts) set to TRUE. If TRUE counts will be transformed to CPM and filtered based on given criteria. If gene counts matrix has been transformed (eg log2, CPM, FPKM or some form of Normalization) set to FALSE. If FALSE no further transformation will be applied and features will be filtered as is. For RNAseq data RAW counts should be transformed to CPM in order to properly filter.}
+
+\item{use_group_based_filtering}{If TRUE, only keeps features (e.g. genes) that have at least a certain number of samples with nonzero CPM counts in at least one group}
+
+\item{minimum_number_of_samples_with_nonzero_counts_in_a_group}{Only keeps genes that have at least this number of samples with nonzero CPM counts in at least one group}
+
+\item{principal_component_on_x_axis}{The principle component to plot on the x-axis for the PCA plot. Choices include 1, 2, 3, ... (default: 1)}
+
+\item{principal_component_on_y_axis}{The principle component to plot on the y-axis for the PCA plot. Choices include 1, 2, 3, ... (default: 2)}
+
+\item{legend_position_for_pca}{legend position for the PCA plot}
+
+\item{point_size_for_pca}{geom point size for the PCA plot}
+
+\item{add_label_to_pca}{label points on the PCA plot}
+
+\item{label_font_size}{label font size for the PCA plot}
+
+\item{label_offset_y_}{label offset y for the PCA plot}
+
+\item{label_offset_x_}{label offset x for the PCA plot}
+
+\item{samples_to_rename_manually}{If you do not have a Plot Labels Column in your sample metadata table, you can use this parameter to rename samples manually for display on the PCA plot. Use "Add item" to add each additional sample for renaming. Use the following format to describe which old name (in your sample metadata table) you want to rename to which new name: old_name: new_name}
+
+\item{color_histogram_by_group}{Set to FALSE to label histogram by Sample Names, or set to TRUE to label histogram by the column you select in the "Group Column Used to Color Histogram" parameter (below). Default is FALSE.}
+
+\item{set_min_max_for_x_axis_for_histogram}{whether to set min/max value for histogram x-axis}
+
+\item{minimum_for_x_axis_for_histogram}{x-axis minimum for histogram plot}
+
+\item{maximum_for_x_axis_for_histogram}{x-axis maximum for histogram plot}
+
+\item{legend_position_for_histogram}{legend position for the histogram plot. consider setting to 'none' for a large number of samples.}
+
+\item{legend_font_size_for_histogram}{legend font size for the histogram plot}
+
+\item{number_of_histogram_legend_columns}{number of columns for the histogram legend}
+
+\item{colors_for_plots}{Colors for the PCA and histogram will be picked, in order, from this list. If you have >12 samples or groups, program will choose from a wide range of random colors}
+
+\item{number_of_image_rows}{number of rows for the plot image. 1 = side-by-side, 2 = stacked}
+
+\item{interactive_plots}{set to TRUE to make PCA and Histogram plots interactive with \code{plotly}, allowing you to hover your mouse over a point or line to view sample information. The similarity heat map will not display if this toggle is set to TRUE. Default is FALSE.}
+
+\item{plot_correlation_matrix_heatmap}{Data sets with a large number of samples may be too large to create a correlation matrix heat map. If this template takes longer than 5 minutes to run, Toggle switch to FALSE and the correlation matrix will not be be created. Default is TRUE.}
+
+\item{make_plots}{whether to create plots}
 }
 \value{
-Filtered counts as a dataframe
+\code{reneeDataSet} with filtered counts
 }
 \description{
-Filter low counts
+This is often the first step in the QC portion of an analysis to filter out
+features that have very low raw counts across most or all of your samples.
+}
+\details{
+This function takes a reneeDataSet containing raw counts and a sample
+metadata table, and returns the reneeDataSet object with filtered counts.
+It also produces an image consisting of three QC plots.
+
+You can tune the threshold for tuning how low counts for a given gene are
+before they are deemed "too low" and filtered out of downstream analysis. By
+default, this parameter is set to 1, meaning any raw count value less than 1
+will count as "too low".
+
+The QC plots are provided to help you assess: (1) PCA Plot: the within and
+between group variance in expression after dimensionality reduction; (2)
+Count Density Histogram: the dis/similarity of count distributions between
+samples; and (3) Similarity Heatmap: the overall similarity of samples to one
+another based on unsupervised clustering.
 }
 \examples{
 renee_ds <- create_reneeDataSet_from_dataframes(
   as.data.frame(nidap_sample_metadata),
   as.data.frame(nidap_clean_raw_counts),
   sample_id_colname = "Sample"
-)
-set.seed(10)
-renee_ds2 <- filter_counts(renee_ds)
-head(renee_ds2@counts[["filt"]])
+  ) \%>\%
+    calc_cpm(gene_colname = "Gene") \%>\%
+    filter_counts(
+      sample_names_column = "Sample",
+      gene_names_column = "Gene"
+    )
+head(renee_ds@counts$filt)
 
 }

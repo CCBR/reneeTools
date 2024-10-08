@@ -8,13 +8,13 @@ validate_sample_metadata(
   counts_matrix,
   sample_metadata,
   sample_names_column = "Sample",
-  groups_column = "Group"
+  group_column = "Group"
 )
 }
 \arguments{
-\item{counts_matrix}{The input Counts Matrix. Usually, this will be your Cleaned Counts matrix.}
+\item{sample_names_column}{The column from your input Sample Metadata table containing the sample names. The names in this column must exactly match the names used as the sample column names of your input Counts Matrix. Only columns of Text type from your input Sample Metadata table will be available to select for this parameter.}
 
-\item{sample_metadata}{The Sample Metadata table containing your sample metadata. At minimum, this table must include one column each of the following: Samples, Groups, Batches, and Labels. The names in the Samples column of your input Sample Metadata must match the Sample Column Names of your input Counts Matrix exactly. You may have more than one column showing different Groups by which your samples may be organized (e.g. Genotype, Response, Time, etc.).}
+\item{group_column}{The column from your input Sample Metadata table containing the sample group information. This is usually a column showing to which experimental treatments each sample belongs (e.g. WildType, Knockout, Tumor, Normal, Before, After, etc.). Only columns of Text type from your input Sample Metadata will be available to select for this parameter.}
 }
 \value{
 sample metadata with empty cells removed and special characters replaced

@@ -8,15 +8,15 @@ plot_heatmap(
   counts_matrix,
   sample_metadata,
   sample_names_column,
-  labels_column,
+  label_column,
   anno_column,
   anno_colors
 )
 }
 \arguments{
-\item{counts_matrix}{The input Counts Matrix. Usually, this will be your Cleaned Counts matrix.}
+\item{sample_names_column}{The column from your input Sample Metadata table containing the sample names. The names in this column must exactly match the names used as the sample column names of your input Counts Matrix. Only columns of Text type from your input Sample Metadata table will be available to select for this parameter.}
 
-\item{sample_metadata}{The Sample Metadata table containing your sample metadata. At minimum, this table must include one column each of the following: Samples, Groups, Batches, and Labels. The names in the Samples column of your input Sample Metadata must match the Sample Column Names of your input Counts Matrix exactly. You may have more than one column showing different Groups by which your samples may be organized (e.g. Genotype, Response, Time, etc.).}
+\item{label_column}{The column from your input Sample Metadata table containing the sample labels as you wish them to appear in the plots produced by this template. This can be the same Sample Names Column. However, you may desire different labels to display on your figure (e.g. shorter labels are sometimes preferred on plots). In that case, select the column with your preferred Labels here. The selected column should contain unique names for each sample.}
 
 \item{anno_column}{annotation (group) column}
 

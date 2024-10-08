@@ -19,39 +19,42 @@
 #' another based on unsupervised clustering.
 #'
 #'
-#' @param renee_ds
-#' @param gene_names_column
-#' @param sample_names_column
-#' @param group_column
-#' @param label_column
-#' @param columns_to_include
-#' @param outlier_samples_to_remove
-#' @param minimum_count_value_to_be_considered_nonzero
-#' @param minimum_number_of_samples_with_nonzero_counts_in_total
-#' @param use_group_based_filtering
-#' @param minimum_number_of_samples_with_nonzero_counts_in_a_group
-#' @param principal_component_on_x_axis
-#' @param principal_component_on_y_axis
-#' @param legend_position_for_pca
-#' @param point_size_for_pca
-#' @param add_label_to_pca
-#' @param label_font_size
-#' @param label_offset_y_
-#' @param label_offset_x_
-#' @param samples_to_rename_manually
-#' @param color_histogram_by_group
-#' @param set_min_max_for_x_axis_for_histogram
-#' @param minimum_for_x_axis_for_histogram
-#' @param maximum_for_x_axis_for_histogram
-#' @param legend_position_for_histogram
-#' @param legend_font_size_for_histogram
-#' @param number_of_histogram_legend_columns
-#' @param colors_for_plots
-#' @param number_of_image_rows
-#' @param interactive_plots
-#' @param plot_correlation_matrix_heatmap
+#' @param renee_ds reneeDataSet object (see `create_reneeDataSet_from_dataframes()`)
+#' @param count_type the type of counts to use -- must be a name in the counts slot (`renee_ds@counts`)
+#' @param gene_names_column The column from your input Counts Matrix containing the Feature IDs (Usually Gene or Protein ID). This is usually the first column of your input Counts Matrix. Only columns of Text type from your input Counts Matrix will be available to select for this parameter.
+#' @param sample_names_column The column from your input Sample Metadata table containing the sample names. The names in this column must exactly match the names used as the sample column names of your input Counts Matrix. Only columns of Text type from your input Sample Metadata table will be available to select for this parameter.
+#' @param group_column The column from your input Sample Metadata table containing the sample group information. This is usually a column showing to which experimental treatments each sample belongs (e.g. WildType, Knockout, Tumor, Normal, Before, After, etc.). Only columns of Text type from your input Sample Metadata will be available to select for this parameter.
+#' @param label_column The column from your input Sample Metadata table containing the sample labels as you wish them to appear in the plots produced by this template. This can be the same Sample Names Column. However, you may desire different labels to display on your figure (e.g. shorter labels are sometimes preferred on plots). In that case, select the column with your preferred Labels here. The selected column should contain unique names for each sample.
+#' @param columns_to_include Which Columns would you like to include? Usually, you will choose to a feature ID column (e.g. gene or protein ID) and all sample columns. Columns excluded here will be removed in this step and from further analysis downstream of this step.
+#' @param outlier_samples_to_remove A list of sample names to remove from the analysis.
+#' @param use_cpm_counts_to_filter If no transformation has been been performed on counts matrix (eg Raw Counts) set to TRUE. If TRUE counts will be transformed to CPM and filtered based on given criteria. If gene counts matrix has been transformed (eg log2, CPM, FPKM or some form of Normalization) set to FALSE. If FALSE no further transformation will be applied and features will be filtered as is. For RNAseq data RAW counts should be transformed to CPM in order to properly filter.
+#' @param minimum_count_value_to_be_considered_nonzero Minimum count value to be considered non-zero for a sample
+#' @param minimum_number_of_samples_with_nonzero_counts_in_total Minimum number of samples (total) with non-zero counts
+#' @param use_group_based_filtering If TRUE, only keeps features (e.g. genes) that have at least a certain number of samples with nonzero CPM counts in at least one group
+#' @param minimum_number_of_samples_with_nonzero_counts_in_a_group Only keeps genes that have at least this number of samples with nonzero CPM counts in at least one group
+#' @param make_plots whether to create plots
+#' @param principal_component_on_x_axis The principle component to plot on the x-axis for the PCA plot. Choices include 1, 2, 3, ... (default: 1)
+#' @param principal_component_on_y_axis The principle component to plot on the y-axis for the PCA plot. Choices include 1, 2, 3, ... (default: 2)
+#' @param legend_position_for_pca legend position for the PCA plot
+#' @param point_size_for_pca geom point size for the PCA plot
+#' @param add_label_to_pca label points on the PCA plot
+#' @param label_font_size label font size for the PCA plot
+#' @param label_offset_y_ label offset y for the PCA plot
+#' @param label_offset_x_ label offset x for the PCA plot
+#' @param samples_to_rename_manually If you do not have a Plot Labels Column in your sample metadata table, you can use this parameter to rename samples manually for display on the PCA plot. Use "Add item" to add each additional sample for renaming. Use the following format to describe which old name (in your sample metadata table) you want to rename to which new name: old_name: new_name
+#' @param color_histogram_by_group Set to FALSE to label histogram by Sample Names, or set to TRUE to label histogram by the column you select in the "Group Column Used to Color Histogram" parameter (below). Default is FALSE.
+#' @param set_min_max_for_x_axis_for_histogram whether to set min/max value for histogram x-axis
+#' @param minimum_for_x_axis_for_histogram x-axis minimum for histogram plot
+#' @param maximum_for_x_axis_for_histogram x-axis maximum for histogram plot
+#' @param legend_position_for_histogram legend position for the histogram plot. consider setting to 'none' for a large number of samples.
+#' @param legend_font_size_for_histogram legend font size for the histogram plot
+#' @param number_of_histogram_legend_columns number of columns for the histogram legend
+#' @param colors_for_plots Colors for the PCA and histogram will be picked, in order, from this list. If you have >12 samples or groups, program will choose from a wide range of random colors
+#' @param number_of_image_rows number of rows for the plot image. 1 = side-by-side, 2 = stacked
+#' @param interactive_plots set to TRUE to make PCA and Histogram plots interactive with `plotly`, allowing you to hover your mouse over a point or line to view sample information. The similarity heat map will not display if this toggle is set to TRUE. Default is FALSE.
+#' @param plot_correlation_matrix_heatmap Data sets with a large number of samples may be too large to create a correlation matrix heat map. If this template takes longer than 5 minutes to run, Toggle switch to FALSE and the correlation matrix will not be be created. Default is TRUE.
 #'
-#' @return reneeDataSet with filtered counts
+#' @return `reneeDataSet` with filtered counts
 #' @export
 #'
 #' @examples
@@ -59,12 +62,13 @@
 #'   as.data.frame(nidap_sample_metadata),
 #'   as.data.frame(nidap_clean_raw_counts),
 #'   sample_id_colname = "Sample"
-#' )
-#' set.seed(10)
-#' renee_ds2 <- renee_ds %>%
-#'   calc_cpm() %>%
-#'   filter_counts()
-#' head(renee_ds2@counts$filt)
+#' ) %>%
+#'   calc_cpm(gene_colname = "Gene") %>%
+#'   filter_counts(
+#'     sample_names_column = "Sample",
+#'     gene_names_column = "Gene"
+#'   )
+#' head(renee_ds@counts$filt)
 #'
 filter_counts <- function(renee_ds,
                           count_type = "raw",

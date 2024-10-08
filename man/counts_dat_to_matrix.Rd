@@ -16,5 +16,8 @@ matrix of gene counts with rows as gene IDs
 Convert a data frame of gene counts to a matrix
 }
 \examples{
+\dontrun{
 counts_dat_to_matrix(head(gene_counts))
 }
+}
+\keyword{internal}

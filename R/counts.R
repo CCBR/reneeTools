@@ -40,7 +40,7 @@ calc_cpm_df <- function(dat, gene_colname = "gene_id", ...) {
   gene_ids <- dat %>% dplyr::pull(gene_colname)
   row_names <- rownames(dat)
   dat_cpm <- dat %>%
-    dplyr::select(-any_of(gene_colname)) %>%
+    dplyr::select(-tidyselect::any_of(gene_colname)) %>%
     as.matrix() %>%
     edgeR::cpm(...) %>%
     as.data.frame()
@@ -61,7 +61,9 @@ calc_cpm_df <- function(dat, gene_colname = "gene_id", ...) {
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' counts_dat_to_matrix(head(gene_counts))
+#' }
 counts_dat_to_matrix <- function(counts_tbl, gene_colname = "gene_id") {
   gene_colnames <- c("gene_id", "GeneName", "gene_name", "Gene", gene_colname) %>%
     unique()

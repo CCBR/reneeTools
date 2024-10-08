@@ -13,10 +13,13 @@ create_reneeDataSet_from_dataframes(
 }
 \arguments{
 \item{sample_meta_dat}{sample metadata as a data frame or tibble.
-Must contain a \code{sample_ID} column.}
+Must contain a \code{sample_id} column.}
 
-\item{count_dat}{expected gene counts from RSEM as a data frame or tibble.
-Must contain a \code{gene_id} column and a column for each sample ID in the metadata.}
+\item{count_dat}{data frame of feature counts (e.g. expected gene counts from RSEM)}
+
+\item{sample_id_colname}{name of the column in \code{sample_meta_filepath} that contains the sample IDs}
+
+\item{count_type}{type to assign the values of \code{gene_counts_filepath} to in the \code{counts} slot}
 }
 \value{
 reneeDataSet object

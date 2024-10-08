@@ -2,6 +2,8 @@
 #'
 #' @param meta_tbl tibble with `sample_id` column
 #'
+#' @inheritParams create_reneeDataSet_from_files
+#'
 #' @return dataframe where row names are the sample IDs
 #' @export
 #'

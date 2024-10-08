@@ -24,6 +24,7 @@ Useful links:
 Authors:
 \itemize{
   \item Kelly Sovacool \email{kelly.sovacool@nih.gov} (\href{https://orcid.org/0000-0003-3283-829X}{ORCID})
+  \item Samantha Chill \email{samantha.chill@nih.gov} (\href{https://orcid.org/0000-0002-8734-9875}{ORCID})
 }
 
 Other contributors:
