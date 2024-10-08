@@ -34,6 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/intro.html">intro</a></li>
+    <li><a class="dropdown-item" href="../articles/memory.html">Memory Usage</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -67,8 +68,6 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CCBR/reneeTools" class="external-link">reneeTools</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by</span></span>
-<span><span class="co">#&gt; 'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -77,14 +76,22 @@
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="co"># replace this line with actual path to your gene counts</span></span>
-<span><span class="va">gene_counts_tsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"RSEM.genes.expected_count.all_samples.txt"</span>, package <span class="op">=</span> <span class="st">"reneeTools"</span><span class="op">)</span></span>
-<span><span class="va">metadata_tsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample_metadata.tsv"</span>, package <span class="op">=</span> <span class="st">"reneeTools"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># replace these lines with the actual paths to your files</span></span>
+<span><span class="va">gene_counts_tsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
+<span>  <span class="st">"RSEM.genes.expected_count.all_samples.txt.gz"</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"reneeTools"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">metadata_tsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample_metadata.tsv.gz"</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"reneeTools"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># create reneeDataSet object</span></span>
-<span><span class="va">renee_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_reneeDataSet_from_files.html">create_reneeDataSet_from_files</a></span><span class="op">(</span><span class="va">gene_counts_tsv</span>, <span class="va">metadata_tsv</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/run_deseq2.html">run_deseq2</a></span><span class="op">(</span>design <span class="op">=</span> <span class="op">~</span><span class="va">condition</span><span class="op">)</span></span>
+<span><span class="va">renee_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_reneeDataSet_from_files.html">create_reneeDataSet_from_files</a></span><span class="op">(</span></span>
+<span>  sample_meta_filepath <span class="op">=</span> <span class="va">metadata_tsv</span>,</span>
+<span>  gene_counts_filepath <span class="op">=</span> <span class="va">gene_counts_tsv</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">58929</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> "\t"</span></span>
@@ -100,38 +107,24 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span><span class="co">#&gt; Warning in DESeqDataSet(se, design = design, ignoreRank): some variables in</span></span>
-<span><span class="co">#&gt; design formula are characters, converting to factors</span></span>
-<span><span class="co">#&gt; estimating size factors</span></span>
-<span><span class="co">#&gt; estimating dispersions</span></span>
-<span><span class="co">#&gt; gene-wise dispersion estimates</span></span>
-<span><span class="co">#&gt; mean-dispersion relationship</span></span>
-<span><span class="co">#&gt; -- note: fitType='parametric', but the dispersion trend was not well captured by the</span></span>
-<span><span class="co">#&gt;    function: y = a/x + b, and a local regression fit was automatically substituted.</span></span>
-<span><span class="co">#&gt;    specify fitType='local' or 'mean' to avoid this message next time.</span></span>
-<span><span class="co">#&gt; final dispersion estimates</span></span>
-<span><span class="co">#&gt; fitting model and testing</span></span>
 <span></span>
-<span><span class="va">renee_ds</span><span class="op">@</span><span class="va">analyses</span><span class="op">$</span><span class="va">deseq2_results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; log2 fold change (MLE): condition wildtype vs knockout </span></span>
-<span><span class="co">#&gt; Wald test p-value: condition wildtype vs knockout </span></span>
-<span><span class="co">#&gt; DataFrame with 6 rows and 6 columns</span></span>
-<span><span class="co">#&gt;                     baseMean log2FoldChange     lfcSE       stat      pvalue</span></span>
-<span><span class="co">#&gt;                    &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt; ENSG00000160179.18   4.23262      0.0527888  1.242584  0.0424831 9.66114e-01</span></span>
-<span><span class="co">#&gt; ENSG00000154734.15  20.38470      7.3430111  1.475316  4.9772452 6.44956e-07</span></span>
-<span><span class="co">#&gt; ENSG00000154736.6   10.72677      6.4048010  1.566426  4.0887980 4.33614e-05</span></span>
-<span><span class="co">#&gt; ENSG00000197381.16   5.36075      0.6802331  0.966972  0.7034673 4.81765e-01</span></span>
-<span><span class="co">#&gt; ENSG00000235609.7    2.82178     -0.5985472  1.168387 -0.5122848 6.08452e-01</span></span>
-<span><span class="co">#&gt; ENSG00000160216.19   8.84505     -0.4807875  0.769604 -0.6247206 5.32154e-01</span></span>
-<span><span class="co">#&gt;                           padj</span></span>
-<span><span class="co">#&gt;                      &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt; ENSG00000160179.18 9.66114e-01</span></span>
-<span><span class="co">#&gt; ENSG00000154734.15 9.39793e-06</span></span>
-<span><span class="co">#&gt; ENSG00000154736.6  3.68572e-04</span></span>
-<span><span class="co">#&gt; ENSG00000197381.16 6.46821e-01</span></span>
-<span><span class="co">#&gt; ENSG00000235609.7  7.30142e-01</span></span>
-<span><span class="co">#&gt; ENSG00000160216.19 6.53973e-01</span></span></code></pre></div>
+<span><span class="va">renee_ds</span> <span class="op">&lt;-</span> <span class="va">renee_ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/filter_counts.html">filter_counts</a></span><span class="op">(</span></span>
+<span>  group_column <span class="op">=</span> <span class="st">"condition"</span>,</span>
+<span>  label_column <span class="op">=</span> <span class="st">"sample_id"</span>,</span>
+<span>  columns_to_include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gene_id"</span>, <span class="st">"KO_S3"</span>, <span class="st">"KO_S4"</span>, <span class="st">"WT_S1"</span>, <span class="st">"WT_S2"</span><span class="op">)</span>,</span>
+<span>  minimum_count_value_to_be_considered_nonzero <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  minimum_number_of_samples_with_nonzero_counts_in_total <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  minimum_number_of_samples_with_nonzero_counts_in_a_group <span class="op">=</span> <span class="fl">1</span>,</span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">renee_ds</span><span class="op">@</span><span class="va">counts</span><span class="op">$</span><span class="va">filt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                     gene_id KO_S3 KO_S4 WT_S1 WT_S2</span></span>
+<span><span class="co">#&gt; 1 ENSG00000072803.17|FBXW11     2     0     0     0</span></span>
+<span><span class="co">#&gt; 2    ENSG00000083845.9|RPS5     1     0     0     0</span></span>
+<span><span class="co">#&gt; 3 ENSG00000107371.13|EXOSC3     1     1     0     0</span></span>
+<span><span class="co">#&gt; 4  ENSG00000111639.8|MRPL51     0     1     0     0</span></span>
+<span><span class="co">#&gt; 5  ENSG00000111640.15|GAPDH     0     1     0     0</span></span>
+<span><span class="co">#&gt; 6   ENSG00000111786.9|SRSF9     0     1     0     0</span></span></code></pre></div>
   </main>
 </div>
 
@@ -142,7 +135,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
