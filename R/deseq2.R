@@ -10,11 +10,11 @@
 #' @examples
 #' \dontrun{
 #' renee_ds <- create_reneeDataSet_from_files(
-#'   system.file("extdata", "sample_metadata.tsv",
+#'   system.file("extdata", "sample_metadata.tsv.gz",
 #'     package = "reneeTools"
 #'   ),
 #'   system.file("extdata",
-#'     "RSEM.genes.expected_count.all_samples.txt",
+#'     "RSEM.genes.expected_count.all_samples.txt.gz",
 #'     package = "reneeTools"
 #'   )
 #' ) %>% filter_counts()

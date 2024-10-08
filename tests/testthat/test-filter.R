@@ -32,8 +32,8 @@ test_that("filter_counts reproduces NIDAP results", {
 # TODO fails on RENEE dataset, R session aborts
 # test_that('filter_counts works on RENEE dataset', {
 #   renee_ds <- create_reneeDataSet_from_files(
-#     system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
-#     system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
+#     system.file("extdata", "sample_metadata.tsv.gz", package = "reneeTools"),
+#     system.file("extdata", "RSEM.genes.expected_count.all_samples.txt.gz", package = "reneeTools")
 #   )
 #   rds2 <- renee_ds %>% filter_counts(gene_names_column = 'gene_id',
 #                              sample_names_column = 'sample_id',

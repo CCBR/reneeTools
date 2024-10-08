@@ -1,7 +1,7 @@
 test_that("reneeDataSet from files works", {
   rds <- create_reneeDataSet_from_files(
-    system.file("extdata", "sample_metadata.tsv", package = "reneeTools"),
-    system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
+    system.file("extdata", "sample_metadata.tsv.gz", package = "reneeTools"),
+    system.file("extdata", "RSEM.genes.expected_count.all_samples.txt.gz", package = "reneeTools")
   ) %>%
     suppressMessages()
   expect_equal(

@@ -1,11 +1,11 @@
 set.seed(20231228)
 renee_ds <- create_reneeDataSet_from_files(
-  sample_meta_filepath = system.file("extdata", "sample_metadata.tsv",
+  sample_meta_filepath = system.file("extdata", "sample_metadata.tsv.gz",
     package = "reneeTools"
   ),
   gene_counts_filepath = system.file(
     "extdata",
-    "RSEM.genes.expected_count.all_samples.txt",
+    "RSEM.genes.expected_count.all_samples.txt.gz",
     package = "reneeTools"
   )
 ) %>%
