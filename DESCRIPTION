@@ -39,6 +39,8 @@ Imports:
 Suggests:
     glue,
     knitr,
+    lobstr,
+    RColorBrewer,
     readr,
     rmarkdown,
     styler,
