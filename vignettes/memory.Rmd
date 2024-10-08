@@ -23,16 +23,21 @@ library(dplyr)
 library(ggplot2)
 library(glue)
 library(readr)
-# library(reneeTools)
-devtools::load_all()
+library(reneeTools)
 ```
 
 Dataset from: <https://portal.gdc.cancer.gov/projects/TCGA-LIHC>
 
 ```{r data}
-counts <- read_tsv("~/Downloads/LIHC_HTseqCounts.txt") %>%
+counts <- read_tsv(system.file(
+  "extdata", "LIHC_HTseqCounts.txt.gz",
+  package = "reneeTools"
+)) %>%
   rename(gene_id = Gene)
-metadat <- read_tsv("~/Downloads/LIHC_PatientData.txt") %>%
+metadat <- read_tsv(system.file(
+  "extdata", "LIHC_PatientData.txt.gz",
+  package = "reneeTools"
+)) %>%
   select(-sample_id) %>%
   rename(sample_id = barcode)
 renee_ds <- create_reneeDataSet_from_dataframes(metadat, counts) %>%

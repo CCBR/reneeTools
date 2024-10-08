@@ -12,6 +12,5 @@
 ^data-raw$
 ^Dockerfile$
 ^CITATION\.cff$
-^vignettes/memory\.Rmd$
 ^doc$
 ^Meta$
