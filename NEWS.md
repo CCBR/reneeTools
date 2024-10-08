@@ -9,5 +9,6 @@ This is the first release of reneeTools 🎉
 - `reneeDataSet` (#16, #28, @kelly-sovacool)
   - `create_reneeDataSet_from_files()`
   - `create_reneeDataSet_from_dataframes()`
-  - `run_deseq2()`
-- `filter_low_counts()` (#10, @kelly-sovacool)
+- `run_deseq2()`
+- `calc_cpm()` (#38, @kelly-sovacool)
+- `filter_counts()` (#38, @kelly-sovacool)
