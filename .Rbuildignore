@@ -12,3 +12,5 @@
 ^data-raw$
 ^Dockerfile$
 ^CITATION\.cff$
+^doc$
+^Meta$

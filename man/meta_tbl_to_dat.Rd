@@ -4,10 +4,12 @@
 \alias{meta_tbl_to_dat}
 \title{Convert sample metadata from a tibble to a dataframe with sample IDs as row names}
 \usage{
-meta_tbl_to_dat(meta_tbl)
+meta_tbl_to_dat(meta_tbl, sample_id_colname = sample_id)
 }
 \arguments{
 \item{meta_tbl}{tibble with \code{sample_id} column}
+
+\item{sample_id_colname}{name of the column in \code{sample_meta_filepath} that contains the sample IDs}
 }
 \value{
 dataframe where row names are the sample IDs
@@ -17,7 +19,7 @@ Convert sample metadata from a tibble to a dataframe with sample IDs as row name
 }
 \examples{
 sample_meta_tbl <- readr::read_tsv(system.file("extdata",
-  "sample_metadata.tsv",
+  "sample_metadata.tsv.gz",
   package = "reneeTools"
 ))
 head(sample_meta_tbl)

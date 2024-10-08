@@ -17,13 +17,32 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(reneeTools)
 library(dplyr)
-# replace this line with actual path to your gene counts
-gene_counts_tsv <- system.file("extdata", "RSEM.genes.expected_count.all_samples.txt", package = "reneeTools")
-metadata_tsv <- system.file("extdata", "sample_metadata.tsv", package = "reneeTools")
+```
+
+```{r data}
+# replace these lines with the actual paths to your files
+gene_counts_tsv <- system.file("extdata",
+  "RSEM.genes.expected_count.all_samples.txt.gz",
+  package = "reneeTools"
+)
+metadata_tsv <- system.file("extdata", "sample_metadata.tsv.gz",
+  package = "reneeTools"
+)
 
 # create reneeDataSet object
-renee_ds <- create_reneeDataSet_from_files(gene_counts_tsv, metadata_tsv) %>%
-  run_deseq2(design = ~condition)
+renee_ds <- create_reneeDataSet_from_files(
+  sample_meta_filepath = metadata_tsv,
+  gene_counts_filepath = gene_counts_tsv
+)
 
-renee_ds@analyses$deseq2_results %>% head()
+renee_ds <- renee_ds %>% filter_counts(
+  group_column = "condition",
+  label_column = "sample_id",
+  columns_to_include = c("gene_id", "KO_S3", "KO_S4", "WT_S1", "WT_S2"),
+  minimum_count_value_to_be_considered_nonzero = 1,
+  minimum_number_of_samples_with_nonzero_counts_in_total = 1,
+  minimum_number_of_samples_with_nonzero_counts_in_a_group = 1,
+)
+
+renee_ds@counts$filt %>% head()
 ```

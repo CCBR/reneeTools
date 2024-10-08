@@ -4,14 +4,13 @@
 \alias{reneeDataSet}
 \title{reneeDataSet class}
 \usage{
-reneeDataSet(count_dat, sample_meta_dat)
+reneeDataSet(sample_meta_dat, counts_lst)
 }
 \arguments{
-\item{count_dat}{expected gene counts from RSEM as a data frame or tibble.
-Must contain a \code{gene_id} column and a column for each sample ID in the metadata.}
-
 \item{sample_meta_dat}{sample metadata as a data frame or tibble.
-Must contain a \code{sample_ID} column.}
+Must contain a \code{sample_id} column.}
+
+\item{counts_lst}{named list of dataframes containing counts, e.g. expected gene counts from RSEM. Each data frame is expected to contain a \code{gene_id} column and a column for each sample ID in the metadata.}
 }
 \description{
 reneeDataSet class
