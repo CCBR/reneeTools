@@ -80,9 +80,9 @@ filter_counts <- function(renee_ds,
                           outlier_samples_to_remove = c(),
                           minimum_count_value_to_be_considered_nonzero = 8,
                           minimum_number_of_samples_with_nonzero_counts_in_total = 7,
+                          minimum_number_of_samples_with_nonzero_counts_in_a_group = 3,
                           use_cpm_counts_to_filter = TRUE,
                           use_group_based_filtering = FALSE,
-                          minimum_number_of_samples_with_nonzero_counts_in_a_group = 3,
                           principal_component_on_x_axis = 1,
                           principal_component_on_y_axis = 2,
                           legend_position_for_pca = "top",
@@ -117,8 +117,8 @@ filter_counts <- function(renee_ds,
                           interactive_plots = FALSE,
                           plot_correlation_matrix_heatmap = TRUE,
                           make_plots = TRUE) {
-  counts_matrix <- renee_ds@counts[[count_type]]
-  sample_metadata <- renee_ds@sample_meta
+  counts_matrix <- renee_ds@counts[[count_type]] %>% as.data.frame() # currently, this function requires data frames
+  sample_metadata <- renee_ds@sample_meta %>% as.data.frame()
   # TODO we should use "feature" instead of "gene" to make sure this is applicable beyond RNA-seq
 
   # TODO: just have users specify hex values directly for simplicity
