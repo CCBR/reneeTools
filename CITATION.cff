@@ -50,6 +50,7 @@ references:
   authors:
   - family-names: Lucas
     given-names: Antoine
+    email: antoinelucas@gmail.com
   year: '2024'
   doi: 10.32614/CRAN.package.amap
 - type: software
