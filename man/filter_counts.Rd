@@ -15,9 +15,9 @@ filter_counts(
   outlier_samples_to_remove = c(),
   minimum_count_value_to_be_considered_nonzero = 8,
   minimum_number_of_samples_with_nonzero_counts_in_total = 7,
+  minimum_number_of_samples_with_nonzero_counts_in_a_group = 3,
   use_cpm_counts_to_filter = TRUE,
   use_group_based_filtering = FALSE,
-  minimum_number_of_samples_with_nonzero_counts_in_a_group = 3,
   principal_component_on_x_axis = 1,
   principal_component_on_y_axis = 2,
   legend_position_for_pca = "top",
@@ -63,11 +63,11 @@ filter_counts(
 
 \item{minimum_number_of_samples_with_nonzero_counts_in_total}{Minimum number of samples (total) with non-zero counts}
 
+\item{minimum_number_of_samples_with_nonzero_counts_in_a_group}{Only keeps genes that have at least this number of samples with nonzero CPM counts in at least one group}
+
 \item{use_cpm_counts_to_filter}{If no transformation has been been performed on counts matrix (eg Raw Counts) set to TRUE. If TRUE counts will be transformed to CPM and filtered based on given criteria. If gene counts matrix has been transformed (eg log2, CPM, FPKM or some form of Normalization) set to FALSE. If FALSE no further transformation will be applied and features will be filtered as is. For RNAseq data RAW counts should be transformed to CPM in order to properly filter.}
 
 \item{use_group_based_filtering}{If TRUE, only keeps features (e.g. genes) that have at least a certain number of samples with nonzero CPM counts in at least one group}
-
-\item{minimum_number_of_samples_with_nonzero_counts_in_a_group}{Only keeps genes that have at least this number of samples with nonzero CPM counts in at least one group}
 
 \item{principal_component_on_x_axis}{The principle component to plot on the x-axis for the PCA plot. Choices include 1, 2, 3, ... (default: 1)}
 
