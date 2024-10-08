@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   echo = FALSE,
+  # eval = FALSE,
   message = FALSE,
   warning = FALSE
 )
@@ -41,15 +42,16 @@ metadat <- read_tsv(system.file(
   select(-sample_id) %>%
   rename(sample_id = barcode)
 renee_ds <- create_reneeDataSet_from_dataframes(metadat, counts) %>%
-  calc_cpm() %>%
-  filter_counts(
-    sample_names_column = "sample_id",
-    gene_names_column = "gene_id",
-    group_column = "treatments_radiation_treatment_type",
-    label_column = "sample",
-    columns_to_include = c("gene_id", metadat %>% pull("sample_id")),
-    make_plots = FALSE
-  )
+  calc_cpm()
+renee_ds@counts$filt <- renee_ds@counts$raw
+# filter_counts(
+#   sample_names_column = "sample_id",
+#   gene_names_column = "gene_id",
+#   group_column = "treatments_radiation_treatment_type",
+#   label_column = "sample",
+#   columns_to_include = c("gene_id", metadat %>% pull("sample_id")),
+#   make_plots = FALSE
+# )
 ```
 
 
