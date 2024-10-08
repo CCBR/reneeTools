@@ -43,6 +43,7 @@ Suggests:
     RColorBrewer,
     readr,
     rmarkdown,
+    scales,
     styler,
     testthat (>= 3.0.0),
     usethis
